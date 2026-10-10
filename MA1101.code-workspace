@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "MA1101 (Matematika I)",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/*.bak": true,
+      "**/~$*": true,
+      "**/.~lock.*#": true
+    },
+    "search.exclude": {
+      "**/*.bak": true
+    }
+  }
+}

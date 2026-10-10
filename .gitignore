@@ -1,0 +1,45 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office and Document Lock/Temporary Files
+~$*.xlsx
+~$*.docx
+~$*.pptx
+.~lock.*#
+
+# Backup and Temporary Files
+*.bak
+*~
+*.swp
+*.swo
+*.tmp
+*.tmu~
+
+# Python (if helper scripts or virtualenvs are used)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# LaTeX Auxiliary Files (if compiled locally)
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+
+# Manim Render Outputs
+media/
+
+# Sensitive Student Information (Rosters and Grades)
+*Daftar Peserta Kelas*
+*Tabel_Nilai*
