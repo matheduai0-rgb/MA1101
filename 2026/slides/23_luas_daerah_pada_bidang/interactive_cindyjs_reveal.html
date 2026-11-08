@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MA1101 Matematika I — Subtopik 5.1: Luas Daerah pada Bidang (Reveal.js + CindyJS + Manim)</title>
+
+  <!-- Reveal.js 5 Core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+
+  <!-- KaTeX for Instant LaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <!-- CindyJS (Interactive Geometry & Calculus Engine) -->
+  <script src="https://cindyjs.org/dist/v0.8.8/Cindy.js"></script>
+
+  <style>
+    :root {
+      --dark-canvas: #0c1018;
+      --dark-box: #141b28;
+      --dark-box-inner: #1a2436;
+      --luminous-gold: #f5be3c;
+      --electric-blue: #50a5fa;
+      --teal-cyan: #2dd4bf;
+      --emerald-green: #34d399;
+      --coral-rose: #fb7185;
+      --purple-belok: #d88cff;
+      --soft-gray: #c8d2e1;
+      /* Compact base font size for Reveal.js (23px guarantees zero overflow) */
+      --r-main-font-size: 23px;
+    }
+
+    body, .reveal-viewport {
+      background-color: var(--dark-canvas) !important;
+      color: #ffffff;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    .reveal {
+      font-size: var(--r-main-font-size);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      padding: 4px 2px !important;
+      box-sizing: border-box;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      text-transform: none;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px 0;
+    }
+
+    .reveal h2.slide-title {
+      font-size: 1.06em;
+      color: var(--luminous-gold);
+      background: var(--dark-box);
+      padding: 6px 14px;
+      border-left: 4px solid var(--luminous-gold);
+      border-radius: 6px;
+      margin-bottom: 9px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Compact Beamer-equivalent Block Styles */
+    .b-block, .b-example, .b-alert {
+      background: var(--dark-box);
+      border-radius: 7px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      font-size: 0.70em;
+      line-height: 1.36;
+    }
+
+    .b-block-title {
+      padding: 4px 11px;
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 1.02em;
+    }
+
+    .b-block .b-block-title {
+      background: linear-gradient(90deg, rgba(80, 165, 250, 0.45), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(80, 165, 250, 0.4);
+    }
+
+    .b-example .b-block-title {
+      background: linear-gradient(90deg, rgba(52, 211, 153, 0.4), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(52, 211, 153, 0.4);
+    }
+
+    .b-alert .b-block-title {
+      background: linear-gradient(90deg, rgba(251, 113, 133, 0.45), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(251, 113, 133, 0.4);
+    }
+
+    .b-block-body {
+      padding: 6px 11px;
+    }
+
+    .b-block-body ul, .b-block-body ol {
+      margin: 3px 0 3px 18px;
+      padding: 0;
+    }
+
+    .b-block-body li {
+      margin-bottom: 2px;
+    }
+
+    /* Compact KaTeX Display Equations */
+    .reveal .katex-display {
+      margin: 0.22em 0 !important;
+      font-size: 0.95em;
+    }
+
+    section.slide-compact .b-block,
+    section.slide-compact .b-example,
+    section.slide-compact .b-alert {
+      font-size: 0.64em;
+      line-height: 1.32;
+      margin-bottom: 6px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .grid-applet {
+      display: grid;
+      grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.96fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .formula-box {
+      background: var(--dark-box-inner);
+      border: 1.5px solid var(--teal-cyan);
+      border-radius: 6px;
+      padding: 5px 10px;
+      text-align: center;
+      margin: 5px 0;
+      font-size: 0.85em;
+    }
+
+    /* Interactive CindyJS & Controls Styling */
+    .cindy-canvas {
+      width: 100%;
+      height: 360px;
+      background: #090d14;
+      border: 1.5px solid rgba(45, 212, 191, 0.35);
+      border-radius: 8px;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .control-panel {
+      background: var(--dark-box);
+      border: 1px solid rgba(245, 190, 60, 0.3);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.64em;
+      line-height: 1.32;
+    }
+
+    .control-row {
+      margin-bottom: 6px;
+    }
+
+    .control-row label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: var(--soft-gray);
+      margin-bottom: 2px;
+    }
+
+    .control-row input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal-cyan);
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .btn-action {
+      background: var(--dark-box-inner);
+      color: #fff;
+      border: 1px solid var(--electric-blue);
+      border-radius: 5px;
+      padding: 4px 8px;
+      font-size: 0.92em;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action:hover, .btn-action.active {
+      background: var(--electric-blue);
+      color: #090d14;
+      font-weight: 700;
+    }
+
+    .live-readout {
+      background: #090d14;
+      border-left: 3px solid var(--teal-cyan);
+      padding: 6px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+      font-family: monospace;
+      font-size: 0.98em;
+      color: var(--teal-cyan);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72em;
+      font-weight: 700;
+      background: rgba(45, 212, 191, 0.18);
+      color: var(--teal-cyan);
+      border: 1px solid var(--teal-cyan);
+    }
+
+    table.synth-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94em;
+      margin-top: 4px;
+    }
+
+    table.synth-table th, table.synth-table td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 8px;
+      text-align: left;
+    }
+
+    table.synth-table th {
+      color: var(--luminous-gold);
+      background: rgba(245, 190, 60, 0.1);
+    }
+
+    .key-hint {
+      color: var(--teal-cyan);
+      font-size: 0.90em;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 1: JUDUL -->
+      <!-- ===================================================================== -->
+      <section style="text-align: center;">
+        <div style="margin-top: 24px;">
+          <span class="badge">Reveal.js + KaTeX + CindyJS Interactive + Manim CE</span>
+          <h2 style="color: var(--electric-blue); font-size: 1.15em; margin-top: 14px;">
+            MA1101 Matematika I — Bab 5: Penggunaan Integral
+          </h2>
+          <h1 style="color: var(--luminous-gold); font-size: 1.7em; margin: 12px 0;">
+            Subtopik 5.1: Luas Daerah pada Bidang
+          </h1>
+          <p style="color: var(--teal-cyan); font-style: italic; font-size: 0.85em; margin: 6px 0;">
+            (The Area of a Plane Region: Vertical and Horizontal Slicing)
+          </p>
+          <hr style="border-color: rgba(255,255,255,0.15); width: 60%; margin: 18px auto;" />
+          <p style="font-size: 0.72em; color: var(--soft-gray); line-height: 1.5;">
+            <strong>Tim Pengajar MA1101</strong><br/>
+            Fakultas Matematika dan Ilmu Pengetahuan Alam — Institut Teknologi Bandung<br/>
+            Semester 1 Tahun Akademik 2026/2027
+          </p>
+          <p style="font-size: 0.62em; color: var(--emerald-green); margin-top: 16px;">
+            Navigasi: <kbd>→</kbd> / <kbd>Spasi</kbd> • Fullscreen: <kbd>F</kbd> • Ikhtisar Slide: <kbd>Esc</kbd>
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 2: PARADIGMA BAB 5 -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Paradigma Bab 5: "Iris, Hampiri, Integralkan"</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Metode 5 Langkah Menuju Integral Tentu (Slice, Approximate, Integrate)</div>
+          <div class="b-block-body">
+            Di sepanjang Bab 5 (luas daerah, volume benda putar, panjang busur, dan kerja fisika), kita membangun rumus integral melalui lima langkah geometris:
+            <ol>
+              <li><strong>Langkah 1 (Gambar &amp; Iris)</strong>: Sketsa daerah dan gambar satu <strong>pias (<em>slice/strip</em>) representatif</strong> pada posisi umum $x$ (atau $y$).</li>
+              <li><strong>Langkah 2 (Hampiri Satu Pias)</strong>: Hampiri luas pias ke-$i$ dengan persegi panjang: $\mathbf{\Delta A_i \approx \text{tinggi} \times \text{lebar}}$.</li>
+              <li><strong>Langkah 3 (Jumlahkan)</strong>: Jumlahkan seluruh $n$ pias membentuk Jumlah Riemann $A \approx \sum_{i=1}^{n} \Delta A_i$.</li>
+              <li><strong>Langkah 4 (Integralkan)</strong>: Ambil limit $\|P\| \to 0$ sehingga jumlah berubah menjadi integral tentu $A = \int_a^b dA$.</li>
+              <li><strong>Langkah 5 (Evaluasi)</strong>: Hitung nilai eksaknya menggunakan Teorema Dasar Kalkulus Kedua ($F(b) - F(a)$).</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="b-example">
+          <div class="b-block-title">Ringkasan Tiga Langkah Inti (Prinsip Diferensial Elemen Luas)</div>
+          <div class="b-block-body" style="text-align: center;">
+            $$\textbf{1. Iris: }\text{pilih pias }\Delta x\text{ atau }\Delta y \;\longrightarrow\; \textbf{2. Hampiri: }\Delta A \approx h(x)\,\Delta x \;\longrightarrow\; \textbf{3. Integralkan: }A = \int_{a}^{b} h(x)\,dx$$
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 3: DAERAH DI ANTARA KURVA Y = F(X) DAN SUMBU-X -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Luas Daerah di Antara Kurva $y = f(x)$ dan Sumbu-$x$</h2>
+
+        <div class="b-alert">
+          <div class="b-block-title">Prinsip Fundamental: Luas Geometris Selalu Tak-Negatif ($A \ge 0$)!</div>
+          <div class="b-block-body">
+            Berbeda dengan <strong>integral tentu</strong> $\int_a^b f(x)\,dx$ yang menghitung <em>luas bertanda</em> (<em>signed area</em>), <strong>luas geometris</strong> suatu daerah datar selalu bernilai positif atau nol!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-example">
+            <div class="b-block-title">1. Daerah di Atas Sumbu-$x$ ($f(x) \ge 0$)</div>
+            <div class="b-block-body">
+              Tinggi pias tegak pada posisi $x$ adalah $y_{\text{atas}} - y_{\text{bawah}} = f(x) - 0 = f(x) \ge 0$, sehingga $\Delta A \approx f(x)\,\Delta x$:
+              <div class="formula-box">
+                $$A = \int_{a}^{b} f(x)\,dx$$
+              </div>
+            </div>
+          </div>
+
+          <div class="b-block">
+            <div class="b-block-title">2. Daerah di Bawah Sumbu-$x$ ($f(x) \le 0$)</div>
+            <div class="b-block-body">
+              Batas atas adalah $y = 0$ dan batas bawah adalah $y = f(x) \le 0$, sehingga tinggi pias adalah $0 - f(x) = \mathbf{-f(x) \ge 0}$:
+              <div class="formula-box">
+                $$A = \int_{a}^{b} \big[-f(x)\big]\,dx = -\int_{a}^{b} f(x)\,dx$$
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="b-block" style="margin-top: 4px;">
+          <div class="b-block-title">Rumus Terpadu (Jika $f$ Memotong Sumbu-$x$ di $x = c \in (a, b)$)</div>
+          <div class="b-block-body">
+            $$A = \int_{a}^{b} |f(x)|\,dx = \int_{a}^{c} f(x)\,dx + \int_{c}^{b} \big[-f(x)\big]\,dx \quad \text{(jika } f \ge 0 \text{ pada } [a,c] \text{ dan } f \le 0 \text{ pada } [c,b]\text{)}$$
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 4: CONTOH 1 — DAERAH YANG MEMOTONG SUMBU-X -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 1: Daerah yang Memotong Sumbu-$x$</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal</div>
+          <div class="b-block-body">
+            Tentukan luas daerah $R$ yang dibatasi oleh kurva $y = x^2 - 2x - 3$, sumbu-$x$, garis $x = -1$, dan garis $x = 4$!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">Penyelesaian (Cari Titik Potong Sumbu-$x$ Dulu!)</div>
+            <div class="b-block-body">
+              <ol>
+                <li>Pembuat nol pada $[-1, 4]$: $(x + 1)(x - 3) = 0 \implies \mathbf{x = -1, \;3}$.</li>
+                <li>Tanda $f(x)$: pada $[-1, 3]$ berlaku $f(x) \le 0$ (tinggi $= -x^2 + 2x + 3$), sedangkan pada $[3, 4]$ berlaku $f(x) \ge 0$ (tinggi $= x^2 - 2x - 3$).</li>
+                <li>Hitung kedua bagian:
+                  $$\begin{aligned}
+                    A &= \int_{-1}^{3} (-x^2 + 2x + 3)\,dx + \int_{3}^{4} (x^2 - 2x - 3)\,dx \\
+                      &= \left[-\frac{x^3}{3} + x^2 + 3x\right]_{-1}^{3} + \left[\frac{x^3}{3} - x^2 - 3x\right]_{3}^{4} \\
+                      &= \frac{32}{3} + \frac{7}{3} = \mathbf{\frac{39}{3} = 13}.
+                  \end{aligned}$$
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">Peringatan: Luas Geometris vs Integral Tentu</div>
+            <div class="b-block-body">
+              Jika langsung diintegralkan tanpa memecah selang:
+              $$\int_{-1}^{4} (x^2 - 2x - 3)\,dx = -\frac{32}{3} + \frac{7}{3} = -\frac{25}{3} \neq 13!$$
+              Bagian di bawah sumbu-$x$ ($A_1 = 32/3$) dan bagian di atas sumbu-$x$ ($A_2 = 7/3$) saling menghilangkan tanda pada integral tentu, padahal luas fisik keduanya saling menjumlahkan!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 5: INTERACTIVE CINDYJS APPLET 1 — PIAS TEGAK DI ANTARA DUA KURVA -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Eksplorasi Interaktif (CindyJS): Pias Tegak ($\Delta x$) di Antara Dua Kurva</h2>
+
+        <div class="grid-applet">
+          <div>
+            <div id="CSCanvasVertical" class="cindy-canvas"></div>
+            <div class="formula-box" style="margin-top: 6px;">
+              $$dA = \big(y_{\text{atas}} - y_{\text{bawah}}\big)\,dx = \big[f(x) - g(x)\big]\,dx \implies A = \int_{-1}^{3} \big[4 - (x-1)^2\big]\,dx = \mathbf{\frac{32}{3}}$$
+            </div>
+          </div>
+
+          <div class="control-panel">
+            <div style="color: var(--luminous-gold); font-weight: 700; font-size: 1.04em; margin-bottom: 6px;">
+              🎛️ Simulasi Pias Tegak &amp; Invariansi Translasi
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Posisi Pias $x_0 \in [-1, 3]$:</span>
+                <span id="lbl-x0-v" style="color: var(--luminous-gold);">1.00</span>
+              </label>
+              <input type="range" id="slider-x0-v" min="-1" max="3" step="0.02" value="1.0" />
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Jumlah Pias Riemann ($N$):</span>
+                <span id="lbl-n-v" style="color: var(--teal-cyan);">12</span>
+              </label>
+              <input type="range" id="slider-n-v" min="2" max="60" step="1" value="12" />
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Pergeseran Vertikal Sumbu ($+C$):</span>
+                <span id="lbl-c-v" style="color: var(--emerald-green);">C = 0.0</span>
+              </label>
+              <input type="range" id="slider-c-v" min="-1.5" max="1.5" step="0.1" value="0.0" />
+            </div>
+
+            <div class="btn-group">
+              <button class="btn-action" id="btn-anim-sweep">▶ Animasikan Pias</button>
+              <button class="btn-action" id="btn-reset-v">↺ Reset</button>
+            </div>
+
+            <div class="live-readout" id="readout-v">
+              x₀ = 1.00 | f(x₀) = 3.00, g(x₀) = -1.00<br/>
+              Tinggi pias h = f(x₀) - g(x₀) = 4.00 &gt; 0<br/>
+              Jumlah Riemann (N=12): A_N ≈ 10.667 (Eksak: 32/3 ≈ 10.667)
+            </div>
+
+            <div style="margin-top: 6px; color: var(--soft-gray);">
+              Meskipun $g(x) &lt; 0$, tinggi pias vertikal tetap $h(x) = f(x) - g(x)$! Geser slider $C$ untuk membuktikan bahwa luas tidak berubah saat kurva digeser ke atas/bawah.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 6: SIMULASI VIDEO MANIM 1 — PIAS TEGAK DI ANTARA DUA KURVA -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Simulasi Dinamis Manim: Pias Tegak ($\Delta x$) di Antara Dua Kurva</h2>
+
+        <div style="text-align: center;">
+          <video controls preload="metadata" poster="keyframe_luas_pias_tegak.png"
+                 style="width: 72%; max-height: 430px; border-radius: 10px; border: 1.5px solid var(--luminous-gold); box-shadow: 0 8px 24px rgba(0,0,0,0.6);">
+            <source src="AreaBetweenCurvesVerticalScene.mp4" type="video/mp4" />
+            <source src="AreaBetweenCurvesVerticalScene.ogv" type="video/ogg" />
+          </video>
+          <div style="font-size: 0.65em; color: var(--soft-gray); margin-top: 8px;">
+            🎬 <code>AreaBetweenCurvesVerticalScene.mp4</code> — Socratic Manim CE Animation: Mengapa tinggi pias tegak tetap $f(x) - g(x)$ saat sebagian kurva bawah menyelam di bawah sumbu-$x$ ($g(x) &lt; 0$).
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 7: CONTOH 2 — DAERAH YANG DIBATASI DUA PARABOLA -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 2: Daerah yang Dibatasi oleh Dua Parabola</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal</div>
+          <div class="b-block-body">
+            Tentukan luas daerah yang dibatasi oleh kurva $y = 4 - x^2$ dan $y = x^2 - 2x$! (Perhatikan bahwa batas kiri $a$ dan batas kanan $b$ tidak diberikan secara eksplisit).
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">1. Cari Titik Potong ($f(x) = g(x)$)</div>
+            <div class="b-block-body">
+              Samakan kedua kurva untuk memperoleh batas integrasi:
+              $$\begin{aligned}
+                4 - x^2 &= x^2 - 2x \iff 2x^2 - 2x - 4 = 0 \\
+                2(x + 1)(x - 2) &= 0 \implies \mathbf{x = -1} \;\text{dan}\; \mathbf{x = 2}.
+              \end{aligned}$$
+              Pada $[-1, 2]$, uji di $x = 0$: kurva $y = 4 - x^2$ bernilai $4$, sedangkan $y = x^2 - 2x$ bernilai $0$. Jadi:
+              $$y_{\text{atas}} = 4 - x^2, \qquad y_{\text{bawah}} = x^2 - 2x.$$
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">2. Iris, Hampiri, Integralkan</div>
+            <div class="b-block-body">
+              Tinggi pias tegak adalah:
+              $$y_{\text{atas}} - y_{\text{bawah}} = (4 - x^2) - (x^2 - 2x) = 4 + 2x - 2x^2.$$
+              Maka luas daerahnya:
+              $$\begin{aligned}
+                A &= \int_{-1}^{2} (4 + 2x - 2x^2)\,dx = \left[4x + x^2 - \frac{2}{3}x^3\right]_{-1}^{2} \\
+                  &= \left(8 + 4 - \frac{16}{3}\right) - \left(-4 + 1 + \frac{2}{3}\right) = \mathbf{9}.
+              \end{aligned}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 8: DUA KURVA YANG SALING BERPOTONGAN -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Daerah dengan Dua Kurva yang Saling Berpotongan</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Bagaimana Jika $f(x)$ dan $g(x)$ Bertukar Posisi Atas-Bawah?</div>
+          <div class="b-block-body">
+            Jika kurva $y = f(x)$ dan $y = g(x)$ berpotongan di satu atau lebih titik di dalam selang $(a, b)$, maka selisih $f(x) - g(x)$ akan <strong>berganti tanda</strong>. Agar tinggi pias selalu positif, tinggi pias pada sebarang titik $x$ adalah $\mathbf{|f(x) - g(x)|}$:
+            <div class="formula-box">
+              $$A = \int_{a}^{b} \big|f(x) - g(x)\big|\,dx$$
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-example">
+            <div class="b-block-title">Prosedur Baku (3 Langkah)</div>
+            <div class="b-block-body">
+              <ol>
+                <li>Selesaikan persamaan $\mathbf{f(x) = g(x)}$ untuk menemukan semua titik potong $c_1, c_2, \dots$ yang jatuh di dalam $(a, b)$.</li>
+                <li>Pecah integral pada setiap titik potong tersebut.</li>
+                <li>Pada tiap subselang, integralkan $\mathbf{(y_{\text{atas}} - y_{\text{bawah}})\,dx}$.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">Jika Berpotongan di Satu Titik $c \in (a, b)$</div>
+            <div class="b-block-body">
+              Misalkan $f(x) \ge g(x)$ pada $[a, c]$ dan $g(x) \ge f(x)$ pada $[c, b]$, maka:
+              $$\begin{aligned}
+                A &= \int_{a}^{c} \big[f(x) - g(x)\big]\,dx \\
+                  &\quad + \int_{c}^{b} \big[g(x) - f(x)\big]\,dx.
+              \end{aligned}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 9: CONTOH 3 — DUA KURVA BERPOTONGAN DI 3 TITIK -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 3: Kurva Kubik dan Garis yang Berpotongan di 3 Titik</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal</div>
+          <div class="b-block-body">
+            Tentukan luas daerah yang dibatasi oleh kurva $y = x^3 - 3x$ dan garis $y = x$!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">1. Titik Potong &amp; Posisi Kurva</div>
+            <div class="b-block-body">
+              <ul>
+                <li><strong>Titik potong</strong>: $x^3 - 3x = x \iff x(x - 2)(x + 2) = 0 \implies \mathbf{x = -2, \;0, \;2}$.</li>
+                <li><strong>Posisi kurva</strong>:
+                  <ul>
+                    <li>Pada $[-2, 0]$: kubik di atas $\implies y_{\text{atas}} - y_{\text{bawah}} = x^3 - 4x$.</li>
+                    <li>Pada $[0, 2]$: garis di atas $\implies y_{\text{atas}} - y_{\text{bawah}} = 4x - x^3$.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">2. Evaluasi Integral (Simetri Fungsi Genap)</div>
+            <div class="b-block-body">
+              Karena luas kedua daun simetris terhadap titik asal:
+              $$\begin{aligned}
+                A &= \int_{-2}^{0} (x^3 - 4x)\,dx + \int_{0}^{2} (4x - x^3)\,dx \\
+                  &= 2\int_{0}^{2} (4x - x^3)\,dx = 2\left[2x^2 - \frac{x^4}{4}\right]_{0}^{2} \\
+                  &= 2(8 - 4) = \mathbf{8}.
+              \end{aligned}$$
+              <div class="key-hint">Jika tidak dipecah di $x=0$, hasilnya $\int_{-2}^2 (x^3 - 4x)\,dx = 0$!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 10: CONTOH 4 — KURVA TRIGONOMETRI YANG BERPOTONGAN -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 4: Daerah di Antara $\sin x$ dan $\cos x$ pada $[0, \pi]$</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal</div>
+          <div class="b-block-body">
+            Hitunglah luas daerah yang dibatasi oleh kurva $y = \sin x$ dan $y = \cos x$ pada selang $[0, \pi]$!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">1. Cari Titik Potong &amp; Tanda Selisih</div>
+            <div class="b-block-body">
+              <ul>
+                <li>Titik potong pada $[0, \pi]$:
+                  $$\sin x = \cos x \iff \tan x = 1 \implies \mathbf{x = \frac{\pi}{4}}.$$
+                </li>
+                <li>Periksa siapa yang berada di atas:
+                  <ul>
+                    <li>Pada $\left[0, \frac{\pi}{4}\right]$: $\cos x \ge \sin x$.</li>
+                    <li>Pada $\left[\frac{\pi}{4}, \pi\right]$: $\sin x \ge \cos x$ (perhatikan bahwa pada $\left[\frac{\pi}{2}, \pi\right]$, $\cos x \le 0$).</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">2. Hitung Kedua Sub-integral</div>
+            <div class="b-block-body">
+              Maka luas totalnya adalah:
+              $$\begin{aligned}
+                A &= \int_{0}^{\pi/4} (\cos x - \sin x)\,dx + \int_{\pi/4}^{\pi} (\sin x - \cos x)\,dx \\
+                  &= \big[\sin x + \cos x\big]_{0}^{\pi/4} + \big[-\cos x - \sin x\big]_{\pi/4}^{\pi} \\
+                  &= \big(\sqrt{2} - 1\big) + \big(1 - (-\sqrt{2})\big) = \mathbf{2\sqrt{2}}.
+              \end{aligned}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 11: INTERACTIVE CINDYJS APPLET 2 — PIAS MENDATAR VS PIAS TEGAK -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Eksplorasi Interaktif (CindyJS): Pias Mendatar ($\Delta y$) vs. Pias Tegak ($\Delta x$)</h2>
+
+        <div class="grid-applet">
+          <div>
+            <div id="CSCanvasHoriz" class="cindy-canvas"></div>
+            <div class="formula-box" style="margin-top: 6px; font-size: 0.78em;">
+              $$\Delta y\text{: } A = \int_{-1}^{2} (y+2 - y^2)\,dy = \mathbf{\frac{9}{2}} \quad \text{vs} \quad \Delta x\text{: } \int_0^1 2\sqrt{x}\,dx + \int_1^4 (\sqrt{x}-x+2)\,dx$$
+            </div>
+          </div>
+
+          <div class="control-panel">
+            <div style="color: var(--luminous-gold); font-weight: 700; font-size: 1.04em; margin-bottom: 6px;">
+              🎛️ Perbandingan Pias pada $x = y^2$ &amp; $x = y + 2$
+            </div>
+
+            <div class="btn-group" style="margin-bottom: 8px;">
+              <button class="btn-action active" id="btn-mode-dy">Mode Pias Mendatar (Δy)</button>
+              <button class="btn-action" id="btn-mode-dx">Mode Pias Tegak (Δx)</button>
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span id="lbl-pos-title">Posisi Pias y₀ ∈ [-1, 2]:</span>
+                <span id="lbl-pos-val" style="color: var(--teal-cyan);">0.50</span>
+              </label>
+              <input type="range" id="slider-pos-h" min="-1" max="2" step="0.02" value="0.5" />
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Jumlah Pias Partisi ($N$):</span>
+                <span id="lbl-nh-val" style="color: var(--luminous-gold);">10</span>
+              </label>
+              <input type="range" id="slider-nh" min="2" max="40" step="1" value="10" />
+            </div>
+
+            <div class="live-readout" id="readout-h">
+              Mode: Pias Mendatar (Δy)<br/>
+              Batas Kiri: x = y² = 0.25 | Batas Kanan: x = y + 2 = 2.50<br/>
+              Panjang Pias L = x_kanan - x_kiri = 2.25<br/>
+              Nilai Eksak: A = 9/2 = 4.50 (1 Integral Saja!)
+            </div>
+
+            <div style="margin-top: 6px; color: var(--soft-gray);">
+              Lihat bagaimana pias tegak ($\Delta x$) terbelah menjadi dua integral di $x=1$, sedangkan pias mendatar ($\Delta y$) menyapu seluruh daerah secara kontinu!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 12: SIMULASI VIDEO MANIM 2 — AREA HORIZONTAL VS VERTICAL -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Simulasi Dinamis Manim: Pias Mendatar ($\Delta y$) vs. Pias Tegak ($\Delta x$)</h2>
+
+        <div style="text-align: center;">
+          <video controls preload="metadata" poster="keyframe_luas_pias_mendatar.png"
+                 style="width: 72%; max-height: 430px; border-radius: 10px; border: 1.5px solid var(--teal-cyan); box-shadow: 0 8px 24px rgba(0,0,0,0.6);">
+            <source src="AreaHorizontalVsVerticalScene.mp4" type="video/mp4" />
+            <source src="AreaHorizontalVsVerticalScene.ogv" type="video/ogg" />
+          </video>
+          <div style="font-size: 0.65em; color: var(--soft-gray); margin-top: 8px;">
+            🎬 <code>AreaHorizontalVsVerticalScene.mp4</code> — Socratic Manim CE Animation: Bandingkan bagaimana pias tegak ($\Delta x$) terbelah di $x=1$, sedangkan pias mendatar ($\Delta y$) menyapu mulus dengan 1 integral!
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 13: CONTOH 5 — PERBANDINGAN LANGSUNG ΔY VS ΔX PADA DAERAH SAMA -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 5: Menghitung Luas Daerah $y^2 = 4x$ dan $4x - 3y = 4$</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal (Purcell §5.1)</div>
+          <div class="b-block-body">
+            Tentukan luas daerah $R$ yang dibatasi oleh parabola $y^2 = 4x$ dan garis $4x - 3y = 4$ dengan <strong>(a) Pias Mendatar ($\Delta y$)</strong> dan <strong>(b) Pias Tegak ($\Delta x$)</strong>!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">(a) Dengan Pias Mendatar ($\Delta y$) — SANGAT MUDAH</div>
+            <div class="b-block-body">
+              Nyatakan $x$ sebagai fungsi dari $y$:
+              $$x_{\text{kiri}} = \frac{y^2}{4}, \qquad x_{\text{kanan}} = \frac{3y + 4}{4}.$$
+              Titik potong: $y^2 = 3y + 4 \implies \mathbf{y = -1}$ dan $\mathbf{y = 4}$.<br/>
+              Maka cukup <strong>1 integral polinom</strong>:
+              $$\begin{aligned}
+                A &= \int_{-1}^{4} \left(\frac{3y + 4}{4} - \frac{y^2}{4}\right)dy \\
+                  &= \frac{1}{4}\left[\frac{3y^2}{2} + 4y - \frac{y^3}{3}\right]_{-1}^{4} = \mathbf{\frac{125}{24} \approx 5{,}21}.
+              \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">(b) Dengan Pias Tegak ($\Delta x$) — HARUS PECAH 2!</div>
+            <div class="b-block-body">
+              Jika dipaksa memakai $\Delta x$, kurva harus dipecah di $x = 1/4$:
+              <ul>
+                <li>Pada $[0, 1/4]$: $y_{\text{atas}} = 2\sqrt{x}, \; y_{\text{bawah}} = -2\sqrt{x}$.</li>
+                <li>Pada $[1/4, 4]$: $y_{\text{atas}} = 2\sqrt{x}, \; y_{\text{bawah}} = \frac{4x - 4}{3}$.</li>
+              </ul>
+              $$A = \int_{0}^{1/4}\! 4\sqrt{x}\,dx + \int_{1/4}^{4}\! \Big(2\sqrt{x} - \tfrac{4x - 4}{3}\Big)\,dx = \mathbf{\frac{125}{24}}.$$
+              <div class="key-hint">Kedua cara sama hasilnya, tetapi $\Delta y$ jauh lebih cepat dan bebas galat akar!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 14: CONTOH 6 — DAERAH YANG DIBATASI TIGA KURVA -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 6: Daerah yang Dibatasi oleh Tiga Kurva</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal</div>
+          <div class="b-block-body">
+            Tentukan luas daerah $R$ di kuadran pertama yang dibatasi oleh kurva $y = x^2$, garis $y = 2 - x$, dan sumbu-$x$ ($y = 0$)!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">Bandingkan: Pias Tegak (Δx) — 2 Integral</div>
+            <div class="b-block-body">
+              Titik potong $y = x^2$ dan $y = 2 - x$ di kuadran I adalah $(1, 1)$.<br/>
+              Batas atas berganti di $x = 1$:
+              $$\begin{aligned}
+                A &= \int_{0}^{1} x^2\,dx + \int_{1}^{2} (2 - x)\,dx \\
+                  &= \left[\frac{x^3}{3}\right]_0^1 + \left[2x - \frac{x^2}{2}\right]_1^2 \\
+                  &= \frac{1}{3} + \frac{1}{2} = \mathbf{\frac{5}{6}}.
+              \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">Pias Mendatar (Δy) — Cukup 1 Integral!</div>
+            <div class="b-block-body">
+              Untuk $y \in [0, 1]$, batas kanan selalu $x = 2 - y$ dan batas kiri selalu parabola $x = \sqrt{y}$:
+              $$\begin{aligned}
+                A &= \int_{0}^{1} \big(2 - y - \sqrt{y}\big)\,dy \\
+                  &= \left[2y - \frac{y^2}{2} - \frac{2}{3}y^{3/2}\right]_{0}^{1} \\
+                  &= 2 - \frac{1}{2} - \frac{2}{3} = \mathbf{\frac{5}{6}}.
+              \end{aligned}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 15: PANDUAN STRATEGIS MEMILIH PIAS TEGAK VS MENDATAR -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Panduan Strategis: Kapan Memilih $\Delta x$ vs. $\Delta y$?</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Tabel Perbandingan Pias Tegak ($\Delta x$) dan Pias Mendatar ($\Delta y$)</div>
+          <div class="b-block-body">
+            <table class="synth-table">
+              <thead>
+                <tr>
+                  <th>Aspek</th>
+                  <th>Pias Tegak ($\Delta x$ / Vertikal)</th>
+                  <th>Pias Mendatar ($\Delta y$ / Horizontal)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Persamaan Kurva</strong></td>
+                  <td>Eksplisit dalam $x$: $y = f(x)$ dan $y = g(x)$</td>
+                  <td>Eksplisit dalam $y$: $x = p(y)$ dan $x = q(y)$</td>
+                </tr>
+                <tr>
+                  <td><strong>Ukuran Pias</strong></td>
+                  <td>Lebar $= \Delta x$, Tinggi $= y_{\text{atas}} - y_{\text{bawah}}$</td>
+                  <td>Tebal $= \Delta y$, Panjang $= x_{\text{kanan}} - x_{\text{kiri}}$</td>
+                </tr>
+                <tr>
+                  <td><strong>Elemen Luas $dA$</strong></td>
+                  <td>$dA = \big[f(x) - g(x)\big]\,dx$</td>
+                  <td>$dA = \big[p(y) - q(y)\big]\,dy$</td>
+                </tr>
+                <tr>
+                  <td><strong>Batas Integrasi</strong></td>
+                  <td>Absis ekstrem kiri $x = a$ s.d. kanan $x = b$</td>
+                  <td>Ordinat ekstrem bawah $y = c$ s.d. atas $y = d$</td>
+                </tr>
+                <tr>
+                  <td><strong>Kapan Terbaik?</strong></td>
+                  <td>Batas atas &amp; bawah tidak berganti rumus pada $[a, b]$</td>
+                  <td>Kurva $x = y^2$, atau batas kiri-kanan tunggal pada $[c, d]$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="b-alert">
+          <div class="b-block-title">Tips Emas di Ujian MA1101</div>
+          <div class="b-block-body">
+            Selalu <strong>gambar sketsa kasar daerah terlebih dahulu</strong> dan tarik satu garis uji vertikal serta satu garis uji horizontal! Pilih arah pias yang <strong>tidak mengalami pergantian kurva batas</strong> (sehingga cukup 1 integral) dan <strong>menghindari bentuk invers/akar yang sulit</strong>.
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 16: TAFSIRAN FISIKA — LUAS KURVA KECEPATAN -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Aplikasi Fisika: Luas di Antara Dua Kurva Kecepatan</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Tafsiran Fisis $\int_{0}^{T} [v_A(t) - v_B(t)]\,dt$</div>
+          <div class="b-block-body">
+            Jika dua benda $A$ dan $B$ bergerak sepanjang lintasan lurus dengan kecepatan masing-masing $v_A(t)$ dan $v_B(t)$ (dengan $v_A(t) \ge v_B(t)$ pada $[0, T]$), maka <strong>luas daerah di antara kedua kurva kecepatan</strong> menyatakan <strong>selisih jarak tempuh</strong> antara benda $A$ dan benda $B$:
+            <div class="formula-box">
+              $$A = \int_{0}^{T} \big[v_A(t) - v_B(t)\big]\,dt = \int_{0}^{T} v_A(t)\,dt - \int_{0}^{T} v_B(t)\,dt = s_A(T) - s_B(T)$$
+            </div>
+          </div>
+        </div>
+
+        <div class="b-example">
+          <div class="b-block-title">Contoh Kinematika: Kapan Pelari Kedua Menyusul Pelari Pertama?</div>
+          <div class="b-block-body">
+            Dua pelari berangkat dari posisi yang sama pada $t = 0$. Pelari $A$ berlari konstan $v_A(t) = 6\text{ m/s}$, pelari $B$ mempercepat lari $v_B(t) = 2t\text{ m/s}$.
+            <ul>
+              <li>Pada $t \in [0, 3]$, $v_A &gt; v_B$: keunggulan maksimum pelari $A$ terjadi saat $t = 3\text{ s}$, yaitu $\int_0^3 (6 - 2t)\,dt = \mathbf{9\text{ meter}}$.</li>
+              <li>Pelari $B$ menyusul pelari $A$ saat luas kelebihan kecepatan pelari $B$ menyamai $9\text{ m}$:
+                $$\int_{3}^{T} (2t - 6)\,dt = (T - 3)^2 = 9 \implies T - 3 = 3 \implies \mathbf{T = 6\text{ detik}}.$$
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 17: SOAL TANTANGAN TINGKAT UJIAN (MA1101) -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Soal Tantangan Tingkat Ujian (MA1101): Garis Pembagi Dua Luas</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal Klasik UTS/UAS ITB</div>
+          <div class="b-block-body">
+            Daerah $R$ dibatasi oleh parabola $y = 9 - x^2$ dan sumbu-$x$. Tentukan nilai konstanta $\mathbf{c}$ sehingga garis mendatar $\mathbf{y = c}$ membagi daerah $R$ menjadi <strong>dua bagian yang sama luasnya</strong>!
+          </div>
+        </div>
+
+        <div class="b-block">
+          <div class="b-block-title">Penyelesaian Cerdas dengan Pias Mendatar ($\Delta y$)!</div>
+          <div class="b-block-body">
+            <ol>
+              <li>Dengan pias mendatar ($\Delta y$), untuk setiap $y \in [0, 9]$, kurva $x^2 = 9 - y$ memberikan:
+                $$x_{\text{kanan}} = \sqrt{9 - y}, \quad x_{\text{kiri}} = -\sqrt{9 - y} \implies \text{panjang pias } = 2\sqrt{9 - y}.$$
+              </li>
+              <li>Luas seluruh daerah $R$ ($y \in [0, 9]$) adalah:
+                $$A_{\text{total}} = \int_{0}^{9} 2(9 - y)^{1/2}\,dy = \left[-\frac{4}{3}(9 - y)^{3/2}\right]_{0}^{9} = \frac{4}{3}(27) = \mathbf{36}.$$
+              </li>
+              <li>Agar bagian atas (dari $y = c$ sampai $y = 9$) memiliki luas $\frac{1}{2}A_{\text{total}} = 18$:
+                $$\int_{c}^{9} 2(9 - y)^{1/2}\,dy = \frac{4}{3}(9 - c)^{3/2} = 18 \iff (9 - c)^{3/2} = \frac{27}{2} \implies \boxed{c = 9\big(1 - 2^{-2/3}\big)}.$$
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 18: PERINGATAN JEBAKAN KLASIK UJIAN SUBTOPIK 5.1 -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Peringatan Jebakan Klasik Ujian pada Subtopik 5.1</h2>
+
+        <div class="grid-2">
+          <div>
+            <div class="b-alert">
+              <div class="b-block-title">Jebakan 1: Lupa Memecah di Titik Potong</div>
+              <div class="b-block-body">
+                Menghitung langsung $\int_a^b [f(x) - g(x)]\,dx$ padahal kurva berpotongan di $c \in (a, b)$ membuat luas kiri dan kanan saling mengurangi! Wajib pecah di titik potong.
+              </div>
+            </div>
+
+            <div class="b-alert">
+              <div class="b-block-title">Jebakan 2: Tertukar $x_{\text{kanan}} - x_{\text{kiri}}$</div>
+              <div class="b-block-body">
+                Pada pias mendatar ($\Delta y$), panjang pias selalu $\mathbf{x_{\text{kanan}} - x_{\text{kiri}}}$. Jika luas bernilai negatif, kurva kanan dan kiri pasti tertukar!
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="b-alert">
+              <div class="b-block-title">Jebakan 3: Memakai Batas-x pada Integral dy</div>
+              <div class="b-block-body">
+                Jika integrasi dilakukan terhadap $\mathbf{dy}$, batas bawah $c$ dan batas atas $d$ pada $\int_c^d \dots\,dy$ wajib nilai ordinat $y$, bukan absis $x$!
+              </div>
+            </div>
+
+            <div class="b-example">
+              <div class="b-block-title">Jebakan 4: Mengubah Rumus Saat $g(x) &lt; 0$</div>
+              <div class="b-block-body">
+                Jangan menambah minus! Rumus $y_{\text{atas}} - y_{\text{bawah}} = f(x) - g(x)$ sudah otomatis memperhitungkan bagian yang berada di bawah sumbu-$x$.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 19: LATIHAN MANDIRI -->
+      <!-- ===================================================================== -->
+      <section class="slide-compact">
+        <h2 class="slide-title">Latihan Mandiri</h2>
+
+        <div class="grid-2">
+          <div>
+            <div class="b-example">
+              <div class="b-block-title">Latihan 1 (Dengan Kunci)</div>
+              <div class="b-block-body">
+                Tentukan luas daerah yang dibatasi oleh parabola $y = x^2 - 4x + 3$ dan garis $y = x - 1$!
+                <div class="key-hint">
+                  <strong>Kunci</strong>: Titik potong $x^2 - 4x + 3 = x - 1 \implies x = 1, 4$. Garis di atas: $A = \int_1^4 (-x^2 + 5x - 4)\,dx = \mathbf{\frac{9}{2}}$.
+                </div>
+              </div>
+            </div>
+
+            <div class="b-example">
+              <div class="b-block-title">Latihan 2 (Dengan Kunci)</div>
+              <div class="b-block-body">
+                Gunakan pias mendatar ($\Delta y$) untuk menghitung luas daerah yang dibatasi oleh kurva $x = y^2 - 2y$ dan garis $x = y + 4$!
+                <div class="key-hint">
+                  <strong>Kunci</strong>: Titik potong $y^2 - 2y = y + 4 \implies y = -1, 4$. Maka $A = \int_{-1}^4 (4 + 3y - y^2)\,dy = \mathbf{\frac{125}{6}}$.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="b-block">
+              <div class="b-block-title">Latihan 3 (Tanpa Kunci)</div>
+              <div class="b-block-body">
+                Tentukan luas daerah yang dibatasi oleh kurva $y = x^3 - 6x^2 + 8x$ dan sumbu-$x$ pada selang $[0, 4]$!
+              </div>
+            </div>
+
+            <div class="b-block">
+              <div class="b-block-title">Latihan 4 (Tanpa Kunci)</div>
+              <div class="b-block-body">
+                Sketsa daerah di kuadran I yang dibatasi oleh $y = \sqrt{x}$, $y = x - 2$, dan sumbu-$x$ ($y = 0$). Susun rumus luasnya menggunakan <strong>(a)</strong> pias tegak ($\Delta x$) dan <strong>(b)</strong> pias mendatar ($\Delta y$), lalu hitung nilainya!
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 20: RINGKASAN SUBTOPIK 5.1 & JEMBATAN MENUJU SUBTOPIK 5.2 -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Ringkasan Subtopik 5.1 &amp; Jembatan Menuju Subtopik 5.2</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Ringkasan Subtopik 5.1 (Luas Daerah pada Bidang)</div>
+          <div class="b-block-body">
+            <ul>
+              <li><strong>Pias Tegak ($\Delta x$)</strong>: Jika $f(x) \ge g(x)$ pada $[a, b]$, maka $\displaystyle dA = (y_{\text{atas}} - y_{\text{bawah}})\,dx \implies A = \int_{a}^{b} \big[f(x) - g(x)\big]\,dx$.</li>
+              <li><strong>Kurva Berpotongan</strong>: Pecah di titik potong $f(x) = g(x)$ sehingga $\displaystyle A = \int_{a}^{b} \big|f(x) - g(x)\big|\,dx$.</li>
+              <li><strong>Pias Mendatar ($\Delta y$)</strong>: Jika $p(y) \ge q(y)$ pada $[c, d]$, maka $\displaystyle dA = (x_{\text{kanan}} - x_{\text{kiri}})\,dy \implies A = \int_{c}^{d} \big[p(y) - q(y)\big]\,dy$.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="b-alert">
+          <div class="b-block-title">Jembatan Menuju Subtopik 5.2: Volume Benda Putar</div>
+          <div class="b-block-body">
+            Pada Subtopik 5.2, kita akan memutar pias persegi panjang yang baru saja kita pelajari mengelilingi sumbu putar! Pias yang menempel pada sumbu putar menyapu sebuah <strong>cakram (<em>disk</em>)</strong> bervolume $\Delta V \approx \pi R^2\,\Delta x$, sedangkan pias di antara dua kurva menyapu sebuah <strong>cincin (<em>washer</em>)</strong> bervolume $\Delta V \approx \pi(R_{\text{luar}}^2 - r_{\text{dalam}}^2)\,\Delta x$.
+          </div>
+        </div>
+
+        <div style="font-size: 0.56em; color: var(--soft-gray); margin-top: 6px;">
+          Rujukan: Varberg, Purcell &amp; Rigdon, <em>Calculus</em> (9th ed.), §5.1; J. Stewart, <em>Calculus</em>, §6.1; Adams &amp; Essex, <em>Calculus</em>, §7.1.
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CINDYJS SCRIPTS FOR APPLET 1: VERTICAL SLICING (PIAS TEGAK)               -->
+  <!-- ========================================================================= -->
+  <script id="csinit-vert" type="text/x-cindyscript">
+    x0 = 1.0;
+    numN = 12;
+    shiftC = 0.0;
+    fTop(x) := 3.0 - 0.5 * (x - 1.0)^2 + shiftC;
+    gBot(x) := 0.5 * (x - 1.0)^2 - 1.0 + shiftC;
+  </script>
+
+  <script id="csdraw-vert" type="text/x-cindyscript">
+    fillpoly([[-5,-5],[12,-5],[12,5],[-5,5]], color->[0.035, 0.05, 0.08]);
+
+    ox = -0.1;
+    oy = -0.1;
+    sx = 1.35;
+    sy = 0.85;
+
+    // Sumbu Koordinat
+    draw([ox - 2.0*sx, oy], [ox + 3.8*sx, oy], color->[0.45, 0.52, 0.62], size->1.5, arrow->true);
+    draw([ox, oy - 2.2*sy], [ox, oy + 4.2*sy], color->[0.45, 0.52, 0.62], size->1.5, arrow->true);
+    drawtext([ox + 3.7*sx, oy - 0.25], "x", color->[0.8, 0.85, 0.9], size->12);
+    drawtext([ox + 0.1, oy + 4.0*sy], "y", color->[0.8, 0.85, 0.9], size->12);
+
+    forall([-1, 1, 2, 3], tk,
+      draw([ox + tk*sx, oy - 0.06], [ox + tk*sx, oy + 0.06], color->[0.7, 0.75, 0.8], size->1.5);
+      drawtext([ox + tk*sx - 0.06, oy - 0.26], "" + tk, color->[0.75, 0.8, 0.88], size->11);
+    );
+
+    // Shading Riemann Sum Strips between fTop and gBot on [-1, 3]
+    dxN = 4.0 / numN;
+    repeat(numN, i,
+      xL = -1.0 + (i - 1) * dxN;
+      xR = -1.0 + i * dxN;
+      xm = 0.5 * (xL + xR);
+      yt = fTop(xm);
+      yb = gBot(xm);
+      p1 = [ox + xL*sx, oy + yb*sy];
+      p2 = [ox + xR*sx, oy + yb*sy];
+      p3 = [ox + xR*sx, oy + yt*sy];
+      p4 = [ox + xL*sx, oy + yt*sy];
+      fillpoly([p1, p2, p3, p4], color->[0.18, 0.83, 0.75], alpha->0.35);
+      drawpoly([p1, p2, p3, p4], color->[0.18, 0.83, 0.75], size->1.0);
+    );
+
+    // Plot curves f(x) and g(x)
+    nsteps = 55;
+    repeat(nsteps, i,
+      x1 = -1.4 + (i - 1) * 4.8 / nsteps;
+      x2 = -1.4 + i * 4.8 / nsteps;
+      draw([ox + x1*sx, oy + fTop(x1)*sy], [ox + x2*sx, oy + fTop(x2)*sy], color->[0.96, 0.75, 0.24], size->3);
+      draw([ox + x1*sx, oy + gBot(x1)*sy], [ox + x2*sx, oy + gBot(x2)*sy], color->[0.31, 0.65, 0.98], size->3);
+    );
+
+    drawtext([ox + 0.2*sx, oy + fTop(1)*sy + 0.16], "y = f(x)", color->[0.96, 0.75, 0.24], size->12);
+    drawtext([ox + 0.2*sx, oy + gBot(1)*sy - 0.32], "y = g(x)", color->[0.31, 0.65, 0.98], size->12);
+
+    // Highlighted Moving Test Strip at x0
+    yt0 = fTop(x0);
+    yb0 = gBot(x0);
+    draw([ox + x0*sx, oy + yb0*sy], [ox + x0*sx, oy + yt0*sy], color->[1, 1, 1], size->4.5);
+    draw([ox + x0*sx, oy + yb0*sy], [ox + x0*sx, oy + yt0*sy], color->[0.96, 0.75, 0.24], size->2.5);
+
+    // Points at strip top and bottom
+    draw([ox + x0*sx, oy + yt0*sy], color->[1, 1, 1], size->5);
+    draw([ox + x0*sx, oy + yb0*sy], color->[1, 1, 1], size->5);
+
+    drawtext([ox + x0*sx + 0.08, oy + 0.5*(yt0 + yb0)*sy], "h = f(x) - g(x)", color->[1, 1, 1], size->12);
+    drawtext([ox + x0*sx - 0.2, oy - 0.42], "x₀ = " + format(x0, 2), color->[0.96, 0.75, 0.24], size->11);
+  </script>
+
+  <!-- ========================================================================= -->
+  <!-- CINDYJS SCRIPTS FOR APPLET 2: HORIZONTAL VS VERTICAL SLICING              -->
+  <!-- ========================================================================= -->
+  <script id="csinit-horiz" type="text/x-cindyscript">
+    modeH = 1; // 1 = Horizontal (dy), 0 = Vertical (dx)
+    posH = 0.5;
+    numNH = 10;
+  </script>
+
+  <script id="csdraw-horiz" type="text/x-cindyscript">
+    fillpoly([[-5,-5],[12,-5],[12,5],[-5,5]], color->[0.035, 0.05, 0.08]);
+
+    ox = -1.2;
+    oy = -0.2;
+    sx = 1.15;
+    sy = 1.15;
+
+    // Axes
+    draw([ox - 0.5*sx, oy], [ox + 4.8*sx, oy], color->[0.45, 0.52, 0.62], size->1.5, arrow->true);
+    draw([ox, oy - 1.8*sy], [ox, oy + 2.8*sy], color->[0.45, 0.52, 0.62], size->1.5, arrow->true);
+    drawtext([ox + 4.7*sx, oy - 0.22], "x", color->[0.8, 0.85, 0.9], size->12);
+    drawtext([ox + 0.08, oy + 2.7*sy], "y", color->[0.8, 0.85, 0.9], size->12);
+
+    forall([1, 2, 3, 4], tk,
+      draw([ox + tk*sx, oy - 0.06], [ox + tk*sx, oy + 0.06], color->[0.7, 0.75, 0.8], size->1.5);
+      drawtext([ox + tk*sx - 0.06, oy - 0.25], "" + tk, color->[0.75, 0.8, 0.88], size->11);
+    );
+
+    // Plot Parabola x = y^2 and Line x = y + 2
+    npts = 50;
+    repeat(npts, i,
+      y1 = -1.2 + (i - 1) * 3.4 / npts;
+      y2 = -1.2 + i * 3.4 / npts;
+      draw([ox + (y1^2)*sx, oy + y1*sy], [ox + (y2^2)*sx, oy + y2*sy], color->[0.96, 0.75, 0.24], size->3);
+    );
+    draw([ox + (-1.2 + 2)*sx, oy - 1.2*sy], [ox + (2.2 + 2)*sx, oy + 2.2*sy], color->[0.31, 0.65, 0.98], size->3);
+
+    drawtext([ox + 1.2*sx, oy + 1.6*sy], "x = y²", color->[0.96, 0.75, 0.24], size->12);
+    drawtext([ox + 3.1*sx, oy + 0.6*sy], "x = y + 2", color->[0.31, 0.65, 0.98], size->12);
+
+    // Intersection points (1, -1) and (4, 2)
+    draw([ox + 1*sx, oy - 1*sy], color->[1, 1, 1], size->4);
+    draw([ox + 4*sx, oy + 2*sy], color->[1, 1, 1], size->4);
+    drawtext([ox + 1.05*sx, oy - 1.25*sy], "(1, -1)", color->[0.85, 0.9, 1], size->11);
+    drawtext([ox + 3.45*sx, oy + 2.15*sy], "(4, 2)", color->[0.85, 0.9, 1], size->11);
+
+    if(modeH == 1,
+      // HORIZONTAL SLICES (dy) on y in [-1, 2]
+      dyN = 3.0 / numNH;
+      repeat(numNH, i,
+        yB = -1.0 + (i - 1) * dyN;
+        yT = -1.0 + i * dyN;
+        ym = 0.5 * (yB + yT);
+        xL = ym^2;
+        xR = ym + 2;
+        p1 = [ox + xL*sx, oy + yB*sy];
+        p2 = [ox + xR*sx, oy + yB*sy];
+        p3 = [ox + xR*sx, oy + yT*sy];
+        p4 = [ox + xL*sx, oy + yT*sy];
+        fillpoly([p1, p2, p3, p4], color->[0.18, 0.83, 0.75], alpha->0.35);
+        drawpoly([p1, p2, p3, p4], color->[0.18, 0.83, 0.75], size->1.0);
+      );
+
+      // Probe Horizontal Strip at posH
+      xL0 = posH^2;
+      xR0 = posH + 2;
+      draw([ox + xL0*sx, oy + posH*sy], [ox + xR0*sx, oy + posH*sy], color->[1, 1, 1], size->4.5);
+      draw([ox + xL0*sx, oy + posH*sy], [ox + xR0*sx, oy + posH*sy], color->[0.96, 0.75, 0.24], size->2.5);
+      drawtext([ox + 0.5*(xL0 + xR0)*sx - 0.4, oy + posH*sy + 0.15], "L = x_kanan - x_kiri", color->[1, 1, 1], size->12);
+    ,
+      // VERTICAL SLICES (dx) split at x = 1!
+      draw([ox + 1*sx, oy - 1.5*sy], [ox + 1*sx, oy + 2.2*sy], color->[0.98, 0.44, 0.52], size->2.5, dashtype->2);
+      drawtext([ox + 0.95*sx, oy + 2.3*sy], "Garis Pemecah x = 1", color->[0.98, 0.44, 0.52], size->12);
+
+      // Vertical strips on [0, 4]
+      dxN = 4.0 / numNH;
+      repeat(numNH, i,
+        xL = (i - 1) * dxN;
+        xR = i * dxN;
+        xm = 0.5 * (xL + xR);
+        if(xm <= 1.0,
+          yt = sqrt(xm);
+          yb = -sqrt(xm);
+          col = [0.98, 0.44, 0.52];
+        ,
+          yt = sqrt(xm);
+          yb = xm - 2;
+          col = [0.31, 0.65, 0.98];
+        );
+        p1 = [ox + xL*sx, oy + yb*sy];
+        p2 = [ox + xR*sx, oy + yb*sy];
+        p3 = [ox + xR*sx, oy + yt*sy];
+        p4 = [ox + xL*sx, oy + yt*sy];
+        fillpoly([p1, p2, p3, p4], color->col, alpha->0.35);
+        drawpoly([p1, p2, p3, p4], color->col, size->1.0);
+      );
+
+      // Probe Vertical Strip at clamp(posH*1.33 + 1.33)
+      xProbe = min(3.9, max(0.1, (posH + 1.0) * (4.0 / 3.0)));
+      if(xProbe <= 1.0,
+        yTp = sqrt(xProbe);
+        yBp = -sqrt(xProbe);
+      ,
+        yTp = sqrt(xProbe);
+        yBp = xProbe - 2;
+      );
+      draw([ox + xProbe*sx, oy + yBp*sy], [ox + xProbe*sx, oy + yTp*sy], color->[1, 1, 1], size->4.5);
+    );
+  </script>
+
+  <!-- ========================================================================= -->
+  <!-- REVEAL.JS & INTERACTIVE CONTROLLER INITIALIZATION                         -->
+  <!-- ========================================================================= -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false }
+        ],
+        throwOnError: false
+      });
+
+      Reveal.initialize({
+        width: 1120,
+        height: 700,
+        margin: 0.03,
+        controls: true,
+        progress: true,
+        center: false,
+        hash: true,
+        slideNumber: "c/t",
+        transition: "slide"
+      });
+
+      // Initialize CindyJS Applet 1 (Vertical Slicing)
+      const cdyVert = CindyJS({
+        canvasname: "CSCanvasVertical",
+        scripts: "cs*-vert",
+        transform: [{ visibleRect: [-2.6, -2.4, 4.4, 3.6] }],
+        use: []
+      });
+
+      // Initialize CindyJS Applet 2 (Horizontal vs Vertical Slicing)
+      const cdyHoriz = CindyJS({
+        canvasname: "CSCanvasHoriz",
+        scripts: "cs*-horiz",
+        transform: [{ visibleRect: [-2.4, -2.2, 4.6, 3.2] }],
+        use: []
+      });
+
+      Reveal.on("slidechanged", () => {
+        window.dispatchEvent(new Event("resize"));
+      });
+
+      // ---------------- Wire Controls for Applet 1 (Vertical Slicing) ----------------
+      const sX0V = document.getElementById("slider-x0-v");
+      const sNV = document.getElementById("slider-n-v");
+      const sCV = document.getElementById("slider-c-v");
+      const lblX0V = document.getElementById("lbl-x0-v");
+      const lblNV = document.getElementById("lbl-n-v");
+      const lblCV = document.getElementById("lbl-c-v");
+      const readoutV = document.getElementById("readout-v");
+
+      function updateVertApplet() {
+        const x0 = parseFloat(sX0V.value);
+        const N = parseInt(sNV.value, 10);
+        const C = parseFloat(sCV.value);
+
+        const fVal = 3.0 - 0.5 * Math.pow(x0 - 1.0, 2) + C;
+        const gVal = 0.5 * Math.pow(x0 - 1.0, 2) - 1.0 + C;
+        const hVal = fVal - gVal;
+
+        lblX0V.textContent = x0.toFixed(2);
+        lblNV.textContent = N;
+        lblCV.textContent = `C = ${C.toFixed(1)}`;
+
+        // Midpoint Riemann sum on [-1, 3] for [4 - (x-1)^2]
+        let sumA = 0;
+        const dx = 4.0 / N;
+        for (let i = 0; i < N; i++) {
+          const xm = -1.0 + (i + 0.5) * dx;
+          sumA += (4.0 - Math.pow(xm - 1.0, 2)) * dx;
+        }
+
+        readoutV.innerHTML =
+          `x₀ = ${x0.toFixed(2)} | f(x₀) = ${fVal.toFixed(2)}, g(x₀) = ${gVal.toFixed(2)}<br/>` +
+          `Tinggi pias h = f(x₀) - g(x₀) = ${hVal.toFixed(2)} &gt; 0<br/>` +
+          `Jumlah Riemann (N=${N}): A_N ≈ ${sumA.toFixed(3)} (Eksak: 32/3 ≈ 10.667)`;
+
+        cdyVert.evokeCS(`x0 = ${x0}; numN = ${N}; shiftC = ${C}; repaint();`);
+      }
+
+      [sX0V, sNV, sCV].forEach(el => el.addEventListener("input", updateVertApplet));
+
+      let animVFrame = null;
+      document.getElementById("btn-anim-sweep").addEventListener("click", () => {
+        if (animVFrame) cancelAnimationFrame(animVFrame);
+        let start = null;
+        const duration = 2500;
+        function step(ts) {
+          if (!start) start = ts;
+          const p = Math.min(1, (ts - start) / duration);
+          // Sweep from -1 to 3
+          const currentX = -1.0 + p * 4.0;
+          sX0V.value = currentX.toFixed(2);
+          updateVertApplet();
+          if (p < 1) animVFrame = requestAnimationFrame(step);
+        }
+        animVFrame = requestAnimationFrame(step);
+      });
+
+      document.getElementById("btn-reset-v").addEventListener("click", () => {
+        if (animVFrame) cancelAnimationFrame(animVFrame);
+        sX0V.value = "1.0";
+        sNV.value = "12";
+        sCV.value = "0.0";
+        updateVertApplet();
+      });
+
+      // ---------------- Wire Controls for Applet 2 (Horizontal vs Vertical) ----------------
+      let currentModeH = 1; // 1 = dy, 0 = dx
+      const sPosH = document.getElementById("slider-pos-h");
+      const sNH = document.getElementById("slider-nh");
+      const lblPosTitle = document.getElementById("lbl-pos-title");
+      const lblPosVal = document.getElementById("lbl-pos-val");
+      const lblNHVal = document.getElementById("lbl-nh-val");
+      const readoutH = document.getElementById("readout-h");
+      const btnModeDy = document.getElementById("btn-mode-dy");
+      const btnModeDx = document.getElementById("btn-mode-dx");
+
+      function updateHorizApplet() {
+        const pos = parseFloat(sPosH.value);
+        const N = parseInt(sNH.value, 10);
+        lblNHVal.textContent = N;
+
+        if (currentModeH === 1) {
+          lblPosTitle.textContent = "Posisi Pias y₀ ∈ [-1, 2]:";
+          lblPosVal.textContent = pos.toFixed(2);
+          const xL = pos * pos;
+          const xR = pos + 2.0;
+          const len = xR - xL;
+          readoutH.innerHTML =
+            `Mode: <strong>Pias Mendatar (Δy)</strong><br/>` +
+            `Batas Kiri: x = y² = ${xL.toFixed(2)} | Batas Kanan: x = y + 2 = ${xR.toFixed(2)}<br/>` +
+            `Panjang Pias L = x_kanan - x_kiri = ${len.toFixed(2)}<br/>` +
+            `Nilai Eksak: A = 9/2 = 4.50 (1 Integral Saja!)`;
+        } else {
+          const xProbe = Math.min(3.9, Math.max(0.1, (pos + 1.0) * (4.0 / 3.0)));
+          lblPosTitle.textContent = "Posisi Pias x₀ ∈ [0, 4]:";
+          lblPosVal.textContent = xProbe.toFixed(2);
+          const region = xProbe <= 1.0 ? "Daerah I: [0, 1] (y = ±√x)" : "Daerah II: [1, 4] (y = √x s.d. y = x - 2)";
+          readoutH.innerHTML =
+            `Mode: <strong>Pias Tegak (Δx) — Terbelah di x = 1</strong><br/>` +
+            `${region}<br/>` +
+            `Terpaksa memecah menjadi 2 integral: ∫₀¹ 2√x dx + ∫₁⁴ (√x - x + 2) dx<br/>` +
+            `Nilai Eksak: 4/3 + 19/6 = 9/2 = 4.50`;
+        }
+
+        cdyHoriz.evokeCS(`modeH = ${currentModeH}; posH = ${pos}; numNH = ${N}; repaint();`);
+      }
+
+      sPosH.addEventListener("input", updateHorizApplet);
+      sNH.addEventListener("input", updateHorizApplet);
+
+      btnModeDy.addEventListener("click", () => {
+        currentModeH = 1;
+        btnModeDy.classList.add("active");
+        btnModeDx.classList.remove("active");
+        updateHorizApplet();
+      });
+
+      btnModeDx.addEventListener("click", () => {
+        currentModeH = 0;
+        btnModeDx.classList.add("active");
+        btnModeDy.classList.remove("active");
+        updateHorizApplet();
+      });
+    });
+  </script>
+</body>
+</html>

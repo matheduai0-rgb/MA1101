@@ -16,6 +16,24 @@ if command -v mise &>/dev/null; then
     eval "$(mise env -s bash 2>/dev/null)" || true
 fi
 
+# Ensure dvisvgm is discoverable
+if ! command -v dvisvgm &>/dev/null; then
+    for p in /home/rafgani/.local/share/mise/installs/tinytex/*/bin/x86_64-linux; do
+        if [[ -x "$p/dvisvgm" ]]; then
+            export PATH="$p:$PATH"
+            break
+        fi
+    done
+fi
+
+# Ensure manim packages are discoverable
+if [[ -d "/home/rafgani/.local/share/mise/installs/python/3.14.7/lib/python3.14/site-packages" ]]; then
+    export PYTHONPATH="${PYTHONPATH:-}:/home/rafgani/.local/share/mise/installs/python/3.14.7/lib/python3.14/site-packages"
+fi
+if ! command -v manim &>/dev/null && [[ -x "/home/rafgani/.local/share/mise/installs/python/3.14.7/bin/manim" ]]; then
+    export PATH="/home/rafgani/.local/share/mise/installs/python/3.14.7/bin:$PATH"
+fi
+
 SCRIPT_FILE="${1:-}"
 SCENE_NAME="${2:-}"
 QUALITY_FLAG="-ql" # Default: low quality 480p15 for fast feedback

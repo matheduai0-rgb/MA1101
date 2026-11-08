@@ -26,3 +26,7 @@ This repository serves as the academic workspace for **MA1101 (Matematika I / Ca
    - Maintain organized folders by academic year and class code (`K<number>`).
    - Keep backup files (`.bak`) ignored by Git.
    - If generating new question sets, provide corresponding answer keys and steps when asked.
+4. **Lecture Presentations & Interactive Animations (`Reveal.js + CindyJS + Manim`)**:
+   - Lecture slides in `2026/slides/` use the **Reveal.js + KaTeX + CindyJS + Manim CE** HTML5 pipeline (`.agents/skills/reveal-cindyjs-calculus-slides/SKILL.md` and `.agents/skills/calculus-manim-animator/SKILL.md`).
+   - Use compact typography (`--r-main-font-size: 23px`, compact `.b-block` cards, and tight display equation margins) so dense derivations fit comfortably inside each slide.
+   - **Mandatory Verification**: Always run `.agents/skills/reveal-cindyjs-calculus-slides/scripts/verify_reveal_slides.py <deck.html>` after creating or editing slides to verify that all text appears inside the slide frame with zero clipping or overflow.

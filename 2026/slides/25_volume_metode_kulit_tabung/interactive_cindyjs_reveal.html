@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MA1101 Matematika I — Subtopik 5.3: Metode Kulit Tabung (Reveal.js + CindyJS + Manim)</title>
+
+  <!-- Reveal.js 5 Core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+
+  <!-- KaTeX for Instant LaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <!-- CindyJS (Interactive Geometry & Calculus Engine) -->
+  <script src="https://cindyjs.org/dist/v0.8.8/Cindy.js"></script>
+
+  <style>
+    :root {
+      --dark-canvas: #0c1018;
+      --dark-box: #141b28;
+      --dark-box-inner: #1a2436;
+      --luminous-gold: #f5be3c;
+      --electric-blue: #50a5fa;
+      --teal-cyan: #2dd4bf;
+      --emerald-green: #34d399;
+      --coral-rose: #fb7185;
+      --purple-belok: #d88cff;
+      --soft-gray: #c8d2e1;
+      /* Compact base font size for Reveal.js (default is 40px -> 23px prevents any overflow!) */
+      --r-main-font-size: 23px;
+    }
+
+    body, .reveal-viewport {
+      background-color: var(--dark-canvas) !important;
+      color: #ffffff;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    .reveal {
+      font-size: var(--r-main-font-size);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      padding: 4px 2px !important;
+      box-sizing: border-box;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      text-transform: none;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px 0;
+    }
+
+    .reveal h2.slide-title {
+      font-size: 1.06em;
+      color: var(--luminous-gold);
+      background: var(--dark-box);
+      padding: 6px 14px;
+      border-left: 4px solid var(--luminous-gold);
+      border-radius: 6px;
+      margin-bottom: 9px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Compact Beamer-equivalent Block Styles */
+    .b-block, .b-example, .b-alert {
+      background: var(--dark-box);
+      border-radius: 7px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      font-size: 0.70em;
+      line-height: 1.36;
+    }
+
+    .b-block-title {
+      padding: 4px 11px;
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 1.02em;
+    }
+
+    .b-block .b-block-title {
+      background: linear-gradient(90deg, rgba(80, 165, 250, 0.45), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(80, 165, 250, 0.4);
+    }
+
+    .b-example .b-block-title {
+      background: linear-gradient(90deg, rgba(52, 211, 153, 0.4), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(52, 211, 153, 0.4);
+    }
+
+    .b-alert .b-block-title {
+      background: linear-gradient(90deg, rgba(251, 113, 133, 0.45), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(251, 113, 133, 0.4);
+    }
+
+    .b-block-body {
+      padding: 6px 11px;
+    }
+
+    .b-block-body ul, .b-block-body ol {
+      margin: 3px 0 3px 18px;
+      padding: 0;
+    }
+
+    .b-block-body li {
+      margin-bottom: 2px;
+    }
+
+    /* Compact KaTeX Display Equations */
+    .reveal .katex-display {
+      margin: 0.22em 0 !important;
+      font-size: 0.95em;
+    }
+
+    section.slide-compact .b-block,
+    section.slide-compact .b-example,
+    section.slide-compact .b-alert {
+      font-size: 0.64em;
+      line-height: 1.32;
+      margin-bottom: 6px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .grid-applet {
+      display: grid;
+      grid-template-columns: 1.24fr 0.96fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .formula-box {
+      background: var(--dark-box-inner);
+      border: 1.5px solid var(--teal-cyan);
+      border-radius: 6px;
+      padding: 5px 10px;
+      text-align: center;
+      margin: 5px 0;
+      font-size: 0.85em;
+    }
+
+    /* Interactive CindyJS & Controls Styling */
+    .cindy-canvas {
+      width: 100%;
+      height: 360px;
+      background: #090d14;
+      border: 1.5px solid rgba(45, 212, 191, 0.35);
+      border-radius: 8px;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .control-panel {
+      background: var(--dark-box);
+      border: 1px solid rgba(245, 190, 60, 0.3);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.64em;
+      line-height: 1.32;
+    }
+
+    .control-row {
+      margin-bottom: 6px;
+    }
+
+    .control-row label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: var(--soft-gray);
+      margin-bottom: 2px;
+    }
+
+    .control-row input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal-cyan);
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .btn-action {
+      background: var(--dark-box-inner);
+      color: #fff;
+      border: 1px solid var(--electric-blue);
+      border-radius: 5px;
+      padding: 4px 8px;
+      font-size: 0.92em;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action:hover, .btn-action.active {
+      background: var(--electric-blue);
+      color: #090d14;
+      font-weight: 700;
+    }
+
+    .live-readout {
+      background: #090d14;
+      border-left: 3px solid var(--teal-cyan);
+      padding: 6px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+      font-family: monospace;
+      font-size: 0.98em;
+      color: var(--teal-cyan);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72em;
+      font-weight: 700;
+      background: rgba(45, 212, 191, 0.18);
+      color: var(--teal-cyan);
+      border: 1px solid var(--teal-cyan);
+    }
+
+    table.synth-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94em;
+      margin-top: 4px;
+    }
+
+    table.synth-table th, table.synth-table td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 8px;
+      text-align: left;
+    }
+
+    table.synth-table th {
+      color: var(--luminous-gold);
+      background: rgba(245, 190, 60, 0.1);
+    }
+
+    .key-hint {
+      color: var(--teal-cyan);
+      font-size: 0.90em;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 1: JUDUL -->
+      <!-- ===================================================================== -->
+      <section style="text-align: center;">
+        <div style="margin-top: 24px;">
+          <span class="badge">Reveal.js + KaTeX + CindyJS Interactive + Manim CE</span>
+          <h2 style="color: var(--electric-blue); font-size: 1.15em; margin-top: 14px;">
+            MA1101 Matematika I — Bab 5: Penggunaan Integral
+          </h2>
+          <h1 style="color: var(--luminous-gold); font-size: 1.7em; margin: 12px 0;">
+            Subtopik 5.3: Volume Benda Putar:<br/>Metode Kulit Tabung
+          </h1>
+          <p style="color: var(--teal-cyan); font-style: italic; font-size: 0.85em; margin: 6px 0;">
+            (Volumes of Solids: Cylindrical Shells)
+          </p>
+          <hr style="border-color: rgba(255,255,255,0.15); width: 60%; margin: 18px auto;" />
+          <p style="font-size: 0.72em; color: var(--soft-gray); line-height: 1.5;">
+            <strong>Tim Pengajar MA1101</strong><br/>
+            Fakultas Matematika dan Ilmu Pengetahuan Alam — Institut Teknologi Bandung<br/>
+            Semester 1 Tahun Akademik 2026/2027
+          </p>
+          <p style="font-size: 0.62em; color: var(--emerald-green); margin-top: 16px;">
+            Navigasi: <kbd>→</kbd> / <kbd>Spasi</kbd> • Fullscreen: <kbd>F</kbd> • Ikhtisar Slide: <kbd>Esc</kbd>
+          </p>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 2: MOTIVASI -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Motivasi: Mengapa Metode Cakram & Cincin Tidak Selalu Cukup?</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Dilema Memutar $y = f(x)$ Mengelilingi Sumbu-$y$</div>
+          <div class="b-block-body">
+            Pada Subtopik 5.2.a, memutar daerah mengelilingi <strong>sumbu-$y$</strong> dengan Metode Cakram/Cincin mengharuskan kita mengambil <strong>pias mendatar ($\Delta y \perp$ sumbu-$y$)</strong> dan menyatakan $x$ sebagai fungsi dari $y$. Namun, perhatikan dua masalah klasik berikut:
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-alert">
+            <div class="b-block-title">1. Kurva Sulit / Mustahil Diinvers</div>
+            <div class="b-block-body">
+              Misalkan daerah di bawah kurva kubik:
+              $$y = 2x^2 - x^3 \quad \text{pada } [0, 2]$$
+              diputar mengelilingi <strong>sumbu-$y$</strong>.<br/>
+              Dengan pias mendatar ($\Delta y$), baik ujung kanan maupun ujung kiri pias menempel pada kurva yang sama! Menyelesaikan $x^3 - 2x^2 + y = 0$ untuk $x = g(y)$ sangat rumit.
+            </div>
+          </div>
+
+          <div class="b-example">
+            <div class="b-block-title">2. Integral Menjadi Jauh Lebih Mudah</div>
+            <div class="b-block-body">
+              Misalkan daerah di bawah:
+              $$y = \sin(x^2) \quad \text{pada } \big[0, \sqrt{\pi}\big]$$
+              diputar mengelilingi <strong>sumbu-$y$</strong>.<br/>
+              Dengan Metode Kulit Tabung ($\Delta x \parallel$ sumbu-$y$), kita memperoleh faktor $\mathbf{x}$ di depan $\sin(x^2)$, sehingga $\int 2\pi x\sin(x^2)\,dx$ langsung selesai dengan substitusi $u = x^2$!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 3: GEOMETRI SATU KULIT TABUNG & APPLET CINDYJS 1 (UNROLLING) -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Geometri Satu Kulit Tabung: Iris & Bentangkan (CindyJS Interaktif)</h2>
+
+        <div class="grid-applet">
+          <div>
+            <div id="CSCanvasUnroll" class="cindy-canvas"></div>
+            <div class="formula-box" style="margin-top: 6px;">
+              $$\Delta V = \pi(r_2^2 - r_1^2)h = 2\pi\Big(\frac{r_1+r_2}{2}\Big)h\,\Delta r = \mathbf{2\pi r \cdot h \cdot \Delta r}$$
+            </div>
+          </div>
+
+          <div class="control-panel">
+            <div style="color: var(--luminous-gold); font-weight: 700; font-size: 1.04em; margin-bottom: 6px;">
+              🎛️ Simulasi CindyJS: Pembentangan Kulit Tabung
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Posisi Pias $x_0 \in [0.25, 1.85]$:</span>
+                <span id="lbl-x0" style="color: var(--luminous-gold);">1.25</span>
+              </label>
+              <input type="range" id="slider-x0" min="0.25" max="1.85" step="0.01" value="1.25" />
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Tebal Pias $\Delta x$:</span>
+                <span id="lbl-dx" style="color: var(--teal-cyan);">0.16</span>
+              </label>
+              <input type="range" id="slider-dx" min="0.04" max="0.35" step="0.01" value="0.16" />
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Proses Bentangkan ($t = 0$ Tabung $\to t = 1$ Balok):</span>
+                <span id="lbl-unroll" style="color: var(--emerald-green);">0%</span>
+              </label>
+              <input type="range" id="slider-unroll" min="0" max="1" step="0.01" value="0" />
+            </div>
+
+            <div class="btn-group">
+              <button class="btn-action" id="btn-anim-unroll">▶ Animasikan Bentangan</button>
+              <button class="btn-action" id="btn-reset-unroll">↺ Reset ke Tabung</button>
+            </div>
+
+            <div class="live-readout" id="readout-unroll">
+              r = x₀ = 1.25 | h = f(x₀) = 1.17<br/>
+              Keliling 2πr = 7.85<br/>
+              ΔV = 2π·r·h·Δx ≈ 1.472 (V eksak = 16π/5 ≈ 10.053)
+            </div>
+
+            <div style="margin-top: 6px; color: var(--soft-gray);">
+              $$\Delta V \approx (\text{keliling})\cdot(\text{tinggi})\cdot(\text{tebal}) = 2\pi x_0 \cdot f(x_0) \cdot \Delta x$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 4: RUMUS METODE KULIT TABUNG MENGELILINGI SUMBU-Y -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Metode Kulit Tabung Mengelilingi Sumbu-$y$ ($\Delta x \parallel$ Sumbu-$y$)</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Teorema / Rumus Metode Kulit Tabung (Putar Sumbu-$y$)</div>
+          <div class="b-block-body">
+            Misalkan daerah dibatasi oleh kurva $y = f(x) \ge 0$, sumbu-$x$, serta garis $x = a$ dan $x = b$ (dengan $0 \le a < b$). Jika daerah tersebut diputar $360^\circ$ mengelilingi <strong>sumbu-$y$</strong>, maka pias tegak pada posisi $x$ (selebar $\Delta x \parallel$ sumbu-$y$) menyapu kulit tabung dengan <strong>jari-jari $r(x) = x$</strong> dan <strong>tinggi $h(x) = f(x)$</strong>:
+            <div class="formula-box">
+              $$\Delta V \approx 2\pi x\,f(x)\,\Delta x \implies V = 2\pi\int_{a}^{b} \underbrace{x}_{\text{jari-jari}}\cdot\underbrace{f(x)}_{\text{tinggi}}\,dx$$
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-example">
+            <div class="b-block-title">Ciri Khas Metode Kulit Tabung</div>
+            <div class="b-block-body">
+              <ul>
+                <li>Pias diambil <strong>SEJAJAR ($\parallel$) dengan sumbu putar</strong> (<em>bukan</em> tegak lurus!).</li>
+                <li>Pengali di depan integral adalah $\mathbf{2\pi}$ (berasal dari keliling lingkaran $2\pi r$, bukan luas $\pi R^2$).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">Jari-Jari Berpangkat Satu!</div>
+            <div class="b-block-body">
+              <ul>
+                <li>Pada Metode Cakram/Cincin: jari-jari dikuadratkan ($\pi R^2$).</li>
+                <li>Pada Metode Kulit Tabung: jari-jari $r = x$ <strong>dikalikan dengan tinggi $h = f(x)$</strong> ($2\pi x f(x)$).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 5: SIMULASI VIDEO MANIM 1 — CYLINDRICAL SHELLS UNROLLING -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Simulasi Dinamis Manim: Kulit Tabung & Pembentangan Balok ($2\pi x\,f(x)\,\Delta x$)</h2>
+
+        <div style="text-align: center;">
+          <video controls preload="metadata" poster="keyframe_kulit_tabung_bentang.png"
+                 style="width: 72%; max-height: 430px; border-radius: 10px; border: 1.5px solid var(--luminous-gold); box-shadow: 0 8px 24px rgba(0,0,0,0.6);">
+            <source src="CylindricalShellsUnrollingScene.mp4" type="video/mp4" />
+            <source src="CylindricalShellsUnrollingScene.ogv" type="video/ogg" />
+          </video>
+          <div style="font-size: 0.65em; color: var(--soft-gray); margin-top: 8px;">
+            🎬 <code>CylindricalShellsUnrollingScene.mp4</code> — Perhatikan bagaimana pias tegak ($\Delta x \parallel$ sumbu-$y$) menyapu kulit tabung dan dibentangkan menjadi balok $2\pi x \cdot f(x) \cdot \Delta x$.
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 6: CONTOH 1 — MENYELESAIKAN MASALAH PEMBUKA -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 1: Menyelesaikan Masalah Pembuka dengan Kulit Tabung</h2>
+
+        <div class="grid-2">
+          <div class="b-example">
+            <div class="b-block-title">Soal 1A: Kurva Kubik $y = 2x^2 - x^3$</div>
+            <div class="b-block-body">
+              Daerah $R$ dibatasi oleh $y = 2x^2 - x^3$ dan sumbu-$x$ pada $[0, 2]$. Hitunglah volume benda yang terbentuk jika $R$ diputar mengelilingi <strong>sumbu-$y$</strong>!<br/>
+              <strong>Penyelesaian</strong>:<br/>
+              Ambil pias tegak ($\Delta x \parallel$ sumbu-$y$). Pada posisi $x \in [0, 2]$, jari-jari kulit tabung $r = x$ dan tingginya $h = 2x^2 - x^3$:
+              $$\begin{aligned}
+                V &= 2\pi\int_{0}^{2} x\big(2x^2 - x^3\big)\,dx = 2\pi\int_{0}^{2} \big(2x^3 - x^4\big)\,dx \\
+                  &= 2\pi\left[\frac{1}{2}x^4 - \frac{1}{5}x^5\right]_{0}^{2} = 2\pi\!\left(8 - \frac{32}{5}\right) = \mathbf{\frac{16\pi}{5}}.
+              \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="b-block">
+            <div class="b-block-title">Soal 1B: Kurva $y = \sin(x^2)$ pada $[0, \sqrt{\pi}]$</div>
+            <div class="b-block-body">
+              Daerah di bawah $y = \sin(x^2)$ pada $\big[0, \sqrt{\pi}\big]$ diputar mengelilingi <strong>sumbu-$y$</strong>. Tentukan volumenya!<br/>
+              <strong>Penyelesaian</strong>:<br/>
+              Dengan Metode Kulit Tabung ($\Delta x \parallel$ sumbu-$y$):
+              $$V = 2\pi\int_{0}^{\sqrt{\pi}} x\sin(x^2)\,dx.$$
+              Substitusi $u = x^2 \implies du = 2x\,dx$ (batas $u = 0$ sampai $u = \pi$):
+              $$V = \pi\int_{0}^{\pi} \sin u\,du = \pi\big[-\cos u\big]_{0}^{\pi} = \mathbf{2\pi}.$$
+              <div class="key-hint">Faktor $x$ dari jari-jari kulit tabung justru menyelamatkan integral!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 7: CONTOH 2 — METODE CINCIN VS KULIT TABUNG -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 2: Metode Cincin vs. Kulit Tabung pada Benda yang Sama</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal (Purcell §5.3)</div>
+          <div class="b-block-body">
+            Daerah $R$ dibatasi oleh $y = \sqrt{x}$, sumbu-$x$ ($y = 0$), dan garis $x = 4$. Hitung volume benda putar jika $R$ diputar mengelilingi <strong>sumbu-$y$</strong> menggunakan <strong>(a) Metode Cincin</strong> dan <strong>(b) Metode Kulit Tabung</strong>!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">(a) Metode Cincin (Pias Mendatar $\Delta y \perp$ Sumbu-$y$)</div>
+            <div class="b-block-body">
+              Untuk $y \in [0, 2]$, batas kanan adalah garis $x = 4$ dan batas kiri adalah parabola $x = y^2$:
+              $$R_{\text{luar}}(y) = 4, \qquad r_{\text{dalam}}(y) = y^2.$$
+              Maka:
+              $$\begin{aligned}
+                V &= \pi\int_{0}^{2} \Big[4^2 - (y^2)^2\Big]\,dy \\
+                  &= \pi\left[16y - \frac{y^5}{5}\right]_{0}^{2} = \pi\!\left(32 - \frac{32}{5}\right) = \mathbf{\frac{128\pi}{5}}.
+              \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">(b) Metode Kulit Tabung (Pias Tegak $\Delta x \parallel$ Sumbu-$y$)</div>
+            <div class="b-block-body">
+              Untuk $x \in [0, 4]$, pias tegak memiliki jari-jari $r(x) = x$ dan tinggi $h(x) = \sqrt{x}$:
+              $$\Delta V \approx 2\pi x\sqrt{x}\,\Delta x = 2\pi x^{3/2}\,\Delta x.$$
+              Maka:
+              $$\begin{aligned}
+                V &= 2\pi\int_{0}^{4} x^{3/2}\,dx \\
+                  &= 2\pi\left[\frac{2}{5}x^{5/2}\right]_{0}^{4} = \frac{4\pi}{5}(32) = \mathbf{\frac{128\pi}{5}}.
+              \end{aligned}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 8: KULIT TABUNG DI ANTARA DUA KURVA -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Metode Kulit Tabung untuk Daerah di Antara Dua Kurva</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Rumus Kulit Tabung di Antara $y = f(x)$ dan $y = g(x)$ (Putar Sumbu-$y$)</div>
+          <div class="b-block-body">
+            Jika daerah dibatasi oleh kurva atas $y = f(x)$ dan kurva bawah $y = g(x)$ pada $[a, b]$ ($0 \le a < b$ dan $f(x) \ge g(x)$), maka tinggi pias tegak pada posisi $x$ adalah $\mathbf{h(x) = f(x) - g(x)}$, sehingga:
+            <div class="formula-box">
+              $$\Delta V \approx 2\pi x\,\big[f(x) - g(x)\big]\,\Delta x \implies V = 2\pi\int_{a}^{b} x\,\big[f(x) - g(x)\big]\,dx$$
+            </div>
+          </div>
+        </div>
+
+        <div class="b-example">
+          <div class="b-block-title">Contoh 3: Daerah di Antara Dua Parabola Diputar Mengelilingi Sumbu-$y$</div>
+          <div class="b-block-body">
+            Tentukan volume benda yang terbentuk jika daerah yang dibatasi oleh $y = 2x - x^2$ dan $y = x^2$ diputar mengelilingi <strong>sumbu-$y$</strong>!
+            <ul>
+              <li>Titik potong: $2x - x^2 = x^2 \iff 2x(1 - x) = 0 \implies \mathbf{x = 0}$ dan $\mathbf{x = 1}$.</li>
+              <li>Pada $[0, 1]$, kurva atas adalah $y = 2x - x^2$ dan kurva bawah adalah $y = x^2$, sehingga tinggi kulit tabung adalah $h(x) = (2x - x^2) - x^2 = 2x - 2x^2$:</li>
+            </ul>
+            $$V = 2\pi\int_{0}^{1} x\big(2x - 2x^2\big)\,dx = 4\pi\int_{0}^{1} \big(x^2 - x^3\big)\,dx = 4\pi\left[\frac{x^3}{3} - \frac{x^4}{4}\right]_{0}^{1} = \mathbf{\frac{\pi}{3}}.$$
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 9: METODE KULIT TABUNG MENGELILINGI SUMBU-X (PIAS MENDATAR ΔY) -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Metode Kulit Tabung Mengelilingi Sumbu-$x$ (Pias Mendatar $\Delta y$)</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Pias Mendatar ($\Delta y \parallel$ Sumbu-$x$) Diputar Mengelilingi Sumbu-$x$</div>
+          <div class="b-block-body">
+            Jika daerah dibatasi oleh kurva kanan $x = p(y)$ dan kurva kiri $x = q(y)$ untuk $y \in [c, d]$ ($c \ge 0$) lalu diputar mengelilingi <strong>sumbu-$x$</strong>, maka <strong>pias mendatar ($\Delta y \parallel$ sumbu-$x$)</strong> menyapu kulit tabung berjari-jari $\mathbf{r(y) = y}$ dan panjang $\mathbf{h(y) = p(y) - q(y)}$:
+            <div class="formula-box">
+              $$\Delta V \approx 2\pi y\,\big[p(y) - q(y)\big]\,\Delta y \implies V = 2\pi\int_{c}^{d} y\,\big(x_{\text{kanan}} - x_{\text{kiri}}\big)\,dy$$
+            </div>
+          </div>
+        </div>
+
+        <div class="b-example">
+          <div class="b-block-title">Contoh 4: Mengapa Pias Mendatar ($\Delta y$) Menghemat Waktu?</div>
+          <div class="b-block-body">
+            Daerah di kuadran pertama yang dibatasi oleh parabola $x = y^2$, sumbu-$x$ ($y = 0$), dan garis $x + y = 2$ diputar mengelilingi <strong>sumbu-$x$</strong>. Hitunglah volumenya!
+            <ul>
+              <li>Jika memakai Metode Cakram ($\Delta x \perp$ sumbu-$x$), batas atas berganti di $x = 1$ (harus pecah 2 integral!).</li>
+              <li>Sebaliknya, dengan <strong>Metode Kulit Tabung ($\Delta y \parallel$ sumbu-$x$)</strong> untuk $y \in [0, 1]$, batas kanan selalu garis $x_{\text{kanan}} = 2 - y$ dan batas kiri selalu parabola $x_{\text{kiri}} = y^2$:</li>
+            </ul>
+            $$V = 2\pi\int_{0}^{1} y\big(2 - y - y^2\big)\,dy = 2\pi\left[y^2 - \frac{y^3}{3} - \frac{y^4}{4}\right]_{0}^{1} = 2\pi\left(\frac{5}{12}\right) = \mathbf{\frac{5\pi}{6}}.$$
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 10: ROTASI MENGELILINGI GARIS x = k ATAU y = k -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Kulit Tabung Mengelilingi Garis $x = k$ atau $y = k$</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Aturan Pengukuran Jari-Jari Kulit Tabung Terhadap Sumbu Putar Bergeser</div>
+          <div class="b-block-body">
+            Jika daerah diputar mengelilingi garis tegak $x = k$ atau garis mendatar $y = k$ yang berada di luar daerah, <strong>tinggi kulit tabung $h$ TIDAK BERUBAH</strong>, tetapi <strong>jari-jari $r$ adalah jarak dari pias ke garis sumbu putar</strong>:
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-example">
+            <div class="b-block-title">1. Putar Garis Tegak $x = k$ (Pias Tegak $\Delta x$)</div>
+            <div class="b-block-body">
+              Jari-jari kulit tabung pada posisi $x \in [a, b]$ adalah $r(x) = |x - k|$:
+              <ul>
+                <li>Jika sumbu $x = k$ di <strong>kiri</strong> daerah ($x \ge k$): $\mathbf{r(x) = x - k}$.</li>
+                <li>Jika sumbu $x = k$ di <strong>kanan</strong> daerah ($x \le k$): $\mathbf{r(x) = k - x}$.</li>
+              </ul>
+              $$V = 2\pi\int_{a}^{b} |x - k|\cdot\big[f(x) - g(x)\big]\,dx.$$
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">2. Putar Garis Mendatar $y = k$ (Pias Mendatar $\Delta y$)</div>
+            <div class="b-block-body">
+              Jari-jari kulit tabung pada ketinggian $y \in [c, d]$ adalah $r(y) = |y - k|$:
+              <ul>
+                <li>Jika sumbu $y = k$ di <strong>bawah</strong> daerah ($y \ge k$): $\mathbf{r(y) = y - k}$.</li>
+                <li>Jika sumbu $y = k$ di <strong>atas</strong> daerah ($y \le k$): $\mathbf{r(y) = k - y}$.</li>
+              </ul>
+              $$V = 2\pi\int_{c}^{d} |y - k|\cdot\big[p(y) - q(y)\big]\,dy.$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 11: SIMULASI CINDYJS INTERAKTIF + VIDEO MANIM 2 (SHIFTED AXIS) -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Simulasi Interaktif (CindyJS & Manim): Sumbu Putar Bergeser $x = k$</h2>
+
+        <div class="grid-applet">
+          <div>
+            <div id="CSCanvasAxis" class="cindy-canvas"></div>
+            <div style="font-size: 0.60em; color: var(--soft-gray); margin-top: 4px; text-align: center;">
+              🎬 Video Manim: <a href="ShellsVsWashersShiftedAxisScene.mp4" target="_blank" style="color: var(--teal-cyan);">Buka <code>ShellsVsWashersShiftedAxisScene.mp4</code></a>
+            </div>
+          </div>
+
+          <div class="control-panel">
+            <div style="color: var(--luminous-gold); font-weight: 700; font-size: 1.04em; margin-bottom: 5px;">
+              🎛️ Daerah $y = 2x - x^2$ & $y = x^2$ pada $[0, 1]$
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Garis Sumbu Putar $x = k$:</span>
+                <span id="lbl-axis-k" style="color: var(--coral-rose);">x = 0.0 (Sumbu-y)</span>
+              </label>
+              <input type="range" id="slider-axis-k" min="-1.5" max="2.5" step="0.1" value="0" />
+            </div>
+
+            <div class="btn-group" style="margin-bottom: 6px;">
+              <button class="btn-action" data-k="0">Sumbu-y (k=0)</button>
+              <button class="btn-action" data-k="2">x = 2 (Kanan)</button>
+              <button class="btn-action" data-k="-1">x = -1 (Kiri)</button>
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Jumlah Pias Kulit Tabung ($N$):</span>
+                <span id="lbl-num-n" style="color: var(--teal-cyan);">8</span>
+              </label>
+              <input type="range" id="slider-num-n" min="1" max="50" step="1" value="8" />
+            </div>
+
+            <div class="control-row">
+              <label>
+                <span>Pias Uji $x_0 \in [0.05, 0.95]$:</span>
+                <span id="lbl-probe-x" style="color: var(--luminous-gold);">0.55</span>
+              </label>
+              <input type="range" id="slider-probe-x" min="0.05" max="0.95" step="0.01" value="0.55" />
+            </div>
+
+            <div class="live-readout" id="readout-axis">
+              Rumus Jari-jari: <strong>r(x) = x</strong> | r(0.55) = 0.55<br/>
+              Jumlah Riemann (N=8): V_N ≈ 1.0525 (Eksak: π/3 ≈ 1.0472)
+            </div>
+
+            <div style="margin-top: 5px; color: var(--soft-gray);">
+              $$V = 2\pi\int_{0}^{1} |x - k|\cdot\big(2x - 2x^2\big)\,dx$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 12: CONTOH 5 — ROTASI MENGELILINGI GARIS x = 2 VS x = -1 -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 5: Rotasi Mengelilingi Garis $x = 2$ vs. Garis $x = -1$</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal</div>
+          <div class="b-block-body">
+            Daerah $R$ dibatasi oleh $y = 2x - x^2$ dan $y = x^2$ pada $[0, 1]$ (tinggi pias tegak $h(x) = 2x - 2x^2$). Hitung volume benda putar jika $R$ diputar mengelilingi <strong>(a) garis $x = 2$</strong> dan <strong>(b) garis $x = -1$</strong>!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">(a) Mengelilingi Garis $x = 2$ (di Kanan $R$)</div>
+            <div class="b-block-body">
+              Karena $x \in [0, 1]$ berada di sebelah <strong>kiri</strong> garis $x = 2$, jarak pias ke sumbu putar adalah $\mathbf{r(x) = 2 - x}$:
+              $$\begin{aligned}
+                V &= 2\pi\int_{0}^{1} (2 - x)(2x - 2x^2)\,dx \\
+                  &= 4\pi\int_{0}^{1} \big(2x - 3x^2 + x^3\big)\,dx \\
+                  &= 4\pi\left[x^2 - x^3 + \frac{x^4}{4}\right]_{0}^{1} = \mathbf{\pi}.
+              \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">(b) Mengelilingi Garis $x = -1$ (di Kiri $R$)</div>
+            <div class="b-block-body">
+              Karena $x \in [0, 1]$ berada di sebelah <strong>kanan</strong> garis $x = -1$, jarak pias ke sumbu putar adalah $\mathbf{r(x) = x - (-1) = x + 1}$:
+              $$\begin{aligned}
+                V &= 2\pi\int_{0}^{1} (x + 1)(2x - 2x^2)\,dx \\
+                  &= 4\pi\int_{0}^{1} \big(x - x^3\big)\,dx \\
+                  &= 4\pi\left[\frac{x^2}{2} - \frac{x^4}{4}\right]_{0}^{1} = \mathbf{\pi}.
+              \end{aligned}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 13: CONTOH 6 — ROTASI MENGELILINGI GARIS MENDATAR y = k (Δy) -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 6: Kulit Tabung Mengelilingi Garis Mendatar $y = -1$ dan $y = 3$</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal</div>
+          <div class="b-block-body">
+            Daerah $R$ dibatasi oleh parabola $x = y^2$ dan garis $x = y + 2$ (berpotongan di $y = -1$ dan $y = 2$). Gunakan <strong>Metode Kulit Tabung ($\Delta y$)</strong> untuk menyusun dan menghitung volume jika $R$ diputar mengelilingi <strong>(a) garis $y = -1$</strong> dan <strong>(b) garis $y = 3$</strong>!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">(a) Mengelilingi Garis $y = -1$ (di Bawah $R$)</div>
+            <div class="b-block-body">
+              Untuk $y \in [-1, 2]$, pias mendatar ($\Delta y \parallel$ garis $y = -1$) memiliki panjang $h(y) = (y + 2) - y^2$ dan jari-jari ke garis $y = -1$ sebesar $\mathbf{r(y) = y - (-1) = y + 1}$:
+              $$\begin{aligned}
+                V &= 2\pi\int_{-1}^{2} (y + 1)\big(y + 2 - y^2\big)\,dy \\
+                  &= 2\pi\int_{-1}^{2} \big(2 + 3y - y^3\big)\,dy = \mathbf{\frac{27\pi}{2}}.
+              \end{aligned}$$
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">(b) Mengelilingi Garis $y = 3$ (di Atas $R$)</div>
+            <div class="b-block-body">
+              Terhadap garis $y = 3$ yang berada di atas daerah, jari-jari kulit tabung pada ketinggian $y \in [-1, 2]$ adalah $\mathbf{r(y) = 3 - y}$:
+              $$\begin{aligned}
+                V &= 2\pi\int_{-1}^{2} (3 - y)\big(y + 2 - y^2\big)\,dy \\
+                  &= 2\pi\int_{-1}^{2} \big(6 + y - 4y^2 + y^3\big)\,dy = \mathbf{\frac{45\pi}{2}}.
+              \end{aligned}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 14: SINTESIS BAB 5 — TABEL MASTER MEMILIH METODE -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Sintesis Bab 5: Kapan Memakai Cakram/Cincin vs. Kulit Tabung?</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Aturan Emas Berdasarkan Orientasi Pias terhadap Sumbu Putar</div>
+          <div class="b-block-body">
+            Langkah pertama selalu: <strong>tentukan arah pias ($\Delta x$ tegak atau $\Delta y$ mendatar)</strong> yang membuat batas daerah paling sederhana (tidak terbelah dan mudah diintegralkan). Setelah arah pias dipilih, bandingkan dengan <strong>sumbu putar</strong>:
+
+            <table class="synth-table">
+              <thead>
+                <tr>
+                  <th>Hubungan Geometri</th>
+                  <th>Pias $\perp$ Sumbu Putar (Tegak Lurus)</th>
+                  <th>Pias $\parallel$ Sumbu Putar (Sejajar)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Bentuk Keping 3D</strong></td>
+                  <td><span style="color: var(--electric-blue); font-weight:700;">Cakram / Cincin</span> (<em>Disk / Washer</em>)</td>
+                  <td><span style="color: var(--teal-cyan); font-weight:700;">Kulit Tabung</span> (<em>Cylindrical Shell</em>)</td>
+                </tr>
+                <tr>
+                  <td><strong>Rumus Elemen Volume</strong></td>
+                  <td>$dV = \pi\big(R_{\text{luar}}^2 - r_{\text{dalam}}^2\big)\,d(\text{tebal})$</td>
+                  <td>$dV = 2\pi\,(\text{jari-jari})\,(\text{tinggi})\,d(\text{tebal})$</td>
+                </tr>
+                <tr>
+                  <td><strong>Putar Sumbu-$x$ / $y = k$</strong></td>
+                  <td>Pakai <strong>Pias Tegak ($\Delta x$)</strong></td>
+                  <td>Pakai <strong>Pias Mendatar ($\Delta y$)</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>Putar Sumbu-$y$ / $x = k$</strong></td>
+                  <td>Pakai <strong>Pias Mendatar ($\Delta y$)</strong></td>
+                  <td>Pakai <strong>Pias Tegak ($\Delta x$)</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 15: CONTOH 7 — SOAL TIPE KBF/UAS ("SUSUNLAH INTEGRAL VOLUME") -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 7: Menyusun Integral Volume dengan 2 Metode (Tipe UAS)</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal Klasik KBF/UAS MA1101</div>
+          <div class="b-block-body">
+            Daerah $R$ di kuadran I dibatasi oleh kurva $y = x^2$, garis $y = 4$, dan sumbu-$y$ ($x = 0$). <strong>Tanpa menghitung nilainya</strong>, susunlah integral tentu untuk volume benda putar jika $R$ diputar mengelilingi <strong>garis $x = 3$</strong>, menggunakan: <strong>(a) Metode Cincin</strong> dan <strong>(b) Metode Kulit Tabung</strong>!
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="b-block">
+            <div class="b-block-title">(a) Metode Cincin ($\Delta y \perp$ garis $x = 3$)</div>
+            <div class="b-block-body">
+              Ambil pias mendatar ($\Delta y$) untuk $y \in [0, 4]$. Batas kiri daerah adalah $x = 0$ dan batas kanan adalah $x = \sqrt{y}$.<br/>
+              Diukur dari sumbu putar $x = 3$:
+              $$R_{\text{luar}}(y) = 3 - 0 = 3, \qquad r_{\text{dalam}}(y) = 3 - \sqrt{y}.$$
+              Maka:
+              <div class="formula-box">
+                $$V = \pi\int_{0}^{4} \Big[3^2 - \big(3 - \sqrt{y}\big)^2\Big]\,dy$$
+              </div>
+            </div>
+          </div>
+
+          <div class="b-alert">
+            <div class="b-block-title">(b) Metode Kulit Tabung ($\Delta x \parallel$ garis $x = 3$)</div>
+            <div class="b-block-body">
+              Ambil pias tegak ($\Delta x$) untuk $x \in [0, 2]$. Batas atas daerah adalah $y = 4$ dan batas bawah adalah $y = x^2$.<br/>
+              Jari-jari ke garis $x = 3$ dan tinggi pias adalah:
+              $$r(x) = 3 - x, \qquad h(x) = 4 - x^2.$$
+              Maka:
+              <div class="formula-box">
+                $$V = 2\pi\int_{0}^{2} (3 - x)\big(4 - x^2\big)\,dx$$
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 16: CONTOH 8 — PARADOKS CINCIN SERBET (NAPKIN RING PROBLEM) -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Contoh 8: Keajaiban Bola Berlubang Bor (<em>Napkin Ring Problem</em>)</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal Klasik (Purcell §5.3)</div>
+          <div class="b-block-body">
+            Sebuah bola pejal berjari-jari $R$ dilubangi tepat melalui pusatnya dengan mata bor silinder sehingga menyisakan "cincin serbet" (<em>napkin ring</em>) setinggi $2h$ (yakni $y \in [-h, h]$). Tunjukkan bahwa volume sisa cincin tersebut adalah $\mathbf{V = \frac{4}{3}\pi h^3}$ (<strong>tidak bergantung pada jari-jari bola $R$</strong>!).
+          </div>
+        </div>
+
+        <div class="b-block">
+          <div class="b-block-title">Bukti Elegan 3 Baris dengan Metode Kulit Tabung</div>
+          <div class="b-block-body">
+            <ol>
+              <li>Berdasarkan Pythagoras pada penampang bola $x^2 + y^2 = R^2$, lubang bor yang menyisakan tinggi $\pm h$ memiliki jari-jari bor $a = \sqrt{R^2 - h^2}$.</li>
+              <li>Ambil pias tegak ($\Delta x \parallel$ sumbu-$y$) pada $x \in [a, R]$. Tinggi kulit tabung dari $-\sqrt{R^2 - x^2}$ hingga $+\sqrt{R^2 - x^2}$ adalah $\mathbf{h(x) = 2\sqrt{R^2 - x^2}}$:
+                $$V = 2\pi\int_{a}^{R} x\cdot 2\sqrt{R^2 - x^2}\,dx = 2\pi\left[-\frac{2}{3}(R^2 - x^2)^{3/2}\right]_{a}^{R} = \frac{4}{3}\pi\big(R^2 - a^2\big)^{3/2}.$$
+              </li>
+              <li>Karena $R^2 - a^2 = h^2$, maka $\boxed{V = \frac{4}{3}\pi h^3}$! (Bola sebesar bumi dan bola sebesar kelereng menghasilkan volume cincin sisa yang sama persis asalkan tingginya sama-sama $2h$!).</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 17: SOAL TANTANGAN TINGKAT UJIAN — VOLUME TORUS (DONAT) -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Soal Tantangan Tingkat Ujian (MA1101): Volume Torus (Donat)</h2>
+
+        <div class="b-example">
+          <div class="b-block-title">Soal</div>
+          <div class="b-block-body">
+            Cakram lingkaran $(x - b)^2 + y^2 \le a^2$ (dengan $0 < a < b$) diputar mengelilingi <strong>sumbu-$y$</strong> membentuk sebuah <strong>torus (donat)</strong>. Hitunglah volumenya dengan Metode Kulit Tabung!
+          </div>
+        </div>
+
+        <div class="b-block">
+          <div class="b-block-title">Penyelesaian dengan Substitusi & Simetri Fungsi Ganjil-Genap!</div>
+          <div class="b-block-body">
+            <ol>
+              <li>Untuk $x \in [b - a, \,b + a]$, tinggi pias tegak pada lingkaran adalah $h(x) = 2\sqrt{a^2 - (x - b)^2}$, sehingga:
+                $$V = 2\pi\int_{b-a}^{b+a} 2x\sqrt{a^2 - (x - b)^2}\,dx.$$
+              </li>
+              <li>Substitusi $u = x - b \implies x = u + b$ dan $dx = du$ pada selang simetris $u \in [-a, a]$:
+                $$V = 4\pi\int_{-a}^{a} (u + b)\sqrt{a^2 - u^2}\,du = 4\pi\underbrace{\int_{-a}^{a} u\sqrt{a^2 - u^2}\,du}_{=\,0\;\text{(fungsi ganjil!)}} + 4\pi b\underbrace{\int_{-a}^{a} \sqrt{a^2 - u^2}\,du}_{\text{luas }\frac{1}{2}\text{ lingkaran }=\,\frac{1}{2}\pi a^2} = \boxed{2\pi^2 a^2 b}.$$
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 18: PERINGATAN JEBAKAN KLASIK UJIAN PADA SUBTOPIK 5.3 -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Peringatan Jebakan Klasik Ujian pada Subtopik 5.3</h2>
+
+        <div class="grid-2">
+          <div>
+            <div class="b-alert">
+              <div class="b-block-title">Jebakan 1: Tertukar Faktor $2\pi$ vs. $\pi$</div>
+              <div class="b-block-body">
+                <ul>
+                  <li><strong>Cakram / Cincin ($\perp$)</strong>: pengali depan $\mathbf{\pi}$, jari-jari dikuadratkan ($\pi R^2$).</li>
+                  <li><strong>Kulit Tabung ($\parallel$)</strong>: pengali depan $\mathbf{2\pi}$, jari-jari dikali tinggi ($2\pi r h$).</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="b-alert">
+              <div class="b-block-title">Jebakan 2: Salah Tanda pada $r(x) = |x - k|$</div>
+              <div class="b-block-body">
+                Jika daerah berada di $[0, 1]$ dan diputar terhadap garis $\mathbf{x = 3}$ (di kanan daerah), maka jari-jarinya adalah $\mathbf{3 - x}$ (bukan $x - 3$!). Ingat: jari-jari $r$ wajib bernilai positif pada seluruh selang.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="b-alert">
+              <div class="b-block-title">Jebakan 3: Memasukkan Kurva ke Jari-Jari $r$</div>
+              <div class="b-block-body">
+                Pada kulit tabung dengan pias tegak ($\Delta x$), jari-jari $r(x)$ <strong>hanya bergantung pada posisi $x$ dan letak sumbu putar</strong> (misal $x$, $x + 1$, atau $2 - x$), <strong>tidak pernah</strong> memuat rumus $f(x)$! Rumus $f(x) - g(x)$ masuk ke faktor <strong>tinggi $h(x)$</strong>.
+              </div>
+            </div>
+
+            <div class="b-example">
+              <div class="b-block-title">Jebakan 4: Lupa Menyesuaikan Batas Integrasi</div>
+              <div class="b-block-body">
+                Pias tegak ($\Delta x$) selalu menggunakan batas kiri-kanan $\mathbf{x \in [a, b]}$, sedangkan pias mendatar ($\Delta y$) selalu menggunakan batas bawah-atas $\mathbf{y \in [c, d]}$.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 19: LATIHAN MANDIRI -->
+      <!-- ===================================================================== -->
+      <section class="slide-compact">
+        <h2 class="slide-title">Latihan Mandiri</h2>
+
+        <div class="grid-2">
+          <div>
+            <div class="b-example">
+              <div class="b-block-title">Latihan 1 (Dengan Kunci)</div>
+              <div class="b-block-body">
+                Gunakan Metode Kulit Tabung untuk menghitung volume benda yang terbentuk jika daerah yang dibatasi oleh $y = 3x - x^2$ dan $y = x$ diputar mengelilingi <strong>sumbu-$y$</strong>!
+                <div class="key-hint">
+                  <strong>Kunci</strong>: Titik potong $3x - x^2 = x \implies x = 0, 2$. Tinggi pias $h(x) = (3x - x^2) - x = 2x - x^2$. Maka $V = 2\pi\int_0^2 x(2x - x^2)\,dx = 2\pi\left[\frac{2}{3}x^3 - \frac{1}{4}x^4\right]_0^2 = \mathbf{\frac{8\pi}{3}}$.
+                </div>
+              </div>
+            </div>
+
+            <div class="b-example">
+              <div class="b-block-title">Latihan 2 (Dengan Kunci)</div>
+              <div class="b-block-body">
+                Hitunglah volume jika daerah pada Latihan 1 diputar mengelilingi garis $\mathbf{x = 2}$!
+                <div class="key-hint">
+                  <strong>Kunci</strong>: Terhadap garis $x = 2$, jari-jari adalah $r(x) = 2 - x$. Maka $V = 2\pi\int_0^2 (2 - x)(2x - x^2)\,dx = 2\pi\int_0^2 (2 - x)^2 x\,dx = \mathbf{\frac{8\pi}{3}}$.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="b-block">
+              <div class="b-block-title">Latihan 3 (Tanpa Kunci)</div>
+              <div class="b-block-body">
+                Gunakan Metode Kulit Tabung untuk menentukan volume benda putar ketika daerah di bawah kurva $y = \dfrac{1}{1 + x^2}$ pada $[0, 2]$ diputar mengelilingi <strong>sumbu-$y$</strong>!
+              </div>
+            </div>
+
+            <div class="b-block">
+              <div class="b-block-title">Latihan 4 (Tanpa Kunci)</div>
+              <div class="b-block-body">
+                Daerah $R$ dibatasi oleh $y = x^2$ dan $y = 2 - x$ di kuadran pertama. Susunlah rumus integral volume jika $R$ diputar mengelilingi garis $\mathbf{y = -2}$ menggunakan <strong>(a)</strong> Metode Cincin ($\Delta x$) dan <strong>(b)</strong> Metode Kulit Tabung ($\Delta y$)!
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- SLIDE 20: RINGKASAN SUBTOPIK 5.3 & JEMBATAN MENUJU SUBTOPIK 5.5 -->
+      <!-- ===================================================================== -->
+      <section>
+        <h2 class="slide-title">Ringkasan Subtopik 5.3 & Jembatan Menuju Subtopik 5.5</h2>
+
+        <div class="b-block">
+          <div class="b-block-title">Ringkasan Subtopik 5.3 (Metode Kulit Tabung)</div>
+          <div class="b-block-body">
+            <ul>
+              <li><strong>Prinsip Kulit Tabung</strong>: Ambil pias yang <strong>SEJAJAR ($\parallel$) dengan sumbu putar</strong>, sehingga $\Delta V \approx 2\pi\,(\text{jari-jari})\,(\text{tinggi})\,(\text{tebal})$.</li>
+              <li><strong>Putar Sumbu-$y$ / Garis $x = k$ (Pias Tegak $\Delta x$)</strong>: $\displaystyle V = 2\pi\int_{a}^{b} |x - k|\cdot\big[f(x) - g(x)\big]\,dx$.</li>
+              <li><strong>Putar Sumbu-$x$ / Garis $y = k$ (Pias Mendatar $\Delta y$)</strong>: $\displaystyle V = 2\pi\int_{c}^{d} |y - k|\cdot\big[p(y) - q(y)\big]\,dy$.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="b-alert">
+          <div class="b-block-title">Jembatan Menuju Subtopik 5.5: Usaha / Kerja Fisika (<em>Work</em>)</div>
+          <div class="b-block-body">
+            Setelah menuntaskan aplikasi geometri integral (luas daerah dan volume benda pejal di 5.1–5.3), pada <strong>Subtopik 5.5</strong> kita akan menerapkan prinsip "<em>iris, hampiri, integralkan</em>" ke dalam fisika mekanika: menghitung <strong>usaha/kerja oleh gaya berubah-ubah</strong> $W = \int_a^b F(x)\,dx$ (pegas Hooke) serta <strong>kerja memompa fluida keluar dari tangki</strong> ($\Delta W \approx \text{berat lapisan}\times\text{jarak angkat}$)!
+          </div>
+        </div>
+
+        <div style="font-size: 0.56em; color: var(--soft-gray); margin-top: 6px;">
+          Rujukan: Varberg, Purcell & Rigdon, <em>Calculus</em> (9th ed.), §5.3; J. Stewart, <em>Calculus</em>, §6.3; Adams & Essex, <em>Calculus</em>, §7.2.
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CINDYJS SCRIPTS FOR APPLET 1: UNROLLING CYLINDRICAL SHELL                 -->
+  <!-- ========================================================================= -->
+  <script id="csinit-unroll" type="text/x-cindyscript">
+    x0 = 1.25;
+    dx = 0.16;
+    unroll = 0.0;
+    f(x) := 2 * x^2 - x^3;
+  </script>
+
+  <script id="csdraw-unroll" type="text/x-cindyscript">
+    fillpoly([[-5,-5],[12,-5],[12,5],[-5,5]], color->[0.035, 0.05, 0.08]);
+
+    ox = -3.4;
+    oy = -1.2;
+    sc = 1.15;
+
+    // Axes
+    draw([ox - 0.3, oy], [ox + 2.4*sc, oy], color->[0.55, 0.62, 0.72], size->1.5, arrow->true);
+    draw([ox, oy - 0.3], [ox, oy + 1.8*sc], color->[0.55, 0.62, 0.72], size->1.5, arrow->true);
+    drawtext([ox + 2.45*sc, oy - 0.1], "x", color->[0.8, 0.85, 0.9], size->13);
+    drawtext([ox - 0.15, oy + 1.85*sc], "y (Sumbu Putar)", color->[0.98, 0.44, 0.52], size->12);
+
+    // Dashed rotation axis highlight on y-axis
+    draw([ox, oy - 0.2], [ox, oy + 1.75*sc], color->[0.98, 0.44, 0.52], size->2.5, dashtype->2);
+
+    // Shaded region under curve
+    nsteps = 50;
+    pts = [[ox, oy]];
+    repeat(nsteps + 1, i,
+      xv = (i - 1) * 2.0 / nsteps;
+      yv = f(xv);
+      pts = pts ++ [[ox + xv*sc, oy + yv*sc]];
+    );
+    pts = pts ++ [[ox + 2.0*sc, oy]];
+    fillpoly(pts, color->[0.18, 0.83, 0.75], alpha->0.16);
+
+    // Plot curve y = 2x^2 - x^3
+    repeat(nsteps, i,
+      x1 = (i - 1) * 2.0 / nsteps;
+      x2 = i * 2.0 / nsteps;
+      draw([ox + x1*sc, oy + f(x1)*sc], [ox + x2*sc, oy + f(x2)*sc], color->[0.96, 0.75, 0.24], size->3);
+    );
+
+    // Vertical strip at x0 with width dx
+    hval = max(0.02, f(x0));
+    xL = ox + (x0 - dx/2)*sc;
+    xR = ox + (x0 + dx/2)*sc;
+    yT = oy + hval*sc;
+    fillpoly([[xL, oy], [xR, oy], [xR, yT], [xL, yT]], color->[0.96, 0.75, 0.24], alpha->0.75);
+    drawpoly([[xL, oy], [xR, oy], [xR, yT], [xL, yT]], color->[1, 1, 1], size->1.5);
+
+    // Radius arrow r = x0
+    draw([ox, oy + 0.5*hval*sc], [ox + x0*sc, oy + 0.5*hval*sc], color->[0.31, 0.65, 0.98], size->2, arrow->true);
+    drawtext([ox + 0.4*x0*sc, oy + 0.5*hval*sc + 0.12], "r = x", color->[0.31, 0.65, 0.98], size->12);
+
+    drawtext([ox + 0.2, oy + 1.5*sc], "y = 2x² - x³", color->[0.96, 0.75, 0.24], size->13);
+    drawtext([ox + 1.95*sc, oy - 0.28], "2", color->[0.8, 0.85, 0.9], size->12);
+
+    // ---------------- RIGHT PANEL: 3D Cylindrical Shell Unrolling to Slab ----------------
+    cx = 1.95;
+    cy = -0.35;
+    R3d = x0 * 0.72;
+    H3d = hval * 1.35;
+    tilt = 0.32 * (1 - 0.55*unroll);
+
+    segs = 36;
+    repeat(segs, k,
+      u1 = (k - 1) / segs - 0.5;
+      u2 = k / segs - 0.5;
+
+      theta1 = u1 * 2 * pi;
+      theta2 = u2 * 2 * pi;
+
+      cylX1 = R3d * sin(theta1);
+      cylY1 = -R3d * cos(theta1) * tilt;
+      cylX2 = R3d * sin(theta2);
+      cylY2 = -R3d * cos(theta2) * tilt;
+
+      flatX1 = u1 * (2 * pi * R3d) * 0.55;
+      flatY1 = 0.0;
+      flatX2 = u2 * (2 * pi * R3d) * 0.55;
+      flatY2 = 0.0;
+
+      px1 = cx + (1 - unroll)*cylX1 + unroll*flatX1;
+      py1 = cy + (1 - unroll)*cylY1 + unroll*flatY1;
+      px2 = cx + (1 - unroll)*cylX2 + unroll*flatX2;
+      py2 = cy + (1 - unroll)*cylY2 + unroll*flatY2;
+
+      shade = 0.55 + 0.35 * cos(theta1 * (1 - unroll));
+      col = [0.18 * shade, 0.83 * shade, 0.75 * shade];
+
+      poly = [[px1, py1], [px2, py2], [px2, py2 + H3d], [px1, py1 + H3d]];
+      fillpoly(poly, color->col, alpha->0.68);
+      draw([px1, py1 + H3d], [px2, py2 + H3d], color->[1, 1, 1], size->1.8);
+      draw([px1, py1], [px2, py2], color->[0.18, 0.83, 0.75], size->1.2);
+    );
+
+    if(unroll < 0.5,
+      draw([cx, cy - 0.3], [cx, cy + H3d + 0.4], color->[0.98, 0.44, 0.52], size->1.8, dashtype->2);
+      draw([cx, cy + H3d], [cx + R3d, cy + H3d], color->[0.96, 0.75, 0.24], size->2.2, arrow->true);
+      drawtext([cx + 0.35*R3d, cy + H3d + 0.14], "r = x", color->[0.96, 0.75, 0.24], size->12);
+      drawtext([cx - 1.1, cy - 1.05], "Kulit Tabung 3D (2πr · h · Δx)", color->[0.8, 0.88, 0.95], size->13);
+    ,
+      halfL = 0.5 * (2 * pi * R3d) * 0.55;
+      draw([cx - halfL, cy - 0.22], [cx + halfL, cy - 0.22], color->[0.96, 0.75, 0.24], size->2, arrow->true);
+      drawtext([cx - 0.85, cy - 0.52], "Panjang Bentangan = 2πr", color->[0.96, 0.75, 0.24], size->13);
+      drawtext([cx + halfL + 0.1, cy + 0.45*H3d], "h = f(x)", color->[1, 1, 1], size->12);
+    );
+  </script>
+
+  <!-- ========================================================================= -->
+  <!-- CINDYJS SCRIPTS FOR APPLET 2: SHIFTED AXIS x = k & TWO CURVES             -->
+  <!-- ========================================================================= -->
+  <script id="csinit-axis" type="text/x-cindyscript">
+    kaxis = 0.0;
+    numN = 8;
+    probex = 0.55;
+    fTop(x) := 2*x - x^2;
+    fBot(x) := x^2;
+  </script>
+
+  <script id="csdraw-axis" type="text/x-cindyscript">
+    fillpoly([[-5,-5],[12,-5],[12,5],[-5,5]], color->[0.035, 0.05, 0.08]);
+
+    ox = -0.5;
+    oy = -1.35;
+    sx = 1.45;
+    sy = 2.25;
+
+    // Coordinate Axes
+    draw([ox - 1.8*sx, oy], [ox + 2.8*sx, oy], color->[0.45, 0.52, 0.62], size->1.5, arrow->true);
+    draw([ox, oy - 0.25], [ox, oy + 1.25*sy], color->[0.45, 0.52, 0.62], size->1.5, arrow->true);
+    drawtext([ox + 2.7*sx, oy - 0.22], "x", color->[0.8, 0.85, 0.9], size->12);
+    drawtext([ox + 0.08, oy + 1.2*sy], "y", color->[0.8, 0.85, 0.9], size->12);
+
+    forall([-1, 0, 1, 2], tk,
+      draw([ox + tk*sx, oy - 0.06], [ox + tk*sx, oy + 0.06], color->[0.7, 0.75, 0.8], size->1.5);
+      drawtext([ox + tk*sx - 0.06, oy - 0.25], "" + tk, color->[0.75, 0.8, 0.88], size->11);
+    );
+
+    dxN = 1.0 / numN;
+    repeat(numN, i,
+      xL = (i - 1) * dxN;
+      xR = i * dxN;
+      xm = 0.5 * (xL + xR);
+      yt = fTop(xm);
+      yb = fBot(xm);
+      p1 = [ox + xL*sx, oy + yb*sy];
+      p2 = [ox + xR*sx, oy + yb*sy];
+      p3 = [ox + xR*sx, oy + yt*sy];
+      p4 = [ox + xL*sx, oy + yt*sy];
+      fillpoly([p1, p2, p3, p4], color->[0.18, 0.83, 0.75], alpha->0.32);
+      drawpoly([p1, p2, p3, p4], color->[0.18, 0.83, 0.75], size->1.0);
+    );
+
+    steps = 45;
+    repeat(steps, i,
+      x1 = (i - 1) * 1.1 / steps;
+      x2 = i * 1.1 / steps;
+      draw([ox + x1*sx, oy + fTop(x1)*sy], [ox + x2*sx, oy + fTop(x2)*sy], color->[0.96, 0.75, 0.24], size->3);
+      draw([ox + x1*sx, oy + fBot(x1)*sy], [ox + x2*sx, oy + fBot(x2)*sy], color->[0.31, 0.65, 0.98], size->3);
+    );
+
+    drawtext([ox + 0.18*sx, oy + 0.88*sy], "f(x) = 2x - x²", color->[0.96, 0.75, 0.24], size->12);
+    drawtext([ox + 0.85*sx, oy + 0.42*sy], "g(x) = x²", color->[0.31, 0.65, 0.98], size->12);
+
+    ytP = fTop(probex);
+    ybP = fBot(probex);
+    ymid = 0.5 * (ytP + ybP);
+    draw([ox + probex*sx, oy + ybP*sy], [ox + probex*sx, oy + ytP*sy], color->[1, 1, 1], size->4.5);
+
+    axX = ox + kaxis*sx;
+    draw([axX, oy - 0.2], [axX, oy + 1.22*sy], color->[0.98, 0.44, 0.52], size->3, dashtype->2);
+    drawtext([axX - 0.35, oy + 1.26*sy], "Sumbu Putar x = " + format(kaxis, 1), color->[0.98, 0.44, 0.52], size->12);
+
+    draw([axX, oy + ymid*sy], [ox + probex*sx, oy + ymid*sy], color->[0.96, 0.75, 0.24], size->2.5, arrow->true);
+
+    rlabel = if(kaxis <= 0,
+      if(abs(kaxis) < 0.05, "r(x) = x", "r(x) = x + " + format(abs(kaxis), 1)),
+      "r(x) = " + format(kaxis, 1) + " - x"
+    );
+    drawtext([0.5*(axX + ox + probex*sx) - 0.35, oy + ymid*sy + 0.14], rlabel, color->[0.96, 0.75, 0.24], size->12);
+  </script>
+
+  <!-- ========================================================================= -->
+  <!-- REVEAL.JS & INTERACTIVE CONTROLLER INITIALIZATION                         -->
+  <!-- ========================================================================= -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false }
+        ],
+        throwOnError: false
+      });
+
+      Reveal.initialize({
+        width: 1120,
+        height: 700,
+        margin: 0.03,
+        controls: true,
+        progress: true,
+        center: false,
+        hash: true,
+        slideNumber: "c/t",
+        transition: "slide"
+      });
+
+      const cdyUnroll = CindyJS({
+        canvasname: "CSCanvasUnroll",
+        scripts: "cs*-unroll",
+        transform: [{ visibleRect: [-4.2, -1.9, 4.3, 2.2] }],
+        use: []
+      });
+
+      const cdyAxis = CindyJS({
+        canvasname: "CSCanvasAxis",
+        scripts: "cs*-axis",
+        transform: [{ visibleRect: [-2.8, -1.8, 3.6, 1.9] }],
+        use: []
+      });
+
+      Reveal.on("slidechanged", () => {
+        window.dispatchEvent(new Event("resize"));
+      });
+
+      const sX0 = document.getElementById("slider-x0");
+      const sDx = document.getElementById("slider-dx");
+      const sUnroll = document.getElementById("slider-unroll");
+      const lblX0 = document.getElementById("lbl-x0");
+      const lblDx = document.getElementById("lbl-dx");
+      const lblUnroll = document.getElementById("lbl-unroll");
+      const readoutUnroll = document.getElementById("readout-unroll");
+
+      function updateUnrollApplet() {
+        const x0 = parseFloat(sX0.value);
+        const dx = parseFloat(sDx.value);
+        const u = parseFloat(sUnroll.value);
+        const h = 2 * x0 * x0 - x0 * x0 * x0;
+        const circ = 2 * Math.PI * x0;
+        const dV = circ * h * dx;
+
+        lblX0.textContent = x0.toFixed(2);
+        lblDx.textContent = dx.toFixed(2);
+        lblUnroll.textContent = Math.round(u * 100) + "%";
+        readoutUnroll.innerHTML =
+          `r = x₀ = ${x0.toFixed(2)} | h = f(x₀) = ${h.toFixed(2)}<br/>` +
+          `Keliling 2πr = ${circ.toFixed(2)}<br/>` +
+          `ΔV = 2π·r·h·Δx ≈ ${dV.toFixed(3)} (V eksak = 16π/5 ≈ 10.053)`;
+
+        cdyUnroll.evokeCS(`x0 = ${x0}; dx = ${dx}; unroll = ${u}; repaint();`);
+      }
+
+      [sX0, sDx, sUnroll].forEach(el => el.addEventListener("input", updateUnrollApplet));
+
+      let animFrame = null;
+      document.getElementById("btn-anim-unroll").addEventListener("click", () => {
+        if (animFrame) cancelAnimationFrame(animFrame);
+        let start = null;
+        const duration = 2200;
+        function step(ts) {
+          if (!start) start = ts;
+          const p = Math.min(1, (ts - start) / duration);
+          const eased = p * p * (3 - 2 * p);
+          sUnroll.value = eased.toFixed(3);
+          updateUnrollApplet();
+          if (p < 1) animFrame = requestAnimationFrame(step);
+        }
+        animFrame = requestAnimationFrame(step);
+      });
+
+      document.getElementById("btn-reset-unroll").addEventListener("click", () => {
+        if (animFrame) cancelAnimationFrame(animFrame);
+        sUnroll.value = 0;
+        updateUnrollApplet();
+      });
+
+      const sAxisK = document.getElementById("slider-axis-k");
+      const sNumN = document.getElementById("slider-num-n");
+      const sProbeX = document.getElementById("slider-probe-x");
+      const lblAxisK = document.getElementById("lbl-axis-k");
+      const lblNumN = document.getElementById("lbl-num-n");
+      const lblProbeX = document.getElementById("lbl-probe-x");
+      const readoutAxis = document.getElementById("readout-axis");
+
+      function updateAxisApplet() {
+        const k = parseFloat(sAxisK.value);
+        const N = parseInt(sNumN.value, 10);
+        const px = parseFloat(sProbeX.value);
+
+        lblAxisK.textContent = Math.abs(k) < 0.05 ? "x = 0.0 (Sumbu-y)" : `x = ${k.toFixed(1)}`;
+        lblNumN.textContent = N;
+        lblProbeX.textContent = px.toFixed(2);
+
+        let sumV = 0;
+        const dx = 1.0 / N;
+        for (let i = 0; i < N; i++) {
+          const xm = (i + 0.5) * dx;
+          const r = Math.abs(xm - k);
+          const h = 2 * xm - 2 * xm * xm;
+          sumV += 2 * Math.PI * r * h * dx;
+        }
+
+        const rFormula = k <= 0
+          ? (Math.abs(k) < 0.05 ? "r(x) = x" : `r(x) = x + ${Math.abs(k).toFixed(1)}`)
+          : `r(x) = ${k.toFixed(1)} - x`;
+
+        readoutAxis.innerHTML =
+          `Rumus Jari-jari: <strong>${rFormula}</strong> | r(${px.toFixed(2)}) = ${Math.abs(px - k).toFixed(2)}<br/>` +
+          `Jumlah Riemann (N=${N}): V_N ≈ ${sumV.toFixed(4)}`;
+
+        cdyAxis.evokeCS(`kaxis = ${k}; numN = ${N}; probex = ${px}; repaint();`);
+      }
+
+      [sAxisK, sNumN, sProbeX].forEach(el => el.addEventListener("input", updateAxisApplet));
+
+      document.querySelectorAll("[data-k]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          sAxisK.value = btn.getAttribute("data-k");
+          updateAxisApplet();
+        });
+      });
+    });
+  </script>
+</body>
+</html>

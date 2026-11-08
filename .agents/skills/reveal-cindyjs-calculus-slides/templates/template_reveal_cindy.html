@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MA1101 Matematika I — Template Slide Interaktif (Reveal.js + CindyJS + Manim)</title>
+
+  <!-- Reveal.js 5 Core CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+
+  <!-- KaTeX for Instant LaTeX Math Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <!-- CindyJS (Interactive Geometry & Calculus Engine) -->
+  <script src="https://cindyjs.org/dist/v0.8.8/Cindy.js"></script>
+
+  <style>
+    :root {
+      --dark-canvas: #0c1018;
+      --dark-box: #141b28;
+      --dark-box-inner: #1a2436;
+      --luminous-gold: #f5be3c;
+      --electric-blue: #50a5fa;
+      --teal-cyan: #2dd4bf;
+      --emerald-green: #34d399;
+      --coral-rose: #fb7185;
+      --purple-belok: #d88cff;
+      --soft-gray: #c8d2e1;
+      /* Compact base font size for Reveal.js (default is 40px -> we use 24px!) */
+      --r-main-font-size: 24px;
+    }
+
+    body, .reveal-viewport {
+      background-color: var(--dark-canvas) !important;
+      color: #ffffff;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    .reveal {
+      font-size: var(--r-main-font-size);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      padding: 6px 4px !important;
+      box-sizing: border-box;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      text-transform: none;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px 0;
+    }
+
+    .reveal h2.slide-title {
+      font-size: 1.08em;
+      color: var(--luminous-gold);
+      background: var(--dark-box);
+      padding: 7px 14px;
+      border-left: 4px solid var(--luminous-gold);
+      border-radius: 6px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Compact Beamer-equivalent Block Styles */
+    .b-block, .b-example, .b-alert {
+      background: var(--dark-box);
+      border-radius: 7px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      font-size: 0.68em;
+      line-height: 1.38;
+    }
+
+    .b-block-title {
+      padding: 5px 12px;
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 1.02em;
+    }
+
+    .b-block .b-block-title {
+      background: linear-gradient(90deg, rgba(80, 165, 250, 0.45), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(80, 165, 250, 0.4);
+    }
+
+    .b-example .b-block-title {
+      background: linear-gradient(90deg, rgba(52, 211, 153, 0.4), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(52, 211, 153, 0.4);
+    }
+
+    .b-alert .b-block-title {
+      background: linear-gradient(90deg, rgba(251, 113, 133, 0.45), rgba(20, 27, 40, 0.9));
+      border-bottom: 1px solid rgba(251, 113, 133, 0.4);
+    }
+
+    .b-block-body {
+      padding: 7px 12px;
+    }
+
+    .b-block-body ul, .b-block-body ol {
+      margin: 4px 0 4px 18px;
+      padding: 0;
+    }
+
+    .b-block-body li {
+      margin-bottom: 3px;
+    }
+
+    /* Compact KaTeX Display Equations */
+    .reveal .katex-display {
+      margin: 0.25em 0 !important;
+      font-size: 0.96em;
+    }
+
+    /* Utility Density Classes for Extra-Dense Slides */
+    section.slide-compact .b-block,
+    section.slide-compact .b-example,
+    section.slide-compact .b-alert {
+      font-size: 0.62em;
+      line-height: 1.32;
+      margin-bottom: 6px;
+    }
+
+    section.slide-ultra-compact .b-block,
+    section.slide-ultra-compact .b-example,
+    section.slide-ultra-compact .b-alert {
+      font-size: 0.56em;
+      line-height: 1.28;
+      margin-bottom: 5px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .grid-applet {
+      display: grid;
+      grid-template-columns: 1.22fr 0.98fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .formula-box {
+      background: var(--dark-box-inner);
+      border: 1.5px solid var(--teal-cyan);
+      border-radius: 6px;
+      padding: 5px 10px;
+      text-align: center;
+      margin: 5px 0;
+      font-size: 0.95em;
+    }
+
+    .cindy-canvas {
+      width: 100%;
+      height: 360px;
+      background: #090d14;
+      border: 1.5px solid rgba(45, 212, 191, 0.35);
+      border-radius: 8px;
+    }
+
+    .control-panel {
+      background: var(--dark-box);
+      border: 1px solid rgba(245, 190, 60, 0.3);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 0.62em;
+      line-height: 1.32;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h2 class="slide-title">Judul Slide MA1101</h2>
+        <div class="b-block">
+          <div class="b-block-title">Blok Teorema</div>
+          <div class="b-block-body">
+            Isi teorema dengan rumus LaTeX:
+            $$V = 2\pi\int_{a}^{b} x\,f(x)\,dx$$
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false }
+        ],
+        throwOnError: false
+      });
+      Reveal.initialize({
+        width: 1120,
+        height: 700,
+        margin: 0.03,
+        controls: true,
+        progress: true,
+        center: false,
+        hash: true,
+        slideNumber: "c/t",
+        transition: "slide"
+      });
+    });
+  </script>
+</body>
+</html>

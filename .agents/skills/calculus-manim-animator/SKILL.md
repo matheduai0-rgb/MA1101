@@ -117,6 +117,26 @@ When generating Manim animations for calculus topics:
      - [templates/03_riemann_sums_and_integral.py](./templates/03_riemann_sums_and_integral.py) (Subtopik 4.2 Jumlah Riemann & Integral Tentu)
      - [templates/04_fundamental_theorem_of_calculus.py](./templates/04_fundamental_theorem_of_calculus.py) (Subtopik 4.3 Teorema Dasar Kalkulus I)
      - [templates/05_taylor_polynomials.py](./templates/05_taylor_polynomials.py) (Subtopik 6.4 Pendekatan Polinomial Taylor)
+     - [templates/16_curve_sketching_with_calculus.py](./templates/16_curve_sketching_with_calculus.py) (Subtopik 3.5 Grafik Fungsi dengan Menggunakan Kalkulus)
+     - [templates/17_mathematical_modeling_pipeline.py](./templates/17_mathematical_modeling_pipeline.py) (Subtopik 3.4 Pemodelan Matematika & Optimasi Terapan)
+     - [templates/18_antiderivatives_family_of_curves.py](./templates/18_antiderivatives_family_of_curves.py) (Subtopik 3.8 Antiturunan & Keluarga Kurva $F(x)+C$)
+     - [templates/19_differential_equations_separable.py](./templates/19_differential_equations_separable.py) (Subtopik 3.9 Pengantar Persamaan Diferensial & Pemisahan Peubah)
+     - [templates/20_area_polygon_exhaustion.py](./templates/20_area_polygon_exhaustion.py) (Subtopik 4.1 Luas Daerah: Poligon Dalam, Poligon Luar & Notasi Sigma)
+     - [templates/21_definite_integral_signed_area.py](./templates/21_definite_integral_signed_area.py) (Subtopik 4.2 Integral Tentu: Jumlah Riemann & Luas Bertanda)
+     - [templates/22_first_fundamental_theorem_of_calculus.py](./templates/22_first_fundamental_theorem_of_calculus.py) (Subtopik 4.3 Teorema Dasar Kalkulus Pertama: Fungsi Akumulasi $A'(x)=f(x)$)
+     - [templates/23_riemann_difference_telescoping.py](./templates/23_riemann_difference_telescoping.py) (Subtopik 4.1 & 4.2 Selisih Poligon Luar & Dalam: Menara Teleskopik)
+     - [templates/24_liquid_flow_net_change_riemann.py](./templates/24_liquid_flow_net_change_riemann.py) (Subtopik 4.2 & 4.4 Laju Alir Fluida & Teorema Perubahan Total)
+     - [templates/25_second_fundamental_theorem_of_calculus.py](./templates/25_second_fundamental_theorem_of_calculus.py) (Subtopik 4.4 Teorema Dasar Kalkulus Kedua: $A(x)=F(x)+C$ & Evaluasi $F(b)-F(a)$)
+     - [templates/26_mean_value_theorem_for_integrals.py](./templates/26_mean_value_theorem_for_integrals.py) (Subtopik 4.5 Teorema Nilai Rata-rata untuk Integral: $\bar{f}=f(c)$)
+     - [templates/27_symmetry_in_definite_integrals.py](./templates/27_symmetry_in_definite_integrals.py) (Subtopik 4.5 Penggunaan Simetri pada Integral Tentu: Fungsi Genap & Ganjil)
+     - [templates/28_trapezoidal_and_midpoint_rules.py](./templates/28_trapezoidal_and_midpoint_rules.py) (Subtopik 4.6 Integrasi Numerik: Aturan Trapesium & Titik Tengah)
+     - [templates/29_simpsons_parabolic_rule.py](./templates/29_simpsons_parabolic_rule.py) (Subtopik 4.6 Integrasi Numerik: Aturan Parabolik Simpson & Batas Galat)
+     - [templates/30_area_between_curves_vertical.py](./templates/30_area_between_curves_vertical.py) (Subtopik 5.1 Luas Daerah pada Bidang: Pias Tegak $\Delta x$ & Kurva Berpotongan)
+     - [templates/31_area_horizontal_vs_vertical_slicing.py](./templates/31_area_horizontal_vs_vertical_slicing.py) (Subtopik 5.1 Luas Daerah pada Bidang: Pias Mendatar $\Delta y$ vs Pias Tegak $\Delta x$)
+     - [templates/32_volumes_disk_and_washer_method.py](./templates/32_volumes_disk_and_washer_method.py) (Subtopik 5.2.a Volume Benda Putar: Metode Cakram & Metode Cincin)
+     - [templates/33_volumes_parallel_cross_sections.py](./templates/33_volumes_parallel_cross_sections.py) (Subtopik 5.2.b Volume Benda Pejal: Metode Irisan Sejajar / Lempeng)
+     - [templates/34_volumes_cylindrical_shells_unrolling.py](./templates/34_volumes_cylindrical_shells_unrolling.py) (Subtopik 5.3 Volume Benda Putar: Metode Kulit Tabung & Pembentangan)
+     - [templates/35_shells_vs_washers_and_shifted_axis.py](./templates/35_shells_vs_washers_and_shifted_axis.py) (Subtopik 5.3 Metode Kulit Tabung di Antara Dua Kurva & Sumbu Putar Bergeser $x=k$)
 3. **Headless Test Render & Batch Export**:
    - Validate geometry and syntax using the preview script:
      ```bash
@@ -127,5 +147,8 @@ When generating Manim animations for calculus topics:
      .agents/skills/calculus-manim-animator/scripts/build_lecture_pack.py -q high --filter "06"
      ```
    - Verify that text labels and mathematical equations do not overlap curves or fall off the 16:9 safe frame.
+4. **Slide Deck Integration (`reveal-cindyjs-calculus-slides`)**:
+   - Pair rendered Manim `.mp4` animations with **Reveal.js + KaTeX + CindyJS** interactive HTML5 lecture slides (see [../reveal-cindyjs-calculus-slides/SKILL.md](../reveal-cindyjs-calculus-slides/SKILL.md)).
+   - Always run `.agents/skills/reveal-cindyjs-calculus-slides/scripts/verify_reveal_slides.py` on generated HTML slide decks to guarantee zero text overflow or clipping.
 
 

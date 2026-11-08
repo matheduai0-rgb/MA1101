@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MA1101 Matematika I — Kuliah Interaktif &amp; Animasi Kalkulus</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --dark-canvas: #0c1018;
+      --dark-card: #141b28;
+      --dark-card-inner: #1a2436;
+      --luminous-gold: #f5be3c;
+      --electric-blue: #50a5fa;
+      --teal-cyan: #2dd4bf;
+      --emerald-green: #34d399;
+      --coral-rose: #fb7185;
+      --soft-gray: #c8d2e1;
+      --muted-gray: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--dark-canvas);
+      color: #ffffff;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 32px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .badge-itb {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(80, 165, 250, 0.15);
+      color: var(--electric-blue);
+      border: 1px solid rgba(80, 165, 250, 0.35);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--luminous-gold);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--teal-cyan);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .desc {
+      font-size: 0.95rem;
+      color: var(--soft-gray);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .tech-stack {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tech-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--soft-gray);
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 20px;
+      background: var(--luminous-gold);
+      border-radius: 2px;
+    }
+
+    .grid-decks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--teal-cyan);
+      box-shadow: 0 8px 30px rgba(45, 212, 191, 0.2);
+    }
+
+    .card-topic {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--electric-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--soft-gray);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .card-features {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--soft-gray);
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .card-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-features li::before {
+      content: "✓";
+      color: var(--emerald-green);
+      font-weight: 700;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .btn-primary {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--teal-cyan), #0d9488);
+      color: #0c1018;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: scale(1.02);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark-card-inner);
+      color: var(--soft-gray);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .nav-guide {
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+
+    .nav-guide h3 {
+      font-size: 1rem;
+      color: var(--luminous-gold);
+      margin-bottom: 12px;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--soft-gray);
+    }
+
+    .nav-item kbd {
+      background: var(--dark-card-inner);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--teal-cyan);
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.8rem;
+      color: var(--muted-gray);
+      width: 100%;
+    }
+
+    footer a {
+      color: var(--electric-blue);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge-itb">FMIPA Institut Teknologi Bandung</span>
+      <h1>MA1101 — Matematika I (Kalkulus I)</h1>
+      <div class="subtitle">Platform Slide Kuliah Interaktif &amp; Animasi Sokratik (HTML5)</div>
+      <p class="desc">
+        Materi perkuliahan MA1101 yang memadukan presentasi berbasis web Reveal.js, notasi matematis presisi KaTeX, simulasi geometri interaktif 60 FPS CindyJS, serta video animasi sokratik Manim CE.
+      </p>
+      <div class="tech-stack">
+        <span class="tech-pill">🌐 Reveal.js 5</span>
+        <span class="tech-pill">⚡ CindyJS 60 FPS</span>
+        <span class="tech-pill">∑ KaTeX Math</span>
+        <span class="tech-pill">🎬 Manim CE Animations</span>
+        <span class="tech-pill">🛡️ Zero-Overflow Verified</span>
+      </div>
+    </header>
+
+    <div class="section-title">Bab 5: Penggunaan Integral (Applications of the Definite Integral)</div>
+
+    <div class="grid-decks">
+      <!-- Deck 1: Subtopik 5.1 -->
+      <div class="card">
+        <div>
+          <div class="card-topic">Subtopik 5.1</div>
+          <div class="card-title">Luas Daerah pada Bidang</div>
+          <div class="card-desc">
+            Prinsip "Iris, Hampiri, Integralkan", penurunan pias tegak (&Delta;x) di antara dua kurva saat kurva bawah menyelam di bawah sumbu-x, serta komparasi pias mendatar (&Delta;y) vs. pias tegak (&Delta;x).
+          </div>
+          <ul class="card-features">
+            <li>20 slide lengkap dengan tipografi ringkas</li>
+            <li>Applet CindyJS: Simulasi Pias Tegak &amp; Invariansi Translasi</li>
+            <li>Applet CindyJS: Sakelar Komparasi &Delta;y vs. &Delta;x</li>
+            <li>2 Video Manim CE embedded native HTML5</li>
+          </ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn-primary" href="2026/slides/23_luas_daerah_pada_bidang/interactive_cindyjs_reveal.html">
+            ▶ Buka Slide Interaktif
+          </a>
+          <a class="btn-secondary" href="https://github.com/matheduai0-rgb/MA1101/tree/main/2026/slides/23_luas_daerah_pada_bidang" target="_blank">
+            Kode
+          </a>
+        </div>
+      </div>
+
+      <!-- Deck 2: Subtopik 5.3 -->
+      <div class="card">
+        <div>
+          <div class="card-topic">Subtopik 5.3</div>
+          <div class="card-title">Volume Benda Putar: Metode Kulit Tabung</div>
+          <div class="card-desc">
+            Geometri kulit tabung &Delta;V &approx; 2&pi;rh&Delta;r, proses iris dan bentangkan silinder menjadi balok rata, pergeseran sumbu putar x = k, pembuktian Paradoks Cincin Serbet (Napkin Ring), dan Torus.
+          </div>
+          <ul class="card-features">
+            <li>20 slide lengkap terverifikasi 0px overflow</li>
+            <li>Applet CindyJS: Pembentangan 3D Silinder ke Balok Rata</li>
+            <li>Applet CindyJS: Pergeseran Sumbu Putar x = k &amp; Jumlah Riemann</li>
+            <li>2 Video Manim CE embedded native HTML5</li>
+          </ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn-primary" href="2026/slides/25_volume_metode_kulit_tabung/interactive_cindyjs_reveal.html">
+            ▶ Buka Slide Interaktif
+          </a>
+          <a class="btn-secondary" href="https://github.com/matheduai0-rgb/MA1101/tree/main/2026/slides/25_volume_metode_kulit_tabung" target="_blank">
+            Kode
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-guide">
+      <h3>Panduan Navigasi Slide</h3>
+      <div class="nav-grid">
+        <div class="nav-item"><kbd>→</kbd> / <kbd>Spasi</kbd> : Maju ke slide / animasi berikutnya</div>
+        <div class="nav-item"><kbd>←</kbd> : Mundur ke slide sebelumnya</div>
+        <div class="nav-item"><kbd>F</kbd> : Mode layar penuh (Fullscreen)</div>
+        <div class="nav-item"><kbd>Esc</kbd> : Ikhtisar seluruh slide (Slide overview)</div>
+        <div class="nav-item"><strong>Slider CindyJS</strong> : Geser titik/parameter matematika langsung dengan mouse atau layar sentuh secara real-time!</div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        © 2026 Tim Pengajar MA1101 — Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA), Institut Teknologi Bandung.<br>
+        Repositori: <a href="https://github.com/matheduai0-rgb/MA1101" target="_blank">github.com/matheduai0-rgb/MA1101</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

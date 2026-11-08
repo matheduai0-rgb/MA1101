@@ -1,0 +1,65 @@
+name: Deploy Interactive Calculus Slides to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'index.html'
+      - '2026/slides/**'
+      - 'docs/**'
+      - '.github/workflows/deploy-slides.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare Artifact Directory
+        run: |
+          mkdir -p _site/2026/slides
+          cp index.html _site/
+          
+          # Copy slide directories containing HTML slides and their media/assets
+          if [ -d "2026/slides/23_luas_daerah_pada_bidang" ]; then
+            mkdir -p _site/2026/slides/23_luas_daerah_pada_bidang
+            cp -r 2026/slides/23_luas_daerah_pada_bidang/* _site/2026/slides/23_luas_daerah_pada_bidang/
+          fi
+          
+          if [ -d "2026/slides/25_volume_metode_kulit_tabung" ]; then
+            mkdir -p _site/2026/slides/25_volume_metode_kulit_tabung
+            cp -r 2026/slides/25_volume_metode_kulit_tabung/* _site/2026/slides/25_volume_metode_kulit_tabung/
+          fi
+          
+          # Copy docs if available
+          if [ -d "docs" ]; then
+            mkdir -p _site/docs
+            cp -r docs/* _site/docs/
+          fi
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
