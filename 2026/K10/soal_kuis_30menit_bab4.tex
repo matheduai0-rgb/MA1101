@@ -1,0 +1,161 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textbf{MA1101 Matematika I --- Kuis Singkat (30 Menit)}}
+\rhead{\textbf{Semester 1 TA 2026/2027}}
+\rfoot{\thepage}
+
+\begin{document}
+
+% =========================================================================
+% PAKET A
+% =========================================================================
+\begin{center}
+    {\large \textbf{FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM}}\\
+    {\large \textbf{INSTITUT TEKNOLOGI BANDUNG}}\\[3pt]
+    {\large \textbf{KUIS KELAS MA1101 MATEMATIKA I}}\\[2pt]
+    \textbf{Materi: Bab 4 (Integral: Subbab 4.1, 4.3--4.5) \quad | \quad Durasi: 30 Menit \quad | \quad Sifat: Tutup Buku \& Tanpa Kalkulator}
+\end{center}
+
+\vspace{1pt}
+\noindent\fbox{%
+\begin{minipage}{0.98\textwidth}
+\begin{tabular}{ll@{\hspace{2cm}}ll}
+    \textbf{Nama Mahasiswa} & : \dotfill & \textbf{Kelas} & : K10 \\
+    \textbf{NIM}            & : \dotfill & \textbf{Paket} & : \textbf{A} \\
+\end{tabular}
+\end{minipage}%
+}
+
+\vspace{6pt}
+\noindent\textbf{Petunjuk Umum:} Jawablah setiap pertanyaan di bawah ini dengan menyertakan langkah pengerjaan yang jelas, lengkap, dan terstruktur. Tuliskan jawaban Anda pada lembar yang disediakan.
+
+\vspace{6pt}
+\hrule
+\vspace{10pt}
+
+% SOAL 1 (PAKET A)
+\noindent\textbf{Soal 1 [Bobot: 50 Poin] (Masalah Nilai Awal \& Teorema Dasar Kalkulus I)}
+\begin{enumerate}[label=(\alph*), leftmargin=22pt]
+    \item \textbf{[25 Poin]} Selesaikan masalah nilai awal berikut: tentukan solusi khusus $y = f(x)$ dari persamaan diferensial
+    \[
+    \frac{dy}{dx} = \frac{3x^2 + 2}{y^2}
+    \]
+    yang memenuhi syarat awal $y(1) = 3$. Nyatakan jawaban akhir Anda dalam bentuk eksplisit $y = f(x)$.\\
+    \textit{\small\textbf{Petunjuk:} Pisahkan variabel $y$ dan $x$ ke ruas yang berbeda sehingga berbentuk $y^2\,dy = (3x^2 + 2)\,dx$, lalu integralkan kedua ruas. Tentukan nilai konstanta integrasi $C$ dari syarat awal $y(1) = 3$ sebelum menarik akar pangkat tiga.}
+    
+    \vspace{8pt}
+    \item \textbf{[25 Poin]} Diberikan fungsi akumulasi $F(x)$ yang didefinisikan oleh integral tentu:
+    \[
+    F(x) = \int_{1}^{x^2} \sqrt{t^2 + 8}\,dt
+    \]
+    \begin{enumerate}[label=(\roman*)]
+        \item \textbf{[18 Poin]} Gunakan Teorema Dasar Kalkulus Pertama dan Aturan Rantai untuk menentukan rumus turunan pertama $F'(x)$.
+        \item \textbf{[7 Poin]} Hitunglah nilai dari $F'(1)$.
+    \end{enumerate}
+    \textit{\small\textbf{Petunjuk:} Misalkan $u = x^2$ sebagai batas atas, gunakan Aturan Leibniz $\dfrac{d}{dx}\left[\int_a^{u(x)} f(t)\,dt\right] = f(u(x))\cdot u'(x)$.}
+\end{enumerate}
+
+\vspace{14pt}
+
+% SOAL 2 (PAKET A)
+\noindent\textbf{Soal 2 [Bobot: 50 Poin] (Metode Substitusi Integral Tentu \& Teorema Simetri)}
+\begin{enumerate}[label=(\alph*), leftmargin=22pt]
+    \item \textbf{[25 Poin]} Hitunglah nilai eksak dari integral tentu berikut menggunakan metode substitusi:
+    \[
+    \int_{0}^{2} x\sqrt{2x^2 + 1}\,dx
+    \]
+    Pastikan Anda menuliskan transformasi batas integrasi dengan jelas.\\
+    \textit{\small\textbf{Petunjuk:} Misalkan $u = 2x^2 + 1$. Ubah batas integrasi $x = 0$ dan $x = 2$ menjadi batas baru untuk peubah $u$ sebelum menghitung nilai integral dengan TDK II.}
+    
+    \vspace{8pt}
+    \item \textbf{[25 Poin]} Gunakan sifat simetri fungsi genap dan fungsi ganjil untuk mengevaluasi integral tentu berikut:
+    \[
+    \int_{-2}^{2} \left( {x^5 \cos x} + 3x^2 - 4 \right) dx
+    \]
+    Uraikan langkah pemilahan antara suku ganjil dan suku genap beserta alasan matematisnya!\\
+    \textit{\small\textbf{Petunjuk:} Pecah integral menjadi dua suku. Periksa apakah setiap suku merupakan fungsi ganjil atau genap dengan memeriksa nilai $f(-x)$, lalu gunakan sifat $\int_{-a}^a (\text{ganjil})\,dx = 0$ dan $\int_{-a}^a (\text{genap})\,dx = 2\int_0^a (\text{genap})\,dx$.}
+\end{enumerate}
+
+\newpage
+
+% =========================================================================
+% PAKET B
+% =========================================================================
+\begin{center}
+    {\large \textbf{FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM}}\\
+    {\large \textbf{INSTITUT TEKNOLOGI BANDUNG}}\\[3pt]
+    {\large \textbf{KUIS KELAS MA1101 MATEMATIKA I}}\\[2pt]
+    \textbf{Materi: Bab 4 (Integral: Subbab 4.1, 4.3--4.5) \quad | \quad Durasi: 30 Menit \quad | \quad Sifat: Tutup Buku \& Tanpa Kalkulator}
+\end{center}
+
+\vspace{1pt}
+\noindent\fbox{%
+\begin{minipage}{0.98\textwidth}
+\begin{tabular}{ll@{\hspace{2cm}}ll}
+    \textbf{Nama Mahasiswa} & : \dotfill & \textbf{Kelas} & : K10 \\
+    \textbf{NIM}            & : \dotfill & \textbf{Paket} & : \textbf{B} \\
+\end{tabular}
+\end{minipage}%
+}
+
+\vspace{6pt}
+\noindent\textbf{Petunjuk Umum:} Jawablah setiap pertanyaan di bawah ini dengan menyertakan langkah pengerjaan yang jelas, lengkap, dan terstruktur. Tuliskan jawaban Anda pada lembar yang disediakan.
+
+\vspace{6pt}
+\hrule
+\vspace{10pt}
+
+% SOAL 1 (PAKET B)
+\noindent\textbf{Soal 1 [Bobot: 50 Poin] (Masalah Nilai Awal \& Teorema Dasar Kalkulus I)}
+\begin{enumerate}[label=(\alph*), leftmargin=22pt]
+    \item \textbf{[25 Poin]} Selesaikan masalah nilai awal berikut: tentukan solusi khusus $y = g(x)$ dari persamaan diferensial
+    \[
+    \frac{dy}{dx} = \frac{3x^2 + 4}{y^2}
+    \]
+    yang memenuhi syarat awal $y(1) = 3$. Nyatakan jawaban akhir Anda dalam bentuk eksplisit $y = g(x)$.\\
+    \textit{\small\textbf{Petunjuk:} Pisahkan variabel $y$ dan $x$ ke ruas yang berbeda sehingga berbentuk $y^2\,dy = (3x^2 + 4)\,dx$, lalu integralkan kedua ruas. Tentukan nilai konstanta integrasi $C$ dari syarat awal $y(1) = 3$ sebelum menarik akar pangkat tiga.}
+    
+    \vspace{8pt}
+    \item \textbf{[25 Poin]} Diberikan fungsi akumulasi $G(x)$ yang didefinisikan oleh integral tentu:
+    \[
+    G(x) = \int_{1}^{x^2} \sqrt{t^2 + 3}\,dt
+    \]
+    \begin{enumerate}[label=(\roman*)]
+        \item \textbf{[18 Poin]} Gunakan Teorema Dasar Kalkulus Pertama dan Aturan Rantai untuk menentukan rumus turunan pertama $G'(x)$.
+        \item \textbf{[7 Poin]} Hitunglah nilai dari $G'(1)$.
+    \end{enumerate}
+    \textit{\small\textbf{Petunjuk:} Misalkan $u = x^2$ sebagai batas atas, gunakan Aturan Leibniz $\dfrac{d}{dx}\left[\int_a^{u(x)} g(t)\,dt\right] = g(u(x))\cdot u'(x)$.}
+\end{enumerate}
+
+\vspace{14pt}
+
+% SOAL 2 (PAKET B)
+\noindent\textbf{Soal 2 [Bobot: 50 Poin] (Metode Substitusi Integral Tentu \& Teorema Simetri)}
+\begin{enumerate}[label=(\alph*), leftmargin=22pt]
+    \item \textbf{[25 Poin]} Hitunglah nilai eksak dari integral tentu berikut menggunakan metode substitusi:
+    \[
+    \int_{0}^{1} x\sqrt{8x^2 + 1}\,dx
+    \]
+    Pastikan Anda menuliskan transformasi batas integrasi dengan jelas.\\
+    \textit{\small\textbf{Petunjuk:} Misalkan $u = 8x^2 + 1$. Ubah batas integrasi $x = 0$ dan $x = 1$ menjadi batas baru untuk peubah $u$ sebelum menghitung nilai integral dengan TDK II.}
+    
+    \vspace{8pt}
+    \item \textbf{[25 Poin]} Gunakan sifat simetri fungsi genap dan fungsi ganjil untuk mengevaluasi integral tentu berikut:
+    \[
+    \int_{-2}^{2} \left( x^3 \cos x + 3x^2 - 2 \right) dx
+    \]
+    Uraikan langkah pemilahan antara suku ganjil dan suku genap beserta alasan matematisnya!\\
+  \textit{\small\textbf{Petunjuk:} Pecah integral menjadi dua suku. Periksa apakah setiap suku merupakan fungsi ganjil atau genap dengan memeriksa nilai $f(-x)$, lalu gunakan sifat $\int_{-a}^a (\text{ganjil})\,dx = 0$ dan $\int_{-a}^a (\text{genap})\,dx = 2\int_0^a (\text{genap})\,dx$.}
+\end{enumerate}
+
+\end{document}
