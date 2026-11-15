@@ -1,0 +1,22 @@
+{
+  "name": "ma1101-slides",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MA1101 Matematika I - Slidev and JSXGraph Interactive Lecture Presentations",
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
+    "export": "slidev export",
+    "mcp": "slidev mcp",
+    "verify": "python3 .agents/skills/slidev-jsxgraph-calculus-slides/scripts/verify_slidev_slides.py"
+  },
+  "dependencies": {
+    "@slidev/cli": "^53.1.0",
+    "@slidev/theme-default": "latest",
+    "jsxgraph": "^1.11.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}

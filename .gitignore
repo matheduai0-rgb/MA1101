@@ -40,6 +40,12 @@ env/
 # Manim Render Outputs
 media/
 
+# Node & Slidev
+node_modules/
+.slidev/
+dist/
+*.png.bak
+
 # Sensitive Student Information (Rosters and Grades)
 *Daftar Peserta Kelas*
 *Tabel_Nilai*

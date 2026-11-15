@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: segment-optimization-practice
+expected_outcome: |
+  A short Indonesian slide segment (not a full lecture) of applied optimization problems where support fades: a guided example through explicit problem-solving phases opened by questions, then a partly completed problem, then an independent problem with tiered hints that do not give away the answer; solutions hidden until click; presenter notes; renders cleanly.

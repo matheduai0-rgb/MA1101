@@ -7,6 +7,10 @@ on:
     paths:
       - 'index.html'
       - '2026/slides/**'
+      - 'components/**'
+      - 'styles/**'
+      - 'package.json'
+      - 'package-lock.json'
       - 'docs/**'
       - '.github/workflows/deploy-slides.yml'
   workflow_dispatch:
@@ -33,27 +37,45 @@ jobs:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies (Slidev, JSXGraph)
+        run: npm ci --omit=dev
+
       - name: Prepare Artifact Directory
         run: |
           mkdir -p _site/2026/slides
           cp index.html _site/
-          
+
           # Copy slide directories containing HTML slides and their media/assets
           if [ -d "2026/slides/23_luas_daerah_pada_bidang" ]; then
             mkdir -p _site/2026/slides/23_luas_daerah_pada_bidang
             cp -r 2026/slides/23_luas_daerah_pada_bidang/* _site/2026/slides/23_luas_daerah_pada_bidang/
           fi
-          
+
           if [ -d "2026/slides/25_volume_metode_kulit_tabung" ]; then
             mkdir -p _site/2026/slides/25_volume_metode_kulit_tabung
             cp -r 2026/slides/25_volume_metode_kulit_tabung/* _site/2026/slides/25_volume_metode_kulit_tabung/
           fi
-          
+
           # Copy docs if available
           if [ -d "docs" ]; then
             mkdir -p _site/docs
             cp -r docs/* _site/docs/
           fi
+
+      - name: Build Slidev decks (Socratic Subtopik 5.3 and 5.5)
+        run: |
+          BASE="/${GITHUB_REPOSITORY#*/}"
+          for deck in 32_volume_metode_kulit_tabung 33_kerja; do
+            npx slidev build "2026/slides/${deck}/slides.md" \
+              --base "${BASE}/2026/slides/${deck}/" \
+              --out "$GITHUB_WORKSPACE/_site/2026/slides/${deck}"
+          done
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3

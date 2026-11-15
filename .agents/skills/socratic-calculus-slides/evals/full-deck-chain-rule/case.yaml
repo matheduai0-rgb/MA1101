@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: full-deck-chain-rule
+expected_outcome: |
+  A full Indonesian lecture deck on the chain rule that opens with a question, builds the rule through prediction, an interactive applet and guided questions before stating it, then scaffolds problem solving with Polya phases fading from a worked example to a half-finished one to an independent problem with tiered hints, ends with an exit reflection, carries presenter notes with expected answers and follow-ups, and renders cleanly.
