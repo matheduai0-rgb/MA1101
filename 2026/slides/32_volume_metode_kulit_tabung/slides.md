@@ -82,7 +82,7 @@ layout: two-cols-header
 
 <SocraticBlock type="predict" mode="Angkat jari: A / B / C">
 
-Satu irisan tegak (merah) diputar mengelilingi sumbu-$y$. Bentuk yang terjadi paling mirip:
+Satu irisan tegak (merah) diputar penuh mengelilingi sumbu putar (garis kuning). Bentuk yang terjadi paling mirip:
 
 **A.** cakram datar  
 **B.** pipa tipis berongga  
@@ -92,21 +92,21 @@ Satu irisan tegak (merah) diputar mengelilingi sumbu-$y$. Bentuk yang terjadi pa
 
 <SocraticBlock v-click type="question" title="Sambil Mengamati" mode="Pikir 30 dtk">
 
-1. Geser $x$. Apa yang ikut berubah pada bentuk di bawah?
+1. Putar irisan, lalu geser $x$. Apa yang ikut berubah pada bentuk merah?
 2. Kalau pipa itu dipotong lurus lalu dibentangkan, jadi bangun apa?
 
 </SocraticBlock>
 
 ::right::
 
-<ShellBoard height="400px" />
+<ShellBoard3D height="380px" />
 
 <!--
-Urutan: (1) minta semua mengangkat jari A/B/C SEBELUM menyentuh applet, hitung dengan lantang. (2) Geser x perlahan dari 0,3 ke 1,9. (3) Klik untuk pertanyaan pengamatan.
+Urutan: (1) minta semua mengangkat jari A/B/C SEBELUM menggeser apa pun; applet awalnya hanya menampilkan irisan datar. (2) Putar irisan dengan slider dari 0° ke 360° perlahan, lalu geser x dari 0,3 ke 1,9. Seret gambar untuk memutar sudut pandang. (3) Klik untuk pertanyaan pengamatan.
 Jawaban diharapkan: B.
 Jika banyak memilih A: "Cakram itu penuh. Apakah irisan kita kena bagian tengah, di dekat sumbu putar?"
 Pengamatan 1: tinggi dan keliling berubah; tebal (Δx) tetap kalau tidak digeser.
-Pengamatan 2: persegi panjang. Setelah ada yang menyebutnya, centang "tampilkan ukuran" untuk memeriksa panjang dan tinggi.
+Pengamatan 2: persegi panjang. Setelah ada yang menyebutnya, centang "bentangkan kulit" untuk memeriksa, lalu "tampilkan ukuran" untuk memeriksa panjang 2πx dan tinggi f(x).
 -->
 
 ---
