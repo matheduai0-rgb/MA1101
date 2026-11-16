@@ -21,7 +21,7 @@ canvasWidth: 980
 <div class="mt-8 max-w-xl mx-auto text-left">
 <SocraticBlock type="question" title="Pertanyaan Kita Hari Ini">
 
-Rumus usaha $W = F \cdot d$ hanya benar kalau gayanya **tetap**. dan perpindahannya seragam. Bagaimana menghitung usaha kalau gaya berubah-ubah sepanjang perpindahan? Atau bagaimana jika perpindahannya tidak seragam?
+Rumus usaha $W = F \cdot d$ hanya benar kalau gayanya **tetap** dan perpindahannya seragam. Bagaimana menghitung usaha kalau gaya berubah-ubah sepanjang perpindahan? Atau bagaimana jika perpindahannya tidak seragam?
 
 </SocraticBlock>
 </div>
@@ -53,13 +53,13 @@ Gaya **tetap** $F$ menggeser benda sejauh $d$: $W = F \cdot d$. Contoh: $10$ N s
 
 Sebuah pegas ditarik dari panjang alaminya sejauh $0{,}3$ m. Makin panjang tarikannya, makin besar gaya yang diperlukan: $F(x) = 100x$ newton, dengan $x$ meter pertambahan panjang. Mau dipakai $W = F \cdot d$. Gaya **yang mana** kalian masukkan?
 
-
+</SocraticBlock>
 
 ::right::
 
 <WorkFigure kind="spring" height="195px" />
 
-<SocraticBlock v-click="2" type="question" title="Pertanyaan Lanjutan" mode="Pikir 30 dtk">
+<SocraticBlock v-click="1" type="question" title="Pertanyaan Lanjutan" mode="Pikir 30 dtk">
 
 Bagaimana kalau kita potong tarikan itu menjadi bagian-bagian kecil? Di tiap bagian, gayanya hampir tetap. Apa yang bisa kita lakukan?
 
