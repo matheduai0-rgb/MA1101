@@ -99,7 +99,8 @@ def steppers_of(slide: str):
         sup = re.search(r'\bsupport="(\w+)"', attrs)
         nums = [int(n) for n in re.findall(r"\d", step.group(1))] if step else [1]
         lo, hi = nums[0], nums[-1]
-        out.append((set(range(lo, hi + 1)), sup.group(1) if sup else "full"))
+        ph = re.search(r'phases="(\d)"', attrs)
+        out.append((set(range(lo, hi + 1)), sup.group(1) if sup else "full", int(ph.group(1)) if ph else 4))
     return out
 
 
@@ -161,18 +162,20 @@ def structure_pass(text: str, scope: str):
 
     seen = {}
     for i, d in enumerate(info):
-        for steps, sup in d["steppers"]:
+        for steps, sup, _ in d["steppers"]:
             seen.setdefault(sup, dict(first=i, steps=set()))["steps"] |= steps
+    n_phases = min([ph for d in info for _, _, ph in d["steppers"]] or [4])
+    required = set(range(1, n_phases + 1))
     for sup, label in (("full", "worked example"), ("partial", "half-finished example"), ("independent", "independent problem")):
         if sup not in seen:
             errors.append(f'no {label}: missing <PolyaStepper support="{sup}">. Support should fade full -> partial -> independent.')
-    if "full" in seen and seen["full"]["steps"] != {1, 2, 3, 4}:
-        missing = sorted({1, 2, 3, 4} - seen["full"]["steps"])
+    if "full" in seen and not required <= seen["full"]["steps"]:
+        missing = sorted(required - seen["full"]["steps"])
         errors.append(f"worked example does not cover Polya phase(s) {missing} (1 Pahami, 2 Rencanakan, 3 Laksanakan, 4 Periksa Kembali).")
     order = [seen[k]["first"] for k in ("full", "partial", "independent") if k in seen]
     if order != sorted(order):
         errors.append("support does not fade in order: the worked example must come before the half-finished one, which comes before the independent problem.")
-    indep = [i for i, d in enumerate(info) if any(sup == "independent" for _, sup in d["steppers"])]
+    indep = [i for i, d in enumerate(info) if any(sup == "independent" for _, sup, _ in d["steppers"])]
     if indep:
         hints = sum(1 for i in indep for t, _ in info[i]["blocks"] if t == "hint")
         if hints < 2:

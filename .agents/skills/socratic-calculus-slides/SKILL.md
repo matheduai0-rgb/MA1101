@@ -181,7 +181,9 @@ The follow-up to a wrong answer should be another question that lets the student
 problem ("Coba periksa dengan $h = 1$"), because correcting them directly ends the thinking.
 
 **Problem-solving slides.** Phase names are fixed: **1 · Pahami Soal**, **2 · Buat Rencana**,
-**3 · Kerjakan**, **4 · Periksa Lagi** (these match `PolyaStepper`).
+**3 · Kerjakan**, **4 · Periksa Lagi** (these match `PolyaStepper`). Keep all four by default. If the
+lecturer asks to drop Periksa Lagi, give every `PolyaStepper` in that deck `:phases="3"`, use steps
+up to 3, and remove the look-back blocks; the checker then expects phases 1–3.
 
 - *Worked example* (`full`): each phase opens with a `question` and resolves on a click. Phase 4
   is a real check (substitute back, sign, units, limiting case, sketch), never "jadi jawabannya…".

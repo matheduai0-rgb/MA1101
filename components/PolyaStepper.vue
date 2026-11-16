@@ -8,6 +8,8 @@
  *            partial      half-finished example, students fill the gaps
  *            independent  students solve; only a hint ladder is offered
  *
+ * phases:  4 (default) shows all four phases; 3 drops "Periksa Lagi" for decks that leave it out.
+ *
  * Put it directly under the slide title. It is ~28px tall.
  */
 import { computed } from 'vue'
@@ -15,12 +17,15 @@ import { computed } from 'vue'
 const props = withDefaults(defineProps<{
   step?: number | string
   support?: 'full' | 'partial' | 'independent'
+  phases?: 3 | 4
 }>(), {
   step: '1',
-  support: 'full'
+  support: 'full',
+  phases: 4
 })
 
-const PHASES = ['Pahami Soal', 'Buat Rencana', 'Kerjakan', 'Periksa Lagi']
+const ALL_PHASES = ['Pahami Soal', 'Buat Rencana', 'Kerjakan', 'Periksa Lagi']
+const PHASES = computed(() => ALL_PHASES.slice(0, props.phases === 3 ? 3 : 4))
 const SUPPORT: Record<string, { label: string; dots: number }> = {
   full: { label: 'Dikerjakan bersama', dots: 3 },
   partial: { label: 'Lengkapi yang kosong', dots: 2 },
@@ -42,7 +47,7 @@ const sup = computed(() => SUPPORT[props.support] ?? SUPPORT.full)
       <span class="polya-pill" :class="{ on: active[i] }">
         <span class="polya-n">{{ i + 1 }}</span>{{ name }}
       </span>
-      <span v-if="i < 3" class="polya-sep">›</span>
+      <span v-if="i < PHASES.length - 1" class="polya-sep">›</span>
     </template>
     <span class="polya-support" :title="`Tingkat dukungan: ${sup.label}`">
       {{ sup.label }}

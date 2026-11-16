@@ -326,7 +326,7 @@ layout: two-cols-header
   <span class="text-xs text-slate-400 font-mono">Stewart §6.4</span>
 </h2>
 
-<PolyaStepper step="1-2" support="full" />
+<PolyaStepper step="1-2" support="full" :phases="3" />
 
 ::left::
 
@@ -380,17 +380,15 @@ Rencana, jawaban diharapkan: cari konstanta pegas k.
 -->
 
 ---
-layout: two-cols-header
----
 
 <h2 class="slide-title">
   <span>Contoh 1: Meregangkan Pegas (lanjutan)</span>
   <span class="text-xs text-slate-400 font-mono">Stewart §6.4</span>
 </h2>
 
-<PolyaStepper step="3-4" support="full" />
+<PolyaStepper step="3" support="full" :phases="3" />
 
-::left::
+<div class="max-w-2xl">
 
 <BeamerBlock type="example" title="3 · Kerjakan">
 
@@ -405,25 +403,10 @@ $$
 
 </BeamerBlock>
 
-::right::
-
-<SocraticBlock v-click type="question" title="4 · Periksa Lagi" mode="Pikir 1 mnt">
-
-Gaya pegas naik dari $F(0{,}05)$ ke $F(0{,}08)$. Bagaimana kita memeriksa $1{,}56$ J tanpa integral?
-
-</SocraticBlock>
-
-<SocraticBlock v-click type="answer" title="Pemeriksaan dengan gaya rata-rata">
-
-$F(0{,}05) = 40$ N dan $F(0{,}08) = 64$ N. Gayanya naik lurus, jadi gaya rata-rata $= 52$ N:
-
-$$52 \times 0{,}03 = 1{,}56\ \text{J}\ \checkmark$$
-
-</SocraticBlock>
+</div>
 
 <!--
 Kerjakan: tulis di papan baris demi baris, slide hanya ringkasan.
-Periksa Lagi: jawaban diharapkan: gaya rata-rata kali jarak. Ini hanya berlaku karena gaya linear (grafik garis lurus). Tanyakan: "Untuk gaya yang grafiknya melengkung, apakah rata-rata dua ujung masih benar?"
 Satuan: pastikan semua dalam meter dan newton sehingga hasilnya joule.
 -->
 
@@ -436,7 +419,7 @@ layout: two-cols-header
   <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 4 mnt</span>
 </h2>
 
-<PolyaStepper step="1-2" support="partial" />
+<PolyaStepper step="1-2" support="partial" :phases="3" />
 
 ::left::
 
@@ -472,7 +455,7 @@ layout: two-cols-header
   <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 4 mnt</span>
 </h2>
 
-<PolyaStepper step="3-4" support="partial" />
+<PolyaStepper step="3" support="partial" :phases="3" />
 
 ::left::
 
@@ -487,27 +470,15 @@ $$
 
 </BeamerBlock>
 
-<SocraticBlock v-click type="question" title="4 · Periksa Lagi" mode="Pikir 30 dtk">
-
-Berat seluruh kabel $600$ N. Dengan itu, bagaimana kita memeriksa jawabannya tanpa integral?
-
-</SocraticBlock>
-
 ::right::
 
-<SocraticBlock v-click="2" type="answer" title="Isian">
+<SocraticBlock v-click="1" type="answer" title="Isian">
 
 berat potongan $20\,\Delta y$ N &nbsp;·&nbsp; jarak naik $y$ &nbsp;·&nbsp; $W = 10y^2\big|_0^{30} = 9000$ J.
 
 </SocraticBlock>
 
-<SocraticBlock v-click="3" type="answer" title="Pemeriksaan">
-
-Rata-rata kabel naik $15$ m (titik tengah): $600 \times 15 = 9000$ ✓
-
-</SocraticBlock>
-
-<div v-click="2">
+<div v-click="1">
 
 <WorkFigure kind="cable" height="230px" />
 
@@ -516,20 +487,21 @@ Rata-rata kabel naik $15$ m (titik tengah): $600 \times 15 = 9000$ ✓
 <!--
 Dukungan dikurangi: kerangka masih ada, isinya dikerjakan mahasiswa. Beri 4 menit berpasangan, berkeliling.
 Berat potongan: massa 2Δy kg × g = 10 → 20Δy N. Kesalahan umum: lupa mengalikan g. Tanyakan: "Berat itu satuan apa? Newton atau kilogram?"
-Klik pertama menunjukkan pertanyaan periksa; klik kedua isian beserta gambar berlabel; klik ketiga pemeriksaan.
-Periksa Lagi, jawaban diharapkan: berat total kali jarak naik rata-rata. Bagian kabel naik dari 0 sampai 30 m, rata-ratanya 15 m.
+Satu klik memunculkan isian beserta gambar kabel berlabel; klik hanya setelah sebagian besar pasangan selesai.
 -->
 
 ---
+layout: two-cols-header
+---
 
 <h2 class="slide-title">
-  <span>Coba Sendiri</span>
+  <span>Coba Sendiri: Tangki Kerucut</span>
   <span class="text-xs text-slate-400 font-mono">Kerjakan sendiri · 6 mnt</span>
 </h2>
 
-<PolyaStepper step="1-4" support="independent" />
+<PolyaStepper step="1-3" support="independent" :phases="3" />
 
-<div class="grid gap-3" style="grid-template-columns: 1fr 250px">
+::left::
 
 <BeamerBlock type="example" title="Soal">
 
@@ -537,9 +509,44 @@ Tangki berbentuk kerucut terbalik penuh berisi air: tinggi $6$ m, jari-jari bibi
 
 </BeamerBlock>
 
-<WorkFigure kind="tank" height="165px" />
+<SocraticBlock type="predict" title="Tebak Dulu" mode="Pikir 30 dtk">
 
-</div>
+Geser lapisan air dari dekat bibir ke dekat dasar. Lapisan mana yang butuh kerja **lebih besar**? Pikirkan luasnya dan jarak naiknya.
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="answer">
+
+Lapisan dekat bibir: naiknya sedikit, tetapi jauh lebih lebar dan lebih berat. Lapisan dekat dasar naik jauh, tetapi hampir tidak ada airnya.
+
+</SocraticBlock>
+
+::right::
+
+<TankBoard height="395px" />
+
+<!--
+Mandiri: slide ini hanya memperlihatkan bentuk soal; rumus jari-jari belum diberikan.
+Minta mahasiswa memutar gambar 3D dan menggeser kedalaman y. Panah putus-putus kuning adalah jarak angkat, yang sama dengan kedalaman y.
+Tebak, jawaban diharapkan: dekat bibir. Jika banyak memilih "dekat dasar karena naiknya jauh": "Bandingkan jari-jari lapisan di y = 1 dan di y = 5. Berapa kali lebih besar luasnya?" (centang "tampilkan ukuran": r = 2,5 dan 0,5, luas 25 kali).
+Tekan "Angkat ke bibir" untuk lapisan dekat bibir (y kecil) lalu untuk lapisan dekat dasar (y besar). Minta kelas membandingkan: berapa jauh tiap lapisan naik, dan seberapa lebar lapisannya? Bayangan putus-putus menandai posisi asal.
+Lanjutkan ke slide berikutnya untuk petunjuk bertingkat.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Coba Sendiri: Tangki Kerucut (lanjutan)</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan sendiri · 6 mnt</span>
+</h2>
+
+<PolyaStepper step="1-3" support="independent" :phases="3" />
+
+<BeamerBlock type="example" title="Soal (ringkas)">
+
+Kerucut terbalik tinggi $6$ m, jari-jari bibir $3$ m, penuh air, dipompa lewat bibir; $\rho g = 10^4$ N/m$^3$. Hitung kerjanya.
+
+</BeamerBlock>
 
 <div class="grid grid-cols-3 gap-3">
 
@@ -563,9 +570,9 @@ Jari-jari lapisan $= \tfrac{6 - y}{2}$. Volumenya $\pi r^2 \Delta y$, beratnya $
 
 </div>
 
-<SocraticBlock v-click type="answer" title="Jawaban Akhir & Periksa Lagi">
+<SocraticBlock v-click type="answer" title="Jawaban Akhir">
 
-$W = 270\,000\pi$ J $\approx 8{,}5 \times 10^5$ J. Berat seluruh air $180\,000\pi$ N. Masuk akalkah bahwa rata-rata air hanya naik $1{,}5$ m, padahal tinggi tangki $6$ m?
+$W = 270\,000\pi$ J $\approx 8{,}5 \times 10^5$ J.
 
 </SocraticBlock>
 
@@ -573,7 +580,6 @@ $W = 270\,000\pi$ J $\approx 8{,}5 \times 10^5$ J. Berat seluruh air $180\,000\p
 Mandiri: tidak ada kerangka langkah. Petunjuk dibuka satu per satu HANYA bila kelas macet, beri jeda minimal 1 menit.
 Petunjuk 1 mengarahkan ulang ke soal, petunjuk 2 menyebut strategi, petunjuk 3 memberi langkah pertama. Tidak ada yang memberi jawaban.
 Penyelesaian: W = ∫₀⁶ 10⁴ π ((6−y)/2)² y dy = 2500π ∫₀⁶ y(6−y)² dy = 2500π(648 − 864 + 324) = 270000π.
-Pemeriksaan: volume kerucut (1/3)π·9·6 = 18π, berat 180000π N. Air paling banyak di dekat bibir (kerucut terbalik), jadi rata-rata air hanya naik 1,5 m (seperempat tinggi). 180000π × 1,5 = 270000π ✓.
 Yang ditampilkan hanya jawaban akhir; penyelesaian lengkap dikerjakan di papan bila perlu.
 -->
 
