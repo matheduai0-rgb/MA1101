@@ -66,6 +66,16 @@ Three rungs, each revealed only if the room is stuck, with at least a minute bet
    pembilang?"
 3. **First move**: give the opening step and stop. "Kalikan dengan sekawannya, lalu sederhanakan."
 
+For applications of the integral (area, volume, work), the rungs map onto the solving pattern.
+
+| Rung | Pattern step | Example (tank) |
+|---|---|---|
+| Reorient | **Partisi** | "Iris air menjadi lapisan setebal Δy pada kedalaman y. Berapa jauh lapisan itu naik?" |
+| Strategy | **Hampiri** | "Satu lapisan hampir berupa cakram tipis: ΔW ≈ berat × jarak naik." |
+| First move | **Jumlahkan** | "Jumlahkan semua lapisan dan buat makin tipis: integral dari 0 sampai 6." |
+
+Title the rungs `Petunjuk 1 · Partisi` and so on, so students see the same three words every time.
+
 Rungs 1 and 2 should themselves be questions. No rung states the answer. After the ladder, show
 the final answer with a look-back question, so students who finished can check and students who
 did not still have work to do.

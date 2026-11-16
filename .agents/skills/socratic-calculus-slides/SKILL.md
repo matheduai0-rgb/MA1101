@@ -196,6 +196,25 @@ up to 3, and remove the look-back blocks; the checker then expects phases 1–3.
   click shows the **final answer and a look-back question**, not the full solution; the full
   solution is board work if needed.
 
+**Applications of the integral: Partisi – Hampiri – Jumlahkan.** In any problem solved by setting
+up an integral (area, volume, work, mass, force, ...), the *Kerjakan* phase is written as three
+`PartitionStep` lines, `n="1"` to `n="3"`. Each line goes on its own click in a worked example.
+
+1. **Partisi**: what is cut, and over which interval (layers Δy at depth y, steps Δx along the
+   stretch, ...).
+2. **Hampiri**: one piece only, ΔW ≈ F(x)Δx, ΔV ≈ A(x)Δx, or weight × distance.
+3. **Jumlahkan**: Σ over the pieces, then the pieces get thinner and the sum becomes the integral.
+   Evaluate it on this same line.
+
+How the three lines change with the support level:
+
+- *Half-finished* (`partial`): give line 1 in full and put the blanks in lines 2 and 3. Pass
+  `compact` to save height.
+- *Independent* (`independent`): the three hints become Partisi, Hampiri, Jumlahkan. Use
+  `title="Petunjuk 1 · Partisi"` and so on.
+- *Discovery and definition slides*: introduce the names after the class has found the steps.
+  Then put the one-line strategy strip under the definition.
+
 Choose problems from the course texts (Stewart; Adams & Essex; Purcell) and cite the section in
 the title's right-hand tag. Vary the surface across the three problems (a polynomial, then a
 rational function, then a root, say) so students practise the plan, not the pattern.
@@ -248,5 +267,6 @@ deck beside it unless told to replace it.
 - `references/applet-recipes.md`: the predict-then-reveal applet pattern in JSXGraph and recipes
   for limits, derivatives, extrema, Riemann sums, FTC and volumes. Read when building an applet.
 - `assets/example_deck.md`: complete verified deck. Read before your first deck.
-- `assets/components/`: `SocraticBlock.vue`, `PolyaStepper.vue`.
+- `assets/components/`: `SocraticBlock.vue`, `PolyaStepper.vue`, `PartitionStep.vue` (one labelled
+  line of Partisi · Hampiri · Jumlahkan; Markdown in the slot needs blank lines around it).
 - `scripts/verify_socratic_deck.py`: structure and render checker.

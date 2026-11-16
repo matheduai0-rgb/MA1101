@@ -57,7 +57,7 @@ Sebuah pegas ditarik dari panjang alaminya sejauh $0{,}3$ m. Makin panjang tarik
 
 ::right::
 
-<WorkFigure kind="spring" height="195px" />
+<SpringStretchBoard height="240px" />
 
 <SocraticBlock v-click="1" type="question" title="Pertanyaan Lanjutan" mode="Pikir 30 dtk">
 
@@ -71,6 +71,7 @@ Jawaban diharapkan: gaya awal, gaya akhir, atau rata-rata. Semua jawaban dicatat
 Jika ada yang menjawab "pakai rata-rata = 15 N, jadi 4,5 J": "Bagus, itu memang benar untuk pegas. Tetapi mengapa boleh rata-rata? Berlaku untuk gaya apa saja?"
 Jika hening: "Kalau gayanya selalu 30 N, usahanya berapa? Kalau selalu 0 N?"
 Pertanyaan lanjutan: arahkan sampai ada yang mengusulkan memotong jadi bagian kecil dan menjumlahkan. Jangan sebut kata integral dulu.
+Applet: minta satu mahasiswa menyeret balok perlahan (atau tekan "▶ Tarik") sambil kelas membaca F di awal, tengah, dan akhir tarikan: 0 N, 15 N, 30 N. Gaya tidak tunggal.
 -->
 
 ---
@@ -173,13 +174,13 @@ layout: two-cols-header
 
 ::left::
 
-<SocraticBlock type="question" title="Pertanyaan 1" mode="Pikir 30 dtk">
+<SocraticBlock type="question" title="Pertanyaan 1 · ① Partisi" mode="Pikir 30 dtk">
 
-Pada potongan kecil dari $x$ sampai $x + \Delta x$, gayanya hampir tetap sebesar $F(x)$. Berapa usaha pada potongan itu?
+Potong selang $[a, b]$ menjadi $n$ potongan selebar $\Delta x$. Pada potongan dari $x$ sampai $x + \Delta x$, gayanya hampir tetap sebesar $F(x)$. Berapa usaha pada potongan itu?
 
 </SocraticBlock>
 
-<SocraticBlock v-click="1" type="answer">
+<SocraticBlock v-click="1" type="answer" title="② Hampiri satu potongan">
 
 $$\Delta W \approx F(x)\,\Delta x$$
 
@@ -193,7 +194,7 @@ Gaya bekerja dari posisi $a$ sampai $b$. Bagaimana kita mendapat usaha totalnya?
 
 ::right::
 
-<SocraticBlock v-click="3" type="answer">
+<SocraticBlock v-click="3" type="answer" title="③ Jumlahkan">
 
 Jumlahkan usaha semua potongan:
 
@@ -207,7 +208,7 @@ Bentuk jumlahan seperti ini kita kenal dari Bab 4. Apa yang terjadi bila potonga
 
 </SocraticBlock>
 
-<SocraticBlock v-click="5" type="answer" title="Kesimpulan Kita">
+<SocraticBlock v-click="5" type="answer" title="③ Jumlahkan, lalu Potongan Makin Tipis">
 
 Limit jumlahan Riemann adalah integral tentu:
 
@@ -220,6 +221,7 @@ Tiap pertanyaan dibuka dengan klik, beri waktu sebelum klik berikutnya.
 P1 jawaban diharapkan: gaya × panjang potongan. Jika ada yang menjawab "F(x) saja": "Satuannya apa? Usaha harus satuan joule, yaitu newton kali meter."
 P2: jawaban "jumlahkan semuanya". Jika ada yang menjawab "kalikan": "Kalau ada tiga potongan bernilai 2, 3, dan 5 joule, usaha totalnya berapa?"
 P3: minta mahasiswa yang menjawab, bukan dosen. Kata integral boleh muncul dari mahasiswa di sini.
+Setelah klik terakhir, beri nama tiga langkah tadi: ① Partisi (potong selang), ② Hampiri (satu potongan: gaya × Δx), ③ Jumlahkan (Σ, lalu potongan makin tipis → integral). Semua soal hari ini diselesaikan dengan tiga langkah ini.
 -->
 
 ---
@@ -242,6 +244,8 @@ $$W = \int_a^b F(x)\,dx$$
 Satuan: joule (J) $=$ newton $\cdot$ meter.
 
 </BeamerBlock>
+
+<div class="mt-3 mb-3 text-sm px-3 py-2 rounded-lg" style="background:#141b28;border:1px solid #233148"><b>Strategi tiap soal:</b> <span style="color:#2dd4bf">① Partisi</span> · <span style="color:#f5be3c">② Hampiri</span> · <span style="color:#fb7185">③ Jumlahkan</span></div>
 
 <SocraticBlock v-click type="question" mode="Tunjuk di papan">
 
@@ -359,7 +363,7 @@ Kita belum tahu rumus gayanya. Apa yang harus dicari lebih dulu?
 <SocraticBlock type="answer" title="Rencana">
 
 1. Hukum Hooke: $F(x) = kx$. Cari $k$ dari $40 = k(0{,}05)$.
-2. Hitung $W = \int_{0{,}05}^{0{,}08} kx\,dx$.
+2. Partisi, hampiri $\Delta W \approx kx\,\Delta x$, jumlahkan.
 
 </SocraticBlock>
 
@@ -382,25 +386,39 @@ Rencana, jawaban diharapkan: cari konstanta pegas k.
 
 <PolyaStepper step="3" support="full" :phases="3" />
 
-<div class="max-w-2xl">
+<div class="max-w-3xl">
 
 <BeamerBlock type="example" title="3 · Kerjakan">
 
-$$k = \frac{40}{0{,}05} = 800\ \text{N/m}$$
+Hukum Hooke: $k = \dfrac{40}{0{,}05} = 800$ N/m, jadi $F(x) = 800x$.
+
+<PartitionStep v-click n="1">
+
+Potong selang $0{,}05 \le x \le 0{,}08$ menjadi potongan kecil selebar $\Delta x$.
+
+</PartitionStep>
+
+<PartitionStep v-click n="2">
+
+Pada potongan di posisi $x$, gaya hampir tetap $800x$ N, jadi $\Delta W \approx 800x\,\Delta x$.
+
+</PartitionStep>
+
+<PartitionStep v-click n="3">
 
 $$
-\begin{aligned}
-W &= \int_{0{,}05}^{0{,}08} 800x\,dx = 400x^2\Big|_{0{,}05}^{0{,}08} \\
-&= 400\,(0{,}0064 - 0{,}0025) = 1{,}56\ \text{J}
-\end{aligned}
+W \approx \sum 800x_i\,\Delta x \;\longrightarrow\; W = \int_{0{,}05}^{0{,}08} 800x\,dx = 400x^2\Big|_{0{,}05}^{0{,}08} = 1{,}56\ \text{J}
 $$
+
+</PartitionStep>
 
 </BeamerBlock>
 
 </div>
 
 <!--
-Kerjakan: tulis di papan baris demi baris, slide hanya ringkasan.
+Kerjakan: buka tiga langkah satu per satu dengan klik. Sebelum tiap klik tanyakan: "Apa yang kita potong?", "Di satu potongan, usahanya kira-kira berapa?", "Bagaimana dari satu potongan ke semuanya?"
+Hitungan 400(0,0064 − 0,0025) = 1,56 ditulis di papan.
 Satuan: pastikan semua dalam meter dan newton sehingga hasilnya joule.
 -->
 
@@ -455,12 +473,23 @@ layout: two-cols-header
 
 <BeamerBlock type="example" title="3 · Kerjakan: lengkapi yang kosong">
 
-$$
-\begin{aligned}
-\Delta W &\approx \boxed{\phantom{000}}\,\Delta y \cdot \boxed{\phantom{000}} \\
-W &= \int_0^{30} 20y\,dy = \boxed{\phantom{000}}\ \text{J}
-\end{aligned}
-$$
+<PartitionStep n="1" compact>
+
+Potong kabel menjadi potongan setebal $\Delta y$ pada kedalaman $y$, untuk $0 \le y \le 30$.
+
+</PartitionStep>
+
+<PartitionStep n="2" compact>
+
+$\Delta W \approx (\text{berat}) \cdot (\text{jarak naik}) = \boxed{\phantom{000}}\,\Delta y \cdot \boxed{\phantom{000}}$
+
+</PartitionStep>
+
+<PartitionStep n="3" compact>
+
+$W \approx \sum \cdots \;\longrightarrow\; W = \displaystyle\int_0^{30} \boxed{\phantom{000}}\,dy = \boxed{\phantom{000}}\ \text{J}$
+
+</PartitionStep>
 
 </BeamerBlock>
 
@@ -468,7 +497,9 @@ $$
 
 <SocraticBlock v-click="1" type="answer" title="Isian">
 
-berat potongan $20\,\Delta y$ N &nbsp;·&nbsp; jarak naik $y$ &nbsp;·&nbsp; $W = 10y^2\big|_0^{30} = 9000$ J.
+② berat potongan $20\,\Delta y$ N, jarak naik $y$, jadi $\Delta W \approx 20y\,\Delta y$.
+
+③ $W = \int_0^{30} 20y\,dy = 10y^2\big|_0^{30} = 9000$ J.
 
 </SocraticBlock>
 
@@ -544,21 +575,21 @@ Kerucut terbalik tinggi $6$ m, jari-jari bibir $3$ m, penuh air, dipompa lewat b
 
 <div class="grid grid-cols-3 gap-3">
 
-<SocraticBlock v-click type="hint" level="1">
+<SocraticBlock v-click type="hint" level="1" title="Petunjuk 1 · Partisi">
 
-Iris air menjadi lapisan tipis pada kedalaman $y$ dari bibir tangki. Berapa jauh lapisan itu harus naik?
-
-</SocraticBlock>
-
-<SocraticBlock v-click type="hint" level="2">
-
-Lapisan itu berbentuk cakram tipis. Jari-jarinya berubah menurut $y$. Cari hubungannya dengan kesebangunan segitiga.
+Iris air menjadi lapisan setebal $\Delta y$ pada kedalaman $y$ dari bibir tangki. Berapa jauh lapisan itu harus naik?
 
 </SocraticBlock>
 
-<SocraticBlock v-click type="hint" level="3">
+<SocraticBlock v-click type="hint" level="2" title="Petunjuk 2 · Hampiri">
 
-Jari-jari lapisan $= \tfrac{6 - y}{2}$. Volumenya $\pi r^2 \Delta y$, beratnya $10^4$ kali itu. Kalikan dengan $y$, lalu integralkan dari $0$ sampai $6$.
+Satu lapisan hampir berupa cakram tipis: $\Delta W \approx$ berat lapisan $\times$ jarak naik. Jari-jarinya berubah menurut $y$; cari dengan kesebangunan segitiga.
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="3" title="Petunjuk 3 · Jumlahkan">
+
+$r = \tfrac{6 - y}{2}$, jadi $\Delta W \approx 10^4 \pi r^2\, y\,\Delta y$. Jumlahkan semua lapisan dan buat makin tipis: integral dari $0$ sampai $6$.
 
 </SocraticBlock>
 
@@ -572,7 +603,7 @@ $W = 270\,000\pi$ J $\approx 8{,}5 \times 10^5$ J.
 
 <!--
 Mandiri: tidak ada kerangka langkah. Petunjuk dibuka satu per satu HANYA bila kelas macet, beri jeda minimal 1 menit.
-Petunjuk 1 mengarahkan ulang ke soal, petunjuk 2 menyebut strategi, petunjuk 3 memberi langkah pertama. Tidak ada yang memberi jawaban.
+Petunjuk mengikuti tiga langkah: 1 Partisi (apa yang dipotong), 2 Hampiri (satu lapisan), 3 Jumlahkan (menuju integral). Tidak ada yang memberi jawaban akhir.
 Penyelesaian: W = ∫₀⁶ 10⁴ π ((6−y)/2)² y dy = 2500π ∫₀⁶ y(6−y)² dy = 2500π(648 − 864 + 324) = 270000π.
 Yang ditampilkan hanya jawaban akhir; penyelesaian lengkap dikerjakan di papan bila perlu.
 -->
@@ -636,21 +667,21 @@ Lanjutkan ke slide berikutnya untuk petunjuk bertingkat.
 
 <div class="grid grid-cols-3 gap-3">
 
-<SocraticBlock v-click type="hint" level="1">
+<SocraticBlock v-click type="hint" level="1" title="Petunjuk 1 · Partisi">
 
-Saat ujung kabel di ketinggian $y$, berapa panjang kabel yang masih tergantung? Berapa beratnya?
-
-</SocraticBlock>
-
-<SocraticBlock v-click type="hint" level="2">
-
-Pada (a), pegas belum ikut ditarik. Gaya tarik hanya berat kabel yang tergantung, dan gaya itu berubah menurut $y$.
+Potong lintasan ujung kabel $0 \le y \le 5$ menjadi langkah kecil $\Delta y$. Saat ujung kabel di $y$, berapa panjang kabel yang masih tergantung?
 
 </SocraticBlock>
 
-<SocraticBlock v-click type="hint" level="3">
+<SocraticBlock v-click type="hint" level="2" title="Petunjuk 2 · Hampiri">
 
-Pada (b), tangan menahan dua gaya sekaligus: gaya pegas $k \cdot (\text{regangan})$ dan berat kabel yang masih tergantung. Jumlahkan.
+Pada (a) pegas belum ditarik. Selama satu langkah $\Delta y$, gaya tarik hampir tetap: berat kabel yang tergantung. $\Delta W \approx$ gaya $\times\ \Delta y$.
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="3" title="Petunjuk 3 · Jumlahkan">
+
+Jumlahkan semua langkah menjadi integral dari $0$ sampai $5$. Untuk (b): gaya tarik = gaya pegas $k \cdot (\text{regangan})$ + berat kabel yang tergantung.
 
 </SocraticBlock>
 
@@ -658,13 +689,25 @@ Pada (b), tangan menahan dua gaya sekaligus: gaya pegas $k \cdot (\text{regangan
 
 <div v-click class="grid grid-cols-2 gap-3">
 
-<SocraticBlock type="answer" title="Jawaban (a)">
+<SocraticBlock type="answer" title="Jawaban (a) · cara 1: iris lintasan">
 
-Kabel tergantung $15 - y$ m, beratnya $20(15 - y)$ N.
+<PartitionStep n="1" compact>
 
-$$
-W = \int_0^5 20(15 - y)\,dy = 20\Big[15y - \tfrac{y^2}{2}\Big]_0^5 = 1250 \text{ J}
-$$
+Lintasan ujung kabel $0 \le y \le 5$ dipotong menjadi $\Delta y$.
+
+</PartitionStep>
+
+<PartitionStep n="2" compact>
+
+Kabel tergantung $15 - y$ m, jadi $\Delta W \approx 20(15 - y)\,\Delta y$.
+
+</PartitionStep>
+
+<PartitionStep n="3" compact>
+
+$W = \displaystyle\int_0^5 20(15 - y)\,dy = 1250$ J
+
+</PartitionStep>
 
 </SocraticBlock>
 
@@ -676,7 +719,7 @@ $$
 F(y) = 10(y - 5) + 20(15 - y) = 250 - 10y \text{ N}
 $$
 
-Cek: $F(5) = 200$ N (hanya kabel), $F(15) = 100$ N (hanya pegas).
+Cek: $F(5) = 200$ N, $F(15) = 100$ N. Untuk kerja dari $5$ ke $15$ m, $F(y)$ inilah yang dipakai di langkah ② Hampiri.
 
 </SocraticBlock>
 
@@ -684,10 +727,69 @@ Cek: $F(5) = 200$ N (hanya kabel), $F(15) = 100$ N (hanya pegas).
 
 <!--
 Mandiri: petunjuk dibuka satu per satu HANYA bila kelas macet, beri jeda minimal 1 menit.
-Petunjuk 1 mengulang ide Contoh 2 (kabel), petunjuk 2 menegaskan batas soal (a), petunjuk 3 menggabungkan Contoh 1 dan Contoh 2.
+Petunjuk mengikuti tiga langkah: 1 Partisi (lintasan dipotong Δy), 2 Hampiri (gaya hampir tetap selama satu langkah), 3 Jumlahkan (integral), ditambah arah untuk (b).
 Kesalahan umum: memakai panjang kabel 15 (bukan 15 − y), lupa mengalikan g, atau menulis regangan pegas y (bukan y − 5).
 Cek di applet: y = 7 → F = 180 N.
 Tantangan untuk yang cepat selesai: kerja dari 5 m sampai 15 m = ∫₅¹⁵ (250 − 10y) dy = 1500 J (luas trapesium di grafik F).
+-->
+
+---
+layout: two-cols-header
+class: slide-compact
+---
+
+<h2 class="slide-title">
+  <span>Solusi (a): Iris Talinya seperti Contoh 2</span>
+  <span class="text-xs text-slate-400 font-mono">Cara 2 · dua kasus</span>
+</h2>
+
+<PolyaStepper step="3" support="independent" :phases="3" />
+
+::left::
+
+<SocraticBlock type="predict" title="Tebak Dulu" mode="Angkat jari: ya / tidak">
+
+Saat ujung kabel naik $5$ m, apakah **semua** potongan tali naik sejauh yang sama?
+
+</SocraticBlock>
+
+<PartitionStep v-click n="1" compact>
+
+Iris tali (posisi awal) menjadi potongan setebal $\Delta y$ pada ketinggian $y$, $0 \le y \le 15$. Beratnya $20\,\Delta y$ N.
+
+</PartitionStep>
+
+<PartitionStep v-click n="2" compact>
+
+<span style="color:#2dd4bf">**Kasus 1**</span>, $10 \le y \le 15$: pindah ke atap, naik $15 - y$, jadi $\Delta W \approx 20(15 - y)\,\Delta y$.
+
+<span style="color:#60a5fa">**Kasus 2**</span>, $0 \le y \lt 10$: tetap menggantung, naik $5$, jadi $\Delta W \approx 100\,\Delta y$.
+
+</PartitionStep>
+
+<PartitionStep v-click n="3" compact>
+
+$$
+\begin{aligned}
+W &= \int_{10}^{15} 20(15 - y)\,dy + \int_0^{10} 100\,dy \\
+&= 250 + 1000 = 1250\ \text{J}
+\end{aligned}
+$$
+
+Sama dengan cara 1.
+
+</PartitionStep>
+
+::right::
+
+<RopeLiftBoard height="420px" />
+
+<!--
+Cara 2 mengikuti Contoh 2: yang diiris adalah talinya, bukan lintasan ujungnya. Pegas tidak digambar karena pada (a) pegas belum tertarik.
+Tebak dulu sebelum memakai applet. Jawaban diharapkan: tidak. Potongan dekat katrol sudah sampai di atap sebelum ujung kabel naik 5 m.
+Minta mahasiswa menggeser irisan dari bawah ke atas melewati batas 10 m, lalu menekan "Tarik ke 5 m". Kasus 2 (biru): naik 5. Kasus 1 (teal): naik 15 − y lalu berjalan mendatar di atap.
+Mengapa jalan mendatar tidak menambah kerja? Gaya berat tegak lurus arah gerak; soal juga meminta gravitasi pada kabel mendatar diabaikan.
+Kesalahan umum: semua potongan naik 5, jadi W = 15 · 20 · 5 = 1500 J. Tanyakan: "Potongan di y = 14 bisa naik 5 m? Ke mana ia pergi?"
 -->
 
 ---
@@ -706,7 +808,7 @@ Tantangan untuk yang cepat selesai: kerja dari 5 m sampai 15 m = ∫₅¹⁵ (25
 
 <SocraticBlock type="question" title="Untuk Pertemuan Berikutnya">
 
-Volume benda putar dan kerja punya pola yang sama: **potong, hampiri, jumlahkan, limit**. Apa yang membuat kita yakin pola itu selalu bisa dipakai pada masalah baru?
+Volume benda putar dan kerja punya pola yang sama: **partisi, hampiri, jumlahkan (lalu limit)**. Apa yang membuat kita yakin pola itu selalu bisa dipakai pada masalah baru?
 
 </SocraticBlock>
 

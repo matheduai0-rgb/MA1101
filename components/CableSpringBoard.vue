@@ -74,7 +74,7 @@ onMounted(async () => {
   // cable over the pulley and to the right (pulled)
   bS.create('segment', [[0.55, 15.6], [4.6, 15.6]], { strokeColor: '#f5be3c', strokeWidth: 3, ...fix })
   bS.create('segment', [[2.4, 16.35], [4.6, 16.35]], { strokeColor: '#f5be3c', strokeWidth: 1.5, dash: 2, lastArrow: true, ...fix })
-  bS.create('text', [2.4, 16.75, 'ditarik'], { color: '#f5be3c', fontSize: 11, anchorY: 'middle', ...fix })
+  bS.create('text', [2.4, 17.15, 'ditarik'], { color: '#f5be3c', cssClass: 'JXGtext jx-gold', highlightCssClass: 'JXGtext jx-gold', fontSize: 11, anchorY: 'middle', ...fix })
   // spring: relaxed (length 5) until the cable end passes 5 m, then stretched to y
   const sTop = () => Math.max(L0, yv.value)
   const N = 9
@@ -96,8 +96,8 @@ onMounted(async () => {
   bS.create('segment', [[0, () => mid() - DY / 2], [0, () => mid() + DY / 2]], {
     strokeColor: '#fb7185', strokeWidth: 7, visible: hasPiece, ...fix
   })
-  bS.create('text', [-0.55, () => mid(), 'Δy'], { color: '#fb7185', fontSize: 13, anchorX: 'right', anchorY: 'middle', visible: hasPiece, ...fix })
-  bS.create('text', [-0.55, () => mid() - 1.1, 'berat ≈ 20 Δy N'], { color: '#fda4af', fontSize: 10.5, anchorX: 'right', anchorY: 'middle', visible: hasPiece, ...fix })
+  bS.create('text', [-0.55, () => mid(), 'Δy'], { color: '#fb7185', cssClass: 'JXGtext jx-coral', highlightCssClass: 'JXGtext jx-coral', fontSize: 13, anchorX: 'right', anchorY: 'middle', visible: hasPiece, ...fix })
+  bS.create('text', [-0.55, () => mid() - 1.1, 'berat ≈ 20 Δy N'], { color: '#fda4af', cssClass: 'JXGtext jx-pink', highlightCssClass: 'JXGtext jx-pink', fontSize: 10.5, anchorX: 'right', anchorY: 'middle', visible: hasPiece, ...fix })
   // hanging length (right of the cable, between cable and wall)
   bS.create('segment', [[0.85, TOP], [0.85, () => yv.value]], {
     strokeColor: '#f5be3c', strokeWidth: 1.3, firstArrow: true, lastArrow: true, visible: () => hang.value > 1.2, ...fix
@@ -105,7 +105,7 @@ onMounted(async () => {
   // height marks on the left
   for (const h of [0, 5, 15]) {
     bS.create('segment', [[-4.5, h], [-4.1, h]], { strokeColor: '#64748b', strokeWidth: 1.5, ...fix })
-    bS.create('text', [-4.7, h, String(h)], { color: '#94a3b8', fontSize: 11, anchorX: 'right', anchorY: 'middle', ...fix })
+    bS.create('text', [-4.7, h, String(h)], { color: '#94a3b8', cssClass: 'JXGtext jx-muted', highlightCssClass: 'JXGtext jx-muted', fontSize: 11, anchorX: 'right', anchorY: 'middle', ...fix })
   }
   bS.create('segment', [[-4.3, 0], [-4.3, TOP]], { strokeColor: '#475569', strokeWidth: 1, ...fix })
   bS.create('segment', [[-4.1, 5], [-0.6, 5]], { strokeColor: '#475569', strokeWidth: 1, dash: 2, ...fix })
@@ -128,8 +128,8 @@ onMounted(async () => {
   })
   bG.create('axis', [[0, 0], [1, 0]], axAtt(5))
   bG.create('axis', [[0, 0], [0, 1]], { ...axAtt(100), ticks: { ...axAtt(100).ticks, label: { strokeColor: '#94a3b8', fontSize: 10, offset: [-24, 0], anchorY: 'middle' } } })
-  bG.create('text', [15.9, 22, 'y'], { color: '#cbd5e1', fontSize: 13, anchorX: 'right', ...fix })
-  bG.create('text', [0.3, 330, 'F (N)'], { color: '#cbd5e1', fontSize: 12, ...fix })
+  bG.create('text', [15.9, 22, 'y'], { color: '#cbd5e1', cssClass: 'JXGtext jx-soft', highlightCssClass: 'JXGtext jx-soft', fontSize: 13, anchorX: 'right', ...fix })
+  bG.create('text', [0.3, 330, 'F (N)'], { color: '#cbd5e1', cssClass: 'JXGtext jx-soft', highlightCssClass: 'JXGtext jx-soft', fontSize: 12, ...fix })
   bG.create('segment', [[5, 0], [5, 200]], { strokeColor: '#475569', strokeWidth: 1, dash: 2, ...fix })
   // shaded area 0..y
   const area = bG.create('curve', [[], []], { strokeWidth: 0, fillColor: '#f5be3c', fillOpacity: 0.22, highlight: false })
@@ -146,7 +146,7 @@ onMounted(async () => {
   bG.create('functiongraph', [(x: number) => F(x), 0, TOP], { strokeColor: '#2dd4bf', strokeWidth: 2.5, ...fix })
   bG.create('point', [() => yv.value, () => F(yv.value)], { size: 4, color: '#f5be3c', name: '', ...fix })
   bG.create('text', [() => Math.max(yv.value / 2, 0.4), 40, () => yv.value > 3 ? 'kerja = luas' : ''], {
-    color: '#f5be3c', fontSize: 11, anchorX: 'middle', ...fix
+    color: '#f5be3c', cssClass: 'JXGtext jx-gold', highlightCssClass: 'JXGtext jx-gold', fontSize: 11, anchorX: 'middle', ...fix
   })
 
   for (const [id, bd] of [[idS, bS], [idG, bG]] as const) {
@@ -210,6 +210,11 @@ onUnmounted(() => {
 .cs-box { flex: 1 1 auto; min-height: 0; border-radius: 0.75rem; border: 1px solid #334155; overflow: hidden; background-color: #0c1018 !important; }
 .cs .jxgbox svg { background-color: #0c1018 !important; }
 .cs .jxgbox .JXGtext { color: #e2e8f0 !important; }
+.cs .jxgbox .JXGtext.jx-coral { color: #fb7185 !important; }
+.cs .jxgbox .JXGtext.jx-pink { color: #fda4af !important; }
+.cs .jxgbox .JXGtext.jx-gold { color: #f5be3c !important; }
+.cs .jxgbox .JXGtext.jx-muted { color: #94a3b8 !important; }
+.cs .jxgbox .JXGtext.jx-soft { color: #cbd5e1 !important; }
 .cs-cover { position: absolute; inset: 0; border-radius: 0.75rem; background: #111826; border: 1px dashed #334155; display: flex; align-items: center; justify-content: center; text-align: center; color: #64748b; font-size: 0.72rem; line-height: 1.5; }
 .cs-cap { font-size: 0.66rem; color: #64748b; text-align: center; margin-top: 0.15rem; }
 .cs-panel { background: #141b28; border: 1px solid #233148; border-radius: 0.75rem; padding: 0.45rem 0.7rem; display: flex; flex-direction: column; gap: 0.3rem; }
