@@ -21,7 +21,7 @@ canvasWidth: 980
 <div class="mt-8 max-w-xl mx-auto text-left">
 <SocraticBlock type="question" title="Pertanyaan Kita Hari Ini">
 
-Rumus usaha $W = F \cdot d$ hanya benar kalau gayanya **tetap**. Bagaimana menghitung usaha kalau gaya berubah-ubah sepanjang perpindahan?
+Rumus usaha $W = F \cdot d$ hanya benar kalau gayanya **tetap**. dan perpindahannya seragam. Bagaimana menghitung usaha kalau gaya berubah-ubah sepanjang perpindahan? Atau bagaimana jika perpindahannya tidak seragam?
 
 </SocraticBlock>
 </div>
@@ -53,13 +53,7 @@ Gaya **tetap** $F$ menggeser benda sejauh $d$: $W = F \cdot d$. Contoh: $10$ N s
 
 Sebuah pegas ditarik dari panjang alaminya sejauh $0{,}3$ m. Makin panjang tarikannya, makin besar gaya yang diperlukan: $F(x) = 100x$ newton, dengan $x$ meter pertambahan panjang. Mau dipakai $W = F \cdot d$. Gaya **yang mana** kalian masukkan?
 
-</SocraticBlock>
 
-<SocraticBlock v-click="1" type="answer" title="Yang biasanya muncul">
-
-Ada yang memakai gaya di awal ($F(0) = 0$ N, jadi $W = 0$ J), ada yang memakai gaya di akhir ($F(0{,}3) = 30$ N, jadi $W = 9$ J). Keduanya tidak masuk akal: jawabannya pasti di antara $0$ dan $9$.
-
-</SocraticBlock>
 
 ::right::
 
@@ -581,6 +575,119 @@ Mandiri: tidak ada kerangka langkah. Petunjuk dibuka satu per satu HANYA bila ke
 Petunjuk 1 mengarahkan ulang ke soal, petunjuk 2 menyebut strategi, petunjuk 3 memberi langkah pertama. Tidak ada yang memberi jawaban.
 Penyelesaian: W = ∫₀⁶ 10⁴ π ((6−y)/2)² y dy = 2500π ∫₀⁶ y(6−y)² dy = 2500π(648 − 864 + 324) = 270000π.
 Yang ditampilkan hanya jawaban akhir; penyelesaian lengkap dikerjakan di papan bila perlu.
+-->
+
+---
+layout: two-cols-header
+class: slide-compact
+---
+
+<h2 class="slide-title">
+  <span>Latihan Gabungan: Kabel Menarik Pegas</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan sendiri · 8 mnt</span>
+</h2>
+
+<PolyaStepper step="1-3" support="independent" :phases="3" />
+
+::left::
+
+<BeamerBlock type="example" title="Soal">
+
+Kabel $2$ kg/m tergantung dari katrol setinggi $15$ m, ujungnya menyentuh lantai. Pegas di lantai: panjang alami $5$ m, $k = 10$ N/m. Di ketinggian $5$ m ujung kabel tersangkut di pegas, lalu ikut menariknya sampai $15$ m. $g = 10$ m/s$^2$.
+
+**(a)** Hitung kerja menarik ujung kabel dari lantai ke ketinggian $5$ m.
+
+**(b)** Tentukan rumus gaya tarik $F(y)$ untuk $5 \le y \le 15$.
+
+</BeamerBlock>
+
+<SocraticBlock type="predict" title="Tebak Dulu" mode="Angkat jari: A / B / C">
+
+Setelah kabel tersangkut di pegas ($y \gt 5$), gaya tarik **A** makin besar, **B** makin kecil, atau **C** tetap?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="answer">
+
+**B: makin kecil.** Tiap naik $1$ m, pegas menambah $10$ N, tetapi berat kabel yang tergantung turun $20$ N.
+
+</SocraticBlock>
+
+::right::
+
+<CableSpringBoard height="400px" />
+
+<!--
+Mandiri: soal ini menggabungkan Contoh 1 (pegas) dan Contoh 2 (kabel).
+Minta mahasiswa menggeser ujung kabel y dari 0 ke 15. Perhatikan: di bawah 5 m pegas diam; di atas 5 m pegas ikut teregang dan kabel yang tergantung makin pendek.
+Tebak dulu, baru centang "tampilkan grafik F". Kebanyakan akan menebak A karena pegas makin teregang. Tanyakan: "Gaya apa saja yang ditahan tangan kita? Mana yang bertambah, mana yang berkurang, dan seberapa cepat?"
+Centang "tampilkan angka" untuk mengecek: y = 5 → F = 200 N, y = 15 → F = 100 N. Luas terarsir di grafik adalah kerja sejauh ini.
+Lanjutkan ke slide berikutnya untuk petunjuk bertingkat.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Latihan Gabungan (lanjutan)</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan sendiri · 8 mnt</span>
+</h2>
+
+<PolyaStepper step="1-3" support="independent" :phases="3" />
+
+<div class="grid grid-cols-3 gap-3">
+
+<SocraticBlock v-click type="hint" level="1">
+
+Saat ujung kabel di ketinggian $y$, berapa panjang kabel yang masih tergantung? Berapa beratnya?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="2">
+
+Pada (a), pegas belum ikut ditarik. Gaya tarik hanya berat kabel yang tergantung, dan gaya itu berubah menurut $y$.
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="3">
+
+Pada (b), tangan menahan dua gaya sekaligus: gaya pegas $k \cdot (\text{regangan})$ dan berat kabel yang masih tergantung. Jumlahkan.
+
+</SocraticBlock>
+
+</div>
+
+<div v-click class="grid grid-cols-2 gap-3">
+
+<SocraticBlock type="answer" title="Jawaban (a)">
+
+Kabel tergantung $15 - y$ m, beratnya $20(15 - y)$ N.
+
+$$
+W = \int_0^5 20(15 - y)\,dy = 20\Big[15y - \tfrac{y^2}{2}\Big]_0^5 = 1250 \text{ J}
+$$
+
+</SocraticBlock>
+
+<SocraticBlock type="answer" title="Jawaban (b)">
+
+Regangan pegas $y - 5$, kabel tergantung $15 - y$:
+
+$$
+F(y) = 10(y - 5) + 20(15 - y) = 250 - 10y \text{ N}
+$$
+
+Cek: $F(5) = 200$ N (hanya kabel), $F(15) = 100$ N (hanya pegas).
+
+</SocraticBlock>
+
+</div>
+
+<!--
+Mandiri: petunjuk dibuka satu per satu HANYA bila kelas macet, beri jeda minimal 1 menit.
+Petunjuk 1 mengulang ide Contoh 2 (kabel), petunjuk 2 menegaskan batas soal (a), petunjuk 3 menggabungkan Contoh 1 dan Contoh 2.
+Kesalahan umum: memakai panjang kabel 15 (bukan 15 − y), lupa mengalikan g, atau menulis regangan pegas y (bukan y − 5).
+Cek di applet: y = 7 → F = 180 N.
+Tantangan untuk yang cepat selesai: kerja dari 5 m sampai 15 m = ∫₅¹⁵ (250 − 10y) dy = 1500 J (luas trapesium di grafik F).
 -->
 
 ---
