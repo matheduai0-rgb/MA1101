@@ -1,15 +1,17 @@
 ---
 name: calculus-manim-animator
 description: >-
-  Generates 3Blue1Brown-style Socratic Manim CE animations for single-variable calculus
-  (MA1101: limits, continuity, derivatives, optimization, Riemann sums, FTC, and Taylor series).
-  Use whenever the user requests visual explanations, mathematical video scenes,
-  or runnable Manim Python code for calculus concepts.
+  Writes and renders 3Blue1Brown-style Manim CE animations for MA1101 calculus topics (limits,
+  derivatives, related rates, MVT, curve sketching, optimization, antiderivatives, Riemann sums,
+  FTC, numerical integration, area, volumes by discs, washers and shells), using a four-act Socratic
+  arc and 35 starter templates mapped to syllabus subtopics. Use when the user wants an animation,
+  a video scene, a .mp4 for a lecture, or runnable Manim Python code for a calculus idea. For
+  interactive in-slide applets use the Slidev/JSXGraph skills instead.
 ---
 
 # Calculus Manim Animator (Socratic & 3Blue1Brown Pedagogy)
 
-This skill equips the Antigravity agent to create elegant, pedagogically profound mathematical animations using the **Manim Community Edition (CE)** library. Rooted in Grant Sanderson's visual philosophy and the Socratic method, animations produced by this skill never introduce formal rigor until intuitive geometric clarity has been unlocked.
+This skill guides the creation of elegant, pedagogically profound mathematical animations using the **Manim Community Edition (CE)** library. Rooted in Grant Sanderson's visual philosophy and the Socratic method, animations produced by this skill never introduce formal rigor until intuitive geometric clarity has been unlocked.
 
 ---
 
@@ -116,7 +118,7 @@ When generating Manim animations for calculus topics:
      - [templates/02_derivative_local_linearity.py](./templates/02_derivative_local_linearity.py) (Subtopik 2.2 Kelinieran Lokal Turunan)
      - [templates/03_riemann_sums_and_integral.py](./templates/03_riemann_sums_and_integral.py) (Subtopik 4.2 Jumlah Riemann & Integral Tentu)
      - [templates/04_fundamental_theorem_of_calculus.py](./templates/04_fundamental_theorem_of_calculus.py) (Subtopik 4.3 Teorema Dasar Kalkulus I)
-     - [templates/05_taylor_polynomials.py](./templates/05_taylor_polynomials.py) (Subtopik 6.4 Pendekatan Polinomial Taylor)
+     - [templates/05_taylor_polynomials.py](./templates/05_taylor_polynomials.py) (Taylor polynomials: not in the 2026 MA1101 syllabus; kept for enrichment)
      - [templates/16_curve_sketching_with_calculus.py](./templates/16_curve_sketching_with_calculus.py) (Subtopik 3.5 Grafik Fungsi dengan Menggunakan Kalkulus)
      - [templates/17_mathematical_modeling_pipeline.py](./templates/17_mathematical_modeling_pipeline.py) (Subtopik 3.4 Pemodelan Matematika & Optimasi Terapan)
      - [templates/18_antiderivatives_family_of_curves.py](./templates/18_antiderivatives_family_of_curves.py) (Subtopik 3.8 Antiturunan & Keluarga Kurva $F(x)+C$)
@@ -147,8 +149,6 @@ When generating Manim animations for calculus topics:
      .agents/skills/calculus-manim-animator/scripts/build_lecture_pack.py -q high --filter "06"
      ```
    - Verify that text labels and mathematical equations do not overlap curves or fall off the 16:9 safe frame.
-4. **Slide Deck Integration (`reveal-cindyjs-calculus-slides`)**:
-   - Pair rendered Manim `.mp4` animations with **Reveal.js + KaTeX + CindyJS** interactive HTML5 lecture slides (see [../reveal-cindyjs-calculus-slides/SKILL.md](../reveal-cindyjs-calculus-slides/SKILL.md)).
-   - Always run `.agents/skills/reveal-cindyjs-calculus-slides/scripts/verify_reveal_slides.py` on generated HTML slide decks to guarantee zero text overflow or clipping.
-
-
+4. **Slide Deck Integration**:
+   - **Slidev decks (current):** copy the rendered `.mp4` into the deck folder's `public/` and embed it on a slide with `<video src="/scene.mp4" controls muted class="w-full rounded" />`. Pose the question (a `predict` block) before playing, and pause at the Socratic inversion. Verify with `socratic-calculus-slides/scripts/verify_socratic_deck.py`.
+   - **Legacy Reveal.js decks:** pair the `.mp4` with Reveal.js + CindyJS slides (see [../reveal-cindyjs-calculus-slides/SKILL.md](../reveal-cindyjs-calculus-slides/SKILL.md)) and run its `verify_reveal_slides.py`.

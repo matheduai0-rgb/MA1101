@@ -19,6 +19,12 @@ Two passes over one slides.md:
 Usage:
   python3 verify_socratic_deck.py <slides.md> [--scope deck|segment]
                                   [--png <dir>] [--port N] [--no-render]
+                                  [--timing [--slot 100]] [--agenda agenda.toml]
+
+  --timing         estimated class minutes per slide (planning-calculus-lecture's
+                   estimate_timing.py); warns when the buffer is under 5 minutes.
+  --agenda FILE    check the deck against an agenda.toml: big question on the
+                   first slides, each misconception targeted, exit reflection.
 
   --scope deck     (default) a full lecture deck: every structure rule applies.
   --scope segment  a few slides (one worked example, one applet): only the
@@ -188,6 +194,61 @@ def structure_pass(text: str, scope: str):
 
 
 # ----------------------------------------------------------------------------
+# Optional timing and agenda checks (warnings only)
+# ----------------------------------------------------------------------------
+
+ESTIMATOR = Path(__file__).resolve().parents[2] / "planning-calculus-lecture" / "scripts" / "estimate_timing.py"
+
+
+def timing_pass(slides_file: Path, slot: float):
+    warns, lines = [], []
+    if not ESTIMATOR.exists():
+        return [f"--timing: estimator not found at {ESTIMATOR}"], lines
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("estimate_timing", ESTIMATOR)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    rows, total = mod.estimate(slides_file)
+    top = sorted(rows, key=lambda r: -r["minutes"])[:3]
+    lines.append(f"estimated {total:.0f} min for a {slot:.0f}-min slot; largest: "
+                 + ", ".join(f"slide {r['slide']} ({r['minutes']:.1f})" for r in top))
+    if total > slot - 5:
+        warns.append(f"estimated {total:.0f} min leaves under 5 min of buffer in a {slot:.0f}-min slot; "
+                     f"shorten the largest slides or move the half-finished example to homework.")
+    return warns, lines
+
+
+def _words(s: str):
+    return {w for w in re.findall(r"[a-z0-9^()]+", s.lower()) if len(w) > 3}
+
+
+def agenda_pass(text: str, agenda_file: Path):
+    import tomllib
+    warns = []
+    ag = tomllib.loads(agenda_file.read_text(encoding="utf-8"))
+    slides = split_slides(text)
+    low = [s.lower() for s in slides]
+    pitfall_text = " ".join(s for s in low if 'type="pitfall"' in s or 'type="predict"' in s)
+    for sub in ag.get("subchapter", []):
+        bq = sub.get("big_question", "")
+        if bq:
+            w = _words(bq)
+            best = max((len(w & _words(s)) / max(1, len(w)) for s in low[:3]), default=0)
+            if best < 0.5:
+                warns.append(f"agenda: big question of {sub.get('code')} ('{bq[:50]}...') is not on the first slides "
+                             f"(best word overlap {best:.0%}); a second-subchapter question may sit at its arc's start.")
+        for m in sub.get("misconceptions", []):
+            w = _words(m)
+            hit = len(w & _words(pitfall_text)) / max(1, len(w))
+            if hit < 0.5:
+                warns.append(f"agenda: misconception '{m}' ({sub.get('code')}) not found in any pitfall/predict slide "
+                             f"(word overlap {hit:.0%}).")
+    if not any('type="reflect"' in s for s in low[-2:]):
+        warns.append("agenda: no reflect block in the last two slides for the exit ticket.")
+    return warns
+
+
+# ----------------------------------------------------------------------------
 # Render pass
 # ----------------------------------------------------------------------------
 
@@ -333,12 +394,21 @@ def main():
     ap.add_argument("--port", type=int, default=0, help="port for the temporary Slidev server (default: first free port from 3350)")
     ap.add_argument("--no-render", action="store_true", help="structure pass only")
     ap.add_argument("--chrome", default="/usr/bin/chromium")
+    ap.add_argument("--timing", action="store_true", help="estimate class minutes (warnings only)")
+    ap.add_argument("--slot", type=float, default=100, help="meeting length in minutes for --timing (default 100)")
+    ap.add_argument("--agenda", default="", help="agenda.toml to check the deck against (warnings only)")
     a = ap.parse_args()
 
     f = Path(a.slides).resolve()
     if not f.exists():
         sys.exit(f"not found: {f}")
     s_err, s_warn, n = structure_pass(f.read_text(encoding="utf-8"), a.scope)
+    info_lines = []
+    if a.timing:
+        t_warn, info_lines = timing_pass(f, a.slot)
+        s_warn += t_warn
+    if a.agenda:
+        s_warn += agenda_pass(f.read_text(encoding="utf-8"), Path(a.agenda))
     r_err, r_warn, rendered = ([], [], 0) if a.no_render else render_pass(f, a.port, a.png, a.chrome)
 
     print(f"\n== Socratic deck check: {f.name} ({n} slides, scope={a.scope}) ==")
@@ -348,6 +418,8 @@ def main():
             print(f"  ERROR  {e}")
         for w in warns:
             print(f"  warn   {w}")
+    for line in info_lines:
+        print(f"\n  time   {line}")
     if not a.no_render and rendered and rendered != n:
         print(f"\n  warn   structure pass counted {n} slides but Slidev rendered {rendered}; check the '---' separators.")
     if a.png and not a.no_render:

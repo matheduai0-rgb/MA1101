@@ -1,0 +1,55 @@
+{
+  "skill_name": "planning-calculus-lecture",
+  "evals": [
+    {
+      "id": 1,
+      "name": "agenda-meeting-28",
+      "prompt": "Rencanakan pertemuan 28 MA1101 (100 menit). Buat agenda dan run-sheet-nya, mulai jam 07.00.",
+      "expected_output": "agenda.toml for meeting 28 (6.5, one-subchapter template) in a deck folder, passing validate_agenda.py, plus runsheet.md with clock times from 07.00 and at least two bold cut-points.",
+      "files": [],
+      "assertions": [
+        "meeting_info.py was run (or the syllabus xlsx read) to get meeting 28's subchapter",
+        "agenda.toml has template = \"one-subchapter\" and subchapter code 6.5",
+        "validate_agenda.py was run and the final run printed RESULT: PASS",
+        "segment minutes sum to at most 95",
+        "runsheet.md exists, starts at 07.00, and marks at least two cut-points",
+        "no roster, grade or exam file was opened"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "deck-over-time",
+      "prompt": "Deck 33_kerja kebanyakan, kuliah saya molor 15 menit. Apa yang sebaiknya dipotong?",
+      "expected_output": "estimate_timing.py output for 2026/slides/33_kerja/slides.md with a total, the most expensive slides named, and concrete cuts with slide numbers and minutes saved; no edits to the deck unless asked.",
+      "files": [],
+      "assertions": [
+        "estimate_timing.py was run on 2026/slides/33_kerja/slides.md",
+        "the answer names specific slide numbers to cut or shorten",
+        "the answer states minutes saved, adding up to roughly 15",
+        "the hook, the worked example and the exit reflection are not cut",
+        "slides.md was not modified"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "retro-privacy",
+      "prompt": "Kuliah 6.2 tadi di K35: diskusi tentang invers makan 12 menit (rencana 5), tiket keluar 20 dari 45 salah di soal 2 karena lupa syarat satu-satu. Buat catatan evaluasinya.",
+      "expected_output": "retro.md in 2026/slides/35_fungsi_invers_dan_turunannya/ (or retro_K35.md) with planned vs actual minutes, the exit-ticket count 25/45 correct with the error pattern, a proposed agenda change and a proposed misconception-bank entry; no names or NIM.",
+      "files": [],
+      "assertions": [
+        "a retro file was written in the deck 35 folder",
+        "it records 5 planned vs 12 actual minutes for the discussion",
+        "it records the exit ticket as counts (20 of 45 wrong, or 25 of 45 right)",
+        "it proposes at least one concrete agenda or deck change",
+        "no file under 2026/K35/ or any roster/grade file was opened",
+        "question-craft.md was not edited"
+      ]
+    }
+  ],
+  "trigger_negatives": [
+    "buatkan slide aturan rantai",
+    "buat kuis bab 4 beserta kuncinya",
+    "rekap nilai UTS K10",
+    "perbaiki teks yang terpotong di slide 5 deck 36"
+  ]
+}

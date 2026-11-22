@@ -1,0 +1,124 @@
+# Agenda pertemuan 27 · Senin 23 Nov 2026 · 6.3 Fungsi Eksponen + 6.4 Eksponen dan Logaritma Umum
+# Example for planning-calculus-lecture. Validate with scripts/validate_agenda.py.
+
+meeting = 27
+date = "2026-11-23"
+slot_minutes = 100
+buffer_minutes = 5
+template = "two-subchapter"
+deck = "2026/slides/36_fungsi_eksponen_natural"     # arc A; arc B (6.4) still needs a deck
+previous_exit = "Tulis dengan kata sendiri: mengapa turunan invers = 1/f'(x)?"
+
+[[subchapter]]
+code = "6.3"
+title = "Fungsi Eksponen"
+purcell = "§6.3"
+goal = "Menurunkan dan mengintegralkan e^u, dan menjelaskan mengapa (e^x)' = e^x dari ln."
+big_question = "Adakah fungsi (selain 0) yang turunannya sama dengan dirinya sendiri?"
+prior = ["ln x sebagai luas di bawah 1/t", "Teorema turunan invers (6.2)"]
+misconceptions = ["aturan pangkat dipakai pada e^(x^2)"]
+
+[[subchapter]]
+code = "6.4"
+title = "Fungsi Eksponen dan Logaritma Umum"
+purcell = "§6.4"
+goal = "Menghitung turunan a^x dan log_a x lewat a^x = e^(x ln a)."
+big_question = "Apa arti 2^pi, padahal pi tidak bisa ditulis sebagai pecahan?"
+prior = ["e^x dan ln x saling invers"]
+misconceptions = ["turunan a^x dikira x a^(x-1)", "faktor ln a terlupa"]
+
+# ---- arc A: full (about 55 min) ----
+[[segment]]
+name = "Pertanyaan besar + 2 jawaban tiket kemarin"
+stage = 1
+minutes = 5
+mode = "Pikir 30 dtk"
+subchapter = "6.3"
+
+[[segment]]
+name = "Mulai dari soal: ln x = 1"
+stage = 2
+minutes = 6
+mode = "Kerjakan di kertas · 2 mnt"
+subchapter = "6.3"
+
+[[segment]]
+name = "Tebak lalu geser: luas 1/t sampai x"
+stage = 3
+minutes = 7
+mode = "Angkat jari: A / B / C"
+subchapter = "6.3"
+
+[[segment]]
+name = "Temukan bersama: exp = ln invers, turunan e^x"
+stage = 4
+minutes = 9
+mode = "Diskusi berpasangan · 1 mnt"
+subchapter = "6.3"
+
+[[segment]]
+name = "Beri nama + Apakah ini benar? (Rina)"
+stage = 6
+minutes = 8
+mode = "Angkat jari: ya / tidak"
+subchapter = "6.3"
+targets = ["aturan pangkat dipakai pada e^(x^2)"]
+
+[[segment]]
+name = "Contoh terpandu: maksimum x e^(-x)"
+stage = 7
+minutes = 9
+mode = "Pikir 30 dtk"
+subchapter = "6.3"
+
+[[segment]]
+name = "Cek cepat / cadangan waktu"
+stage = 0
+minutes = 3
+mode = "Angkat jari: A / B / C"
+cut = true
+
+# ---- arc B: compressed (about 40 min) ----
+[[segment]]
+name = "Soal + tebak: 2^x di applet, kemiringan di 0"
+stage = 3
+minutes = 9
+mode = "Angkat jari: A / B / C"
+subchapter = "6.4"
+targets = ["turunan a^x dikira x a^(x-1)"]
+
+[[segment]]
+name = "Temukan bersama: a^x = e^(x ln a), beri nama"
+stage = 5
+minutes = 10
+mode = "Diskusi berpasangan · 1 mnt"
+subchapter = "6.4"
+targets = ["faktor ln a terlupa"]
+
+[[segment]]
+name = "Contoh terpandu: turunan 3^(x^2) dan log_2 x"
+stage = 7
+minutes = 8
+mode = "Pikir 30 dtk"
+subchapter = "6.4"
+
+[[segment]]
+name = "Latihan mandiri berpasangan + tangga petunjuk"
+stage = 9
+minutes = 8
+mode = "Kerjakan di kertas · 4 mnt"
+subchapter = "6.4"
+cut = true
+
+[[segment]]
+name = "Tiket keluar + pertanyaan jembatan"
+stage = 10
+minutes = 5
+mode = "Tulis · 3 mnt"
+subchapter = "6.4"
+
+[exit_ticket]
+goal = "6.4"
+prompt = "Hitung turunan 5^x di x = 0, lalu jelaskan dari mana faktor ln 5 datang."
+bridge = "Pertemuan berikutnya: bila laju pertumbuhan sebanding dengan banyaknya, fungsi apa yang muncul? (6.5)"
+materials = ["kertas kecil untuk tiket keluar", "spidol 2 warna"]

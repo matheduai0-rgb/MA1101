@@ -1,15 +1,17 @@
 ---
 name: reveal-cindyjs-calculus-slides
 description: >-
-  Generates and verifies 3Blue1Brown-styled interactive HTML5 lecture slide decks
-  for MA1101 (Matematika I / Calculus I) using Reveal.js, KaTeX, CindyJS (real-time
-  60 FPS interactive geometry), and embedded Manim CE videos, with mandatory automated
-  DOM/viewport text-overflow verification so zero text is ever clipped or hidden.
+  Legacy stack for MA1101 lecture decks built with Reveal.js, KaTeX, CindyJS and embedded Manim
+  videos, with a Playwright overflow verifier. Use only when editing the existing Reveal.js decks in
+  2026/slides/ (the html_slide_preview / interactive_cindyjs_reveal.html files of decks 06–25) or
+  when the user explicitly asks for Reveal.js or CindyJS. New decks use Slidev
+  (socratic-calculus-slides and slidev-jsxgraph-calculus-slides).
+disable-model-invocation: true
 ---
 
 # Reveal.js + CindyJS + Manim Interactive Lecture Slides (MA1101)
 
-This skill equips the Antigravity agent to create, style, and verify interactive HTML5 lecture presentations for **MA1101 (Matematika I / Calculus I)** at FMIPA ITB. It replaces static LaTeX Beamer PDFs with **Reveal.js + KaTeX + CindyJS + Manim CE**, combining Socratic pre-rendered Manim videos with real-time 60 FPS interactive CindyJS applets and automated viewport overflow verification.
+This skill covers how to create, style, and verify interactive HTML5 lecture presentations for **MA1101 (Matematika I / Calculus I)** at FMIPA ITB. It replaces static LaTeX Beamer PDFs with **Reveal.js + KaTeX + CindyJS + Manim CE**, combining Socratic pre-rendered Manim videos with real-time 60 FPS interactive CindyJS applets and automated viewport overflow verification.
 
 ---
 

@@ -54,7 +54,13 @@ Put one in the `mode` chip so the whole room responds, not only the front row.
 - `Tunjuk di papan`: matching parts of a formula to a picture.
 
 Rough time cost: a poll is 1 minute, a pair discussion 2 to 3, paper work 3 to 5. Add these up when
-planning; a 50-minute lecture holds about 10 to 14 such moments.
+planning; a 100-minute MA1101 meeting holds about 20 to 28 such moments, shared between its two
+subchapters. For per-slide minutes run `planning-calculus-lecture/scripts/estimate_timing.py`
+(constants in that skill's `references/timing_model.md`).
+
+When a vote shows most of the room already right, move on; when it shows a split, that is the
+moment for pair discussion and a revote (peer instruction: vote, discuss before seeing results,
+revote, then explain).
 
 ## 5. The hint ladder
 

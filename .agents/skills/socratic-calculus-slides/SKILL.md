@@ -1,17 +1,16 @@
 ---
 name: socratic-calculus-slides
 description: >-
-  Designs and builds engaging, question-driven calculus lecture decks in Slidev + JSXGraph for
-  MA1101: every idea is reached through Socratic questions (hook, predict, explore an applet,
-  guided discovery, then the definition), and problem solving is scaffolded with Pólya's four
-  phases and support that fades from worked example to half-finished example to independent
-  problem with a hint ladder. Use this skill whenever the user asks for lecture slides, a slide
-  deck, "slide kuliah", "bahan ajar", a worked-example sequence, practice-problem slides, or an
-  interactive applet slide for any calculus topic, and whenever they mention Socratic questioning,
-  scaffolding, guided discovery, active learning, "pertanyaan pemantik", Pólya, hints, or making
-  slides more engaging or less lecture-heavy, even if they only name a topic ("buatkan slide
-  aturan rantai") and do not say "Socratic". Also use it to convert an existing expository deck
-  into a questioning one.
+  Designs and builds question-driven calculus lecture decks in Slidev + JSXGraph for MA1101's
+  100-minute meetings: every idea is reached through Socratic questions (hook, predict, applet,
+  guided discovery, then the definition), and problem solving follows Pólya's four phases with
+  support that fades from worked to half-finished to independent with a hint ladder. Builds from
+  agenda.toml when planning-calculus-lecture made one, and checks timing against the slot. Use
+  whenever the user asks for lecture slides, a slide deck, "slide kuliah", "bahan ajar", worked
+  examples, practice-problem slides, or an applet slide for any calculus topic, or mentions Socratic
+  questioning, scaffolding, guided discovery, active learning, Pólya, hints, or making slides less
+  lecture-heavy, even if they only name a topic ("buatkan slide aturan rantai"). Also converts an
+  expository deck into a questioning one.
 ---
 
 # Socratic Calculus Slides (Slidev + JSXGraph)
@@ -48,6 +47,14 @@ Three ideas drive everything below. Keep them in mind and the specific rules fol
 
 ## Workflow
 
+### 0. Look for an agenda
+
+If the deck folder already holds `agenda.toml` (written by the `planning-calculus-lecture` skill),
+take the goals, big questions, misconceptions, segment order and minute budgets from it and do not
+re-decide them; each agenda segment becomes one or more slides at its arc stage. If there is no
+agenda and the user wants slides for a whole meeting, offer to plan the meeting first (two
+subchapters rarely fit without it), or go on with step 1 when they just want the deck.
+
 ### 1. Pin down the lesson before writing slides
 
 From the request (and the syllabus PDF/XLSX in `2026/` if the subtopic number matters), settle:
@@ -66,8 +73,19 @@ in your summary.
 
 ### 2. Plan the arc
 
-A full deck follows this arc. The stage names in the second column are what appears on slide titles; they are plain Indonesian on purpose (see step 3b). Slide counts are typical, not required; 10 to 14 slides suits a
-50-minute session because each question costs one to four minutes of room time.
+A full deck follows this arc. The stage names in the second column are what appears on slide titles; they are plain Indonesian on purpose (see step 3b).
+
+**Size it for a 100-minute meeting.** Each question costs one to four minutes of room time, and
+one full arc of 14–16 slides already takes about 55–65 minutes. Most MA1101 meetings cover two
+subchapters, so:
+
+- **Two subchapters:** a full arc for the first (~55 min) and a compressed arc for the second
+  (~40 min): merge stages 2–3, keep one discovery, drop the half-finished example, and let the
+  independent problem (done in pairs) close the topic. About 20–26 slides, or two decks.
+- **One subchapter:** a full arc with two predict/discover pairs, both the half-finished and the
+  independent example, then a 25–30 minute practice block.
+
+Leave about 5 minutes of buffer and mark what can be skipped (see `planning-calculus-lecture`).
 
 | # | Stage | What happens | Blocks |
 |---|-------|--------------|--------|
@@ -136,6 +154,25 @@ ln -s ../../../styles styles      # without this the dark theme does not load
 ```
 
 Several older decks lack the `styles` link and render unstyled on white; do not copy that.
+
+**Deck frontmatter.** Besides the quoted `title:`, add `info: 'Subtopik 6.4 · Pertemuan 27'` (the
+syllabus codes and meeting number) so coverage and timing tools can match the deck to the
+syllabus.
+
+**Slide design rules** (from multimedia-learning and slide-design research; see the report in
+`reports/Calculus lecture and slide design.md`):
+
+- Headlines state the result ("Luas di bawah 1/t mendefinisikan ln x"), except on predict and
+  question slides, which keep a question so the answer is not given away.
+- One idea per slide; no decorative images; labels go on the graph, not in a legend.
+- Derivations appear one line per click, aligned on `=`, 4–6 lines per visible state, with the
+  changing term highlighted. Formulas stay on screen even when spoken.
+- Give each colour one role for the whole deck (e.g. teal = the function, gold = the slice, coral
+  = the result) and use it the same way in equations and applets. Never rely on colour alone.
+- Contrast at least 4.5:1 for text and 3:1 for curves and axes against the dark background; pure
+  blue and dark red usually fail on `#0c1018`.
+- Applets: one or two controls labelled with the mathematical symbol, a prediction before the
+  slider moves, and named key states to pause at in the presenter note.
 
 **Components.** This skill ships two components. Copy them into the repo's `components/` once if
 they are not there yet:
@@ -226,7 +263,11 @@ python3 .agents/skills/socratic-calculus-slides/scripts/verify_socratic_deck.py 
   2026/slides/NN_slug/slides.md --png 2026/slides/NN_slug/previews
 ```
 
-Add `--scope segment` when the deliverable is a few slides and not a full lecture.
+Add `--scope segment` when the deliverable is a few slides and not a full lecture. Add
+`--timing` (default `--slot 100`) to print the estimated minutes per slide and warn when the deck
+leaves less than 5 minutes of buffer, and `--agenda <deck>/agenda.toml` to check that the deck
+carries the agenda's big question and targets each of its misconceptions. Both report warnings,
+not errors.
 
 The script runs two passes. The **structure** pass reads the Markdown and checks the pedagogy:
 hook present, a question attached to every applet, notes on every question slide, all four Pólya
@@ -247,7 +288,8 @@ frontmatter, reduce a board to `height="280px"`.
 ### 7. Report
 
 Tell the user, briefly: the big question and learning goal you chose, the arc slide by slide (one
-line each), which misconception the deck targets, the checker result, and where the previews are.
+line each), which misconception the deck targets, the estimated minutes against the 100-minute
+slot, the checker result, and where the previews are.
 Mention anything you were unsure of (problem difficulty, timing) so they can adjust.
 
 ## Converting an existing deck

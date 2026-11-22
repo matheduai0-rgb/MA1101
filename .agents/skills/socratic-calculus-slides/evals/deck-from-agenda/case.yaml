@@ -1,0 +1,4 @@
+schema_version: "1.1"
+name: deck-from-agenda
+expected_outcome: |
+  An Indonesian Slidev deck built from the given agenda.toml for 6.5 (one subchapter, 100 minutes): the agenda's big question on the title slide, its misconception diagnosed on a pitfall slide, segments in the agenda's order, an exit reflection matching the exit ticket, and an estimated length that fits the 100-minute slot with buffer.
