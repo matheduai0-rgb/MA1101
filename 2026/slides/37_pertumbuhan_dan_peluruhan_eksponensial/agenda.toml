@@ -1,0 +1,118 @@
+# Agenda pertemuan 28 · Kamis 26 Nov 2026 · 6.5 Pertumbuhan dan Peluruhan Eksponensial
+# Dibuat dengan planning-calculus-lecture. Periksa: python3 .claude/skills/planning-calculus-lecture/scripts/validate_agenda.py <file ini>
+
+meeting = 28
+date = "2026-11-26"
+slot_minutes = 100
+buffer_minutes = 5
+template = "one-subchapter"
+deck = "2026/slides/37_pertumbuhan_dan_peluruhan_eksponensial"
+previous_exit = "Hitung turunan 5^x di x = 0, lalu jelaskan dari mana faktor ln 5 datang."
+applets = ["GrowthBoard mode=race (slide 3)", "GrowthBoard mode=compound (slide 9)"]
+
+[[subchapter]]
+code = "6.5"
+title = "Pertumbuhan dan Peluruhan Eksponensial"
+purcell = "§6.5"
+goal = "Menyusun y' = ky dari cerita, menyelesaikannya menjadi y = y0 e^(kt), dan menentukan k dari data (waktu paruh, persen per tahun)."
+big_question = "Kapan sesuatu bertambah dengan laju yang sebanding dengan banyaknya sendiri, dan rumus apa yang selalu muncul?"
+prior = ["(e^x)' = e^x dan (e^u)' = e^u u' (6.3)", "a^x = e^(x ln a) (6.4)", "memisahkan peubah pada persamaan diferensial (3.9)"]
+misconceptions = ["pertumbuhan eksponensial dikira linear", "k disamakan dengan persen per tahun"]
+
+[[segment]]
+name = "Pertanyaan besar + 2 jawaban anonim tiket keluar kemarin"
+slides = "1"
+stage = 1
+minutes = 5
+mode = "Pikir 30 dtk"
+subchapter = "6.5"
+
+[[segment]]
+name = "Mulai dari soal: bakteri dua kali lipat tiap jam, berapa setelah 10 jam?"
+slides = "2"
+stage = 2
+minutes = 7
+mode = "Kerjakan di kertas · 2 mnt"
+subchapter = "6.5"
+
+[[segment]]
+name = "Tebak lalu geser: siapa menang, tambah 500 per jam atau kali 2 per jam?"
+slides = "3"
+stage = 3
+minutes = 7
+mode = "Angkat jari: A / B / C"
+subchapter = "6.5"
+targets = ["pertumbuhan eksponensial dikira linear"]
+
+[[segment]]
+name = "Temukan bersama: laju sebanding banyaknya, y' = ky, y = y0 e^(kt)"
+slides = "4"
+stage = 4
+minutes = 10
+mode = "Diskusi berpasangan · 1 mnt"
+subchapter = "6.5"
+
+[[segment]]
+name = "Beri nama + Apakah ini benar? (naik 10% per tahun berarti k = 0,1?)"
+slides = "5-6"
+stage = 6
+minutes = 8
+mode = "Angkat jari: A / B / C"
+subchapter = "6.5"
+targets = ["k disamakan dengan persen per tahun"]
+
+[[segment]]
+name = "Contoh terpandu: waktu paruh karbon-14, umur fosil"
+slides = "7-8"
+stage = 7
+minutes = 10
+mode = "Pikir 30 dtk"
+subchapter = "6.5"
+
+[[segment]]
+name = "Tebak lalu geser 2: bunga dihitung makin sering, (1 + 1/n)^n menuju e"
+slides = "9"
+stage = 3
+minutes = 7
+mode = "Angkat jari: A / B / C"
+subchapter = "6.5"
+cut = true
+
+[[segment]]
+name = "Contoh setengah jadi: kadar obat dalam darah"
+slides = "10-11"
+stage = 8
+minutes = 8
+mode = "Kerjakan di kertas · 2 mnt"
+subchapter = "6.5"
+
+[[segment]]
+name = "Latihan mandiri berpasangan + tangga petunjuk: populasi kota"
+slides = "12-13"
+stage = 9
+minutes = 10
+mode = "Kerjakan di kertas · 4 mnt"
+subchapter = "6.5"
+
+[[segment]]
+name = "Latihan berpasangan 2: soal campuran Purcell 6.5 (pertumbuhan, peluruhan, bunga)"
+slides = "14"
+stage = 9
+minutes = 15
+mode = "Kerjakan di kertas · 5 mnt"
+subchapter = "6.5"
+cut = true
+
+[[segment]]
+name = "Tiket keluar + pertanyaan jembatan"
+slides = "15"
+stage = 10
+minutes = 6
+mode = "Tulis · 3 mnt"
+subchapter = "6.5"
+
+[exit_ticket]
+goal = "6.5"
+prompt = "Penduduk sebuah kota naik 3% per tahun. Tulis y(t), lalu tentukan kapan penduduknya menjadi dua kali lipat."
+bridge = "Kopi panas mendingin dengan laju sebanding selisih suhunya dengan suhu ruang, bukan suhunya sendiri. Apakah ini masih y' = ky? (6.6)"
+materials = ["kertas kecil untuk tiket keluar", "spidol 2 warna", "kalkulator (ln dan e^x)"]
