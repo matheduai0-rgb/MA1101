@@ -2,7 +2,7 @@
 theme: default
 background: '#0c1018'
 title: 'MA1101 Kalkulus I - Fungsi Invers dan Turunannya'
-info: 'Subtopik 6.2 · Pertemuan 27 (bagian 1 dari 2, lanjut ke deck 36)'
+info: 'Subtopik 6.2 · Pertemuan 26'
 class: text-white
 drawings:
   persist: false
@@ -13,10 +13,10 @@ canvasWidth: 980
 
 # MA1101 Kalkulus I
 <p class="text-xl text-amber-400 font-semibold mt-2">Bab 6: Fungsi Transenden</p>
-<p class="text-sm text-slate-300 mt-1">Subtopik 6.2: Fungsi Invers dan Turunannya · lalu 6.3: Fungsi Eksponen Natural</p>
+<p class="text-sm text-slate-300 mt-1">Subtopik 6.2: Fungsi Invers dan Turunannya</p>
 
 <div class="mt-8 max-w-xl mx-auto text-left">
-<SocraticBlock type="question" title="Pertanyaan Pertama Hari Ini" mode="Pikir 30 dtk">
+<SocraticBlock type="question" title="Pertanyaan Kita Hari Ini">
 
 Kalau rumus fungsi invers **tidak bisa** kita tuliskan, bisakah kita tetap menghitung turunannya?
 
@@ -24,9 +24,7 @@ Kalau rumus fungsi invers **tidak bisa** kita tuliskan, bisakah kita tetap mengh
 </div>
 
 <!--
-Pertemuan ini dua bagian: 6.2 (deck ini, sekitar 50 menit) lalu 6.3 (deck 36, sekitar 43 menit).
-Buka dengan dua jawaban anonim tiket keluar 6.1 ("apa sebenarnya ln x, dan mengapa turunannya 1/x?"): satu yang menyebut luas di bawah 1/t, satu yang hanya menulis "log basis e". Tanya: "Mana yang menjelaskan mengapa turunannya 1/x?"
-Lalu bacakan pertanyaan ini, beri jeda 30 detik. Jangan dijawab: "Di akhir bagian pertama, kalian sendiri yang akan menjawabnya."
+Jangan dijawab sekarang. Bacakan, beri jeda 10 detik, lalu katakan: "Di akhir kuliah, kalian sendiri yang akan menjawabnya."
 Hubungkan dengan akhir pertemuan lalu: "ln selalu naik, jadi tiap nilai hanya dicapai satu kali. Hari ini kita lihat apa artinya itu."
 -->
 
@@ -147,9 +145,15 @@ Jadi $f$ selalu naik, dan $f^{-1}$ ada walaupun rumusnya tidak bisa ditulis.
 
 </SocraticBlock>
 
-<SocraticBlock v-click="4" type="answer" title="Kesimpulan Kita">
+<SocraticBlock v-click="4" type="question" title="Pertanyaan 3" mode="Pikir 30 dtk">
 
-Fungsi yang **selalu naik atau selalu turun** punya invers, dan tanda $f'$ cukup untuk memeriksanya. Untuk $x^2$, batasi daerah asal ke $x \ge 0$: inversnya $\sqrt{y}$.
+$f(x) = x^2$ tidak punya invers di seluruh garis bilangan. Bagaimana kalau kita hanya memakai $x \ge 0$?
+
+</SocraticBlock>
+
+<SocraticBlock v-click="5" type="answer" title="Kesimpulan Kita">
+
+Di $x \ge 0$, $x^2$ selalu naik, jadi punya invers: $f^{-1}(y) = \sqrt{y}$. Kalau perlu, **batasi daerah asal** sampai fungsinya selalu naik atau selalu turun.
 
 </SocraticBlock>
 
@@ -157,7 +161,7 @@ Fungsi yang **selalu naik atau selalu turun** punya invers, dan tanda $f'$ cukup
 Tiap pertanyaan dibuka dengan klik, beri waktu sebelum klik berikutnya.
 P1, jawaban diharapkan: tidak bisa. Jika hening: "Ambil x₁ = 1 dan x₂ = 2 untuk fungsi yang selalu naik. Mana yang nilainya lebih besar?"
 P2: jawaban "turunannya positif". Ingatkan hubungan tanda f' dengan naik-turun dari Bab 3.
-Kesimpulan: soal x² dengan x ≥ 0 cukup disebut, tidak perlu dibahas panjang (waktu). Kata "monoton murni" diperkenalkan di slide Beri Nama.
+P3: arahkan ke √y. Kata "monoton murni" boleh diperkenalkan di slide berikutnya.
 -->
 
 ---
@@ -336,10 +340,16 @@ Angka $4$ adalah nilai $y$, bukan $x$. Rumusnya $\bigl(f^{-1}\bigr)'(y) = \dfrac
 
 </SocraticBlock>
 
+<SocraticBlock v-click type="question" title="Pertanyaan Lanjutan" mode="Pikir 30 dtk">
+
+Bima juga menulis $f^{-1}(y) = \dfrac{1}{f(y)}$. Periksa dengan $f(x) = 2x + 6$ di $y = 8$. Apa yang ia campur aduk?
+
+</SocraticBlock>
+
 <!--
 Nama tokoh pada slide kesalahan selalu fiktif agar tidak ada mahasiswa yang merasa dituding.
 Jawaban diharapkan: titiknya salah. Jika hening: "f(4) berapa? Apakah titik (4, ...) ada di grafik f⁻¹?"
-Bila waktu longgar, tanya lisan: "Bima juga menulis f⁻¹(y) = 1/f(y). Periksa dengan f(x) = 2x + 6 di y = 8." f⁻¹(8) = 1, sedangkan 1/f(8) = 1/22. Tanda pangkat −1 pada f⁻¹ BUKAN berarti "satu per".
+Pertanyaan lanjutan: f⁻¹(8) = 1, sedangkan 1/f(8) = 1/22. Tanda pangkat −1 pada f⁻¹ BUKAN berarti "satu per".
 -->
 
 ---
@@ -450,29 +460,184 @@ Sekarang Pertanyaan Lanjutan di slide 2 sudah terjawab.
 -->
 
 ---
+layout: two-cols-header
+---
 
 <h2 class="slide-title">
-  <span>Latihan di Rumah, lalu Lanjut ke 6.3</span>
-  <span class="text-xs text-slate-400 font-mono">PKH · jembatan</span>
+  <span>Contoh 2: Lengkapi yang Kosong</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 4 mnt</span>
 </h2>
 
-<BeamerBlock type="example" title="Latihan di rumah (PKH 6.2)">
+<PolyaStepper step="1-2" support="partial" />
 
-1. $f(x) = 2x + \cos x$. Tunjukkan $f$ punya invers, lalu hitung $\bigl(f^{-1}\bigr)'(1)$.
-2. $f(x) = x^3 + \ln x$ untuk $x \gt 0$. Tunjukkan $f$ punya invers, lalu hitung $\bigl(f^{-1}\bigr)'(1)$.
+::left::
 
-Untuk tiap soal: cari dulu $x$ pasangannya, lalu periksa jawaban kalian dengan menggeser $x$ sedikit, seperti di Contoh 1.
+<BeamerBlock type="example" title="Soal">
+
+Diketahui $f(x) = 2x + \cos x$. Hitung $\bigl(f^{-1}\bigr)'(1)$.
 
 </BeamerBlock>
 
-<SocraticBlock type="question" title="Jembatan ke Bagian Kedua" mode="Pikir 30 dtk">
+<SocraticBlock type="question" title="1–2 · Pahami Soal & Buat Rencana" mode="Diskusi berpasangan · 1 mnt">
+
+Rencananya sama dengan Contoh 1. Apa dua hal yang harus kalian peroleh lebih dulu, dan bagaimana memastikan $f^{-1}$ ada?
+
+</SocraticBlock>
+
+::right::
+
+<BeamerBlock type="example" title="Yang sudah kita punya">
+
+Rencana: (1) pastikan $f$ monoton murni, (2) cari $x$ dengan $f(x) = 1$, (3) hitung $\dfrac{1}{f'(x)}$.
+
+</BeamerBlock>
+
+<!--
+Dukungan dikurangi: rencana sudah diberikan, mahasiswa yang mengisi langkahnya. Beri 1 menit berpasangan untuk Pahami dan Rencana.
+Jawaban diharapkan: x pasangan dan f'(x). Untuk "f⁻¹ ada": f'(x) = 2 − sin x.
+Jika ada yang bingung mencari x: "Coba x = 0. cos 0 berapa?"
+-->
+
+---
+layout: two-cols-header
+---
+
+<h2 class="slide-title">
+  <span>Contoh 2: Lengkapi yang Kosong (lanjutan)</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 4 mnt</span>
+</h2>
+
+<PolyaStepper step="3-4" support="partial" />
+
+::left::
+
+<BeamerBlock type="example" title="3 · Kerjakan: lengkapi yang kosong">
+
+$$
+\begin{aligned}
+f'(x) &= \boxed{\phantom{000}} \;\ge\; \boxed{\phantom{000}} \gt 0 \\
+f(\boxed{\phantom{00}}) &= 1 \\
+\bigl(f^{-1}\bigr)'(1) &= \frac{1}{f'(\boxed{\phantom{00}})} = \boxed{\phantom{000}}
+\end{aligned}
+$$
+
+</BeamerBlock>
+
+::right::
+
+<SocraticBlock v-click type="answer" title="Isian dan Pemeriksaan">
+
+$f'(x) = 2 - \sin x \ge 1 \gt 0$, jadi $f$ selalu naik dan $f^{-1}$ ada. $f(0) = 0 + \cos 0 = 1$, jadi $x = 0$. $\bigl(f^{-1}\bigr)'(1) = \dfrac{1}{f'(0)} = \dfrac{1}{2}$.
+
+**Periksa:** $f'(x)$ selalu antara $1$ dan $3$, jadi kemiringan $f^{-1}$ selalu antara $\tfrac13$ dan $1$. Nilai $\tfrac12$ ada di dalamnya ✓
+
+</SocraticBlock>
+
+<!--
+Beri 4 menit berpasangan, berkeliling.
+Kesalahan umum: menulis f'(x) = 2 + sin x (tanda turunan cos). Tanyakan: "Turunan cos x itu sin x atau −sin x?"
+Kesalahan kedua: memakai x = 1 karena soal menyebut angka 1. Arahkan kembali ke slide Bima.
+Klik untuk isian hanya setelah sebagian besar pasangan selesai.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Coba Sendiri: Invers yang Melibatkan ln</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan sendiri · 6 mnt</span>
+</h2>
+
+<PolyaStepper step="1-4" support="independent" />
+
+<BeamerBlock type="example" title="Soal">
+
+Diketahui $f(x) = x^3 + \ln x$ untuk $x \gt 0$. Tunjukkan bahwa $f$ punya invers, lalu hitung $\bigl(f^{-1}\bigr)'(1)$.
+
+</BeamerBlock>
+
+<SocraticBlock type="question" title="Sebelum Mulai" mode="Pikir 30 dtk">
+
+Tulis dulu: apa yang harus ditunjukkan, dan apa yang harus dihitung? Kalian mau mulai dari langkah mana?
+
+</SocraticBlock>
+
+<!--
+Mandiri: tidak ada kerangka langkah. Beri waktu 1 menit sebelum membuka slide petunjuk.
+Soal ini menyambung ke 6.1: turunan ln x adalah 1/x, dan ln 1 = 0.
+Lanjutkan ke slide berikutnya untuk petunjuk bertingkat.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Coba Sendiri: Invers yang Melibatkan ln (lanjutan)</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan sendiri · 6 mnt</span>
+</h2>
+
+<PolyaStepper step="1-4" support="independent" />
+
+<BeamerBlock type="example" title="Soal (ringkas)">
+
+$f(x) = x^3 + \ln x$, $x \gt 0$. Tunjukkan $f$ punya invers, lalu hitung $\bigl(f^{-1}\bigr)'(1)$.
+
+</BeamerBlock>
+
+<div class="grid grid-cols-3 gap-3">
+
+<SocraticBlock v-click type="hint" level="1">
+
+Teorema mana yang menjamin invers ada? Apa yang harus kalian periksa tentang $f'(x)$?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="2">
+
+Untuk turunan invers di $y = 1$, kalian perlu $x$ pasangannya. Nilai $x$ berapa yang membuat $\ln x$ hilang?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="3">
+
+$f'(x) = 3x^2 + \tfrac{1}{x}$, positif untuk $x \gt 0$. Coba $x = 1$: $f(1) = 1 + \ln 1$.
+
+</SocraticBlock>
+
+</div>
+
+<SocraticBlock v-click type="answer" title="Jawaban Akhir & Periksa Lagi">
+
+$\bigl(f^{-1}\bigr)'(1) = \dfrac14$. Periksa: $f(1{,}01) \approx 1{,}0403$. Apakah $\dfrac{0{,}01}{0{,}0403}$ dekat dengan $\dfrac14$?
+
+</SocraticBlock>
+
+<!--
+Mandiri: petunjuk dibuka satu per satu HANYA bila kelas macet, beri jeda minimal 1 menit.
+Petunjuk 1 mengarahkan ulang ke teorema, petunjuk 2 menyebut strategi (cari x pasangan), petunjuk 3 memberi langkah pertama. Tidak ada yang memberi jawaban.
+Penyelesaian: f'(x) = 3x² + 1/x > 0 untuk x > 0, jadi monoton murni. f(1) = 1, f'(1) = 4, (f⁻¹)'(1) = 1/4.
+Pemeriksaan: 1,01³ ≈ 1,0303 dan ln 1,01 ≈ 0,00995, jumlahnya ≈ 1,0403; 0,01/0,0403 ≈ 0,248 ≈ 1/4.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Tulis Sebelum Pulang</span>
+  <span class="text-xs text-slate-400 font-mono">Tulis di kertas · 2 mnt</span>
+</h2>
+
+<SocraticBlock type="reflect" title="Rangkum dengan Kata-Katamu">
+
+1. Jelaskan kepada teman SMA: kapan sebuah fungsi punya invers, dan bagaimana grafik inversnya terlihat?
+2. Untuk menghitung $\bigl(f^{-1}\bigr)'(y)$, apa yang harus dicari lebih dulu? Di langkah mana kalian paling mungkin keliru?
+
+</SocraticBlock>
+
+<SocraticBlock type="question" title="Untuk Pertemuan Berikutnya">
 
 $\ln x$ selalu naik, jadi punya invers. Fungsi apa itu? Dengan Teorema B, berapa turunannya?
 
 </SocraticBlock>
 
 <!--
-Kedua soal PKH adalah contoh setengah jadi dan soal mandiri dari draf lengkap deck ini (slides.v1-full.md); jawabannya 1/2 dan 1/4. Bahas sebentar di awal pertemuan berikutnya bila banyak yang macet.
-Bila waktu tersisa sebelum menit 50: kerjakan soal 1 bersama-sama di papan (2–3 menit).
-Pertanyaan jembatan tidak dijawab di sini; ia langsung menjadi bagian kedua (deck 36: 6.3).
+Kumpulkan kertasnya. Pertanyaan 2 memberi data miskonsepsi untuk pembukaan pertemuan berikutnya.
+Pertanyaan terakhir tidak dijawab; ia menjadi pembuka 6.3 (fungsi eksponen natural, bilangan e).
 -->

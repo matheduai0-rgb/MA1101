@@ -2,7 +2,7 @@
 theme: default
 background: '#0c1018'
 title: 'MA1101 Kalkulus I - Fungsi Eksponen dan Logaritma Umum'
-info: 'Subtopik 6.4 · Pertemuan 28 (bagian 1 dari 2, lanjut ke deck 37)'
+info: 'Subtopik 6.4 · Pertemuan 27 (bagian 2 dari 2, setelah deck 36)'
 class: text-white
 drawings:
   persist: false
@@ -11,40 +11,20 @@ mdc: true
 canvasWidth: 980
 ---
 
-# MA1101 Kalkulus I
-<p class="text-xl text-amber-400 font-semibold mt-2">Bab 6: Fungsi Transenden</p>
-<p class="text-sm text-slate-300 mt-1">Subtopik 6.4: Fungsi Eksponen dan Logaritma Umum · lalu 6.5: Pertumbuhan dan Peluruhan</p>
+<h2 class="slide-title">
+  <span>Bagian Kedua: Apa Arti 2 pangkat √2?</span>
+  <span class="text-xs text-cyan-400 font-mono">Subtopik 6.4 · Mulai dari soal</span>
+</h2>
 
-<div class="mt-8 max-w-xl mx-auto text-left">
-<SocraticBlock type="question" title="Pertanyaan Pertama Hari Ini" mode="Pikir 30 dtk">
+<SocraticBlock type="question" title="Pertanyaan Kedua Hari Ini">
 
 Apa arti $2^{\sqrt 2}$, dan seberapa curam grafik $y = 2^x$?
 
 </SocraticBlock>
-</div>
 
-<!--
-Pertemuan ini dua bagian: 6.4 (deck ini, sekitar 47 menit) lalu 6.5 (deck 37, sekitar 45 menit).
-Buka dengan dua jawaban anonim tiket keluar pertemuan 27 (f(x) = x + eˣ, hitung (f⁻¹)'(1)): satu yang benar (pasangan x = 0, jawaban 1/2), satu yang memakai x = 1 (kesalahan Bima). Tanya: "Mana yang benar, dan mengapa x = 0?"
-Lalu bacakan pertanyaan ini, beri jeda 30 detik. Jangan dijawab: "Di akhir bagian pertama, kalian sendiri yang akan menjawabnya."
--->
+<SocraticBlock type="question" title="Kerjakan" mode="Kerjakan di kertas · 1 mnt">
 
----
-
-<h2 class="slide-title">
-  <span>Mulai dari Soal: Pangkat yang Tidak Rasional</span>
-  <span class="text-xs text-slate-400 font-mono">Pakai yang sudah kita tahu</span>
-</h2>
-
-<BeamerBlock type="block" title="Yang sudah kita tahu">
-
-Pangkat rasional bisa dihitung: $2^{1{,}4} = 2^{7/5} = \sqrt[5]{2^7} \approx 2{,}639$. Dari 6.3: $e^x$ terdefinisi untuk **semua** $x$ real, dan $e^{\ln a} = a$.
-
-</BeamerBlock>
-
-<SocraticBlock type="question" mode="Kerjakan di kertas · 1 mnt">
-
-Kalkulator memberi $2^{\sqrt 2} \approx 2{,}665$. Padahal $\sqrt 2$ tidak bisa ditulis sebagai pecahan. Usulkan cara mendefinisikan $2^{\sqrt 2}$. Petunjuk: tulis $2$ sebagai $e^{\text{sesuatu}}$.
+Pangkat rasional bisa dihitung: $2^{1{,}4} = \sqrt[5]{2^7} \approx 2{,}639$. Tetapi $\sqrt 2$ bukan pecahan. Pakai $e^{\ln a} = a$ dari bagian pertama: tulis $2$ sebagai $e^{\text{sesuatu}}$, lalu usulkan arti $2^{\sqrt 2}$.
 
 </SocraticBlock>
 
@@ -61,10 +41,10 @@ Sekarang $2^x$ punya arti untuk semua $x$. Seberapa curam grafiknya di $x = 0$? 
 </SocraticBlock>
 
 <!--
-Tanya: 1 menit di kertas. Jawaban yang diharapkan muncul dari jembatan di akhir pertemuan lalu (2 = e^{ln 2}).
-Jika ada yang mengusulkan "barisan 2^{1,4}, 2^{1,41}, 2^{1,414}, …": bagus, itu benar secara intuisi. Tanya: "Rumus apa yang langsung memberi nilainya tanpa barisan?"
+Bagian kedua pertemuan (sekitar 43 menit), langsung setelah deck 36. Pertanyaan ini sudah dibacakan sebagai jembatan di slide terakhir deck 36; jangan diulang panjang.
+Tanya: 1 menit di kertas. Jika ada yang mengusulkan "barisan 2^{1,4}, 2^{1,41}, 2^{1,414}, …": bagus, itu benar secara intuisi. Tanya: "Rumus apa yang langsung memberi nilainya tanpa barisan?"
 Hitung di kalkulator: √2 · ln 2 ≈ 0,9803; e^{0,9803} ≈ 2,6651.
-Pertanyaan lanjutan dijawab di applet berikutnya.
+Pertanyaan lanjutan dijawab di applet berikutnya. Separuh pertanyaan pertama (arti 2^√2) terjawab di sini; separuh kedua di slide Temukan Bersama.
 -->
 
 ---
@@ -162,7 +142,7 @@ Tiap pertanyaan dibuka dengan klik, beri waktu sebelum klik berikutnya.
 P1: langsung dari slide sebelumnya; definisi a^x untuk semua x real (Purcell §6.4).
 P2: u = x ln a, u' = ln a (ln a konstanta!). Kesalahan umum menurunkan ln a menjadi 1/a. Tanya: "a itu variabel atau bilangan tetap?"
 P3: jawaban diharapkan dengan "membalik" turunan. Periksa dengan menurunkan hasilnya. Mengapa a ≠ 1? (ln 1 = 0, dan 1^x konstan.)
-Pertanyaan pertama hari ini sekarang terjawab.
+Pertanyaan kedua hari ini sekarang terjawab.
 -->
 
 ---
@@ -366,26 +346,83 @@ Periksa Lagi menghubungkan ke aturan trapesium (4.6) dan kecekungan (3.2): (2^x)
 ---
 
 <h2 class="slide-title">
-  <span>Latihan di Rumah, lalu Lanjut ke 6.5</span>
-  <span class="text-xs text-slate-400 font-mono">PKH · jembatan</span>
+  <span>Coba Sendiri: Turunan logₐ</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 3 mnt</span>
 </h2>
 
-<BeamerBlock type="example" title="Latihan di rumah (PKH 6.4)">
+<PolyaStepper step="1-4" support="independent" />
 
-1. Turunkan $\log_{10}(x^2 + 1)$ dan $3^{x^2}$.
-2. Tentukan persamaan garis singgung $y = x^x$ di $x = 2$.
-3. Hitung $\displaystyle\int x\,3^{x^2}\,dx$, lalu periksa dengan menurunkan hasilnya.
+<BeamerBlock type="example" title="Soal">
+
+Tentukan kemiringan grafik $y = \log_2(x^2 + 1)$ di $x = 1$.
 
 </BeamerBlock>
 
-<SocraticBlock type="question" title="Jembatan ke Bagian Kedua" mode="Pikir 30 dtk">
+<div class="grid grid-cols-3 gap-3">
 
-Banyaknya bakteri $y = 1000\cdot 2^t$. Dari rumus tadi, lajunya $y' = 1000\cdot 2^t\ln 2 = (\ln 2)\,y$. Apa artinya laju yang **sebanding dengan banyaknya**?
+<SocraticBlock v-click type="hint" level="1">
+
+Bentuk mana yang sudah bisa kita turunkan: $\log_2$ atau $\ln$? Tulis ulang $\log_2$ dengan rumus dari kotak definisi.
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="2">
+
+$y = \dfrac{\ln(x^2 + 1)}{\ln 2}$, dan $\ln 2$ hanya konstanta. Bagian mana yang butuh aturan rantai?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="3">
+
+$\bigl(\ln u\bigr)' = \dfrac{u'}{u}$ dengan $u = x^2 + 1$, $u' = 2x$.
+
+</SocraticBlock>
+
+</div>
+
+<SocraticBlock v-click type="answer" title="Jawaban Akhir & Periksa Lagi">
+
+$y' = \dfrac{2x}{(x^2 + 1)\ln 2}$, jadi di $x = 1$ kemiringannya $\dfrac{1}{\ln 2} \approx 1{,}443$. Periksa: $\dfrac{\log_2(2{,}0201) - \log_2 2}{0{,}01} \approx 1{,}44$ ✓
 
 </SocraticBlock>
 
 <!--
-Jawaban PKH: (1) 2x/((x² + 1) ln 10) dan 3^{x²}·2x·ln 3. (2) f(2) = 4, f'(2) = 4(ln 2 + 1) ≈ 6,77, jadi y = 4 + 6,77(x − 2). (3) 3^{x²}/(2 ln 3) + C.
-Bila waktu tersisa sebelum menit 47: kerjakan soal 1 bersama di papan.
-Pertanyaan jembatan tidak dijawab di sini; ia langsung menjadi bagian kedua (deck 37: 6.5).
+Mandiri: petunjuk dibuka satu per satu HANYA bila kelas macet, beri jeda minimal 1 menit.
+Kesalahan umum: menulis (log₂ u)' = 1/u (lupa ln 2) atau lupa u' = 2x. Tanya: "Periksa dengan selisih di kalkulator."
+Kebetulan yang enak: hasilnya sama dengan luas di Contoh 1 (1/ln 2).
+Jika telat (lewat menit 85), lewati slide ini; soalnya masuk PKH.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Tulis Sebelum Pulang</span>
+  <span class="text-xs text-slate-400 font-mono">Tiket keluar · PKH · jembatan ke 6.5</span>
+</h2>
+
+<SocraticBlock type="reflect" title="Tiket Keluar" mode="Tulis · 3 mnt">
+
+1. Hitung turunan $5^x$ di $x = 0$, lalu jelaskan dari mana faktor $\ln 5$ datang.
+2. Dengan kata-katamu sendiri: apa sebenarnya bilangan $e$, dan mengapa $e$ disebut alas "alami"?
+
+</SocraticBlock>
+
+<BeamerBlock type="example" title="Latihan di rumah (PKH 6.3 dan 6.4)">
+
+PKH 6.3 di slide terakhir deck 36, ditambah: (1) turunkan $3^{x^2}$; (2) garis singgung $y = x^x$ di $x = 2$; (3) $\displaystyle\int x\,3^{x^2}\,dx$, periksa dengan menurunkan hasilnya.
+
+</BeamerBlock>
+
+<SocraticBlock type="question" title="Untuk Pertemuan Berikutnya">
+
+Bakteri yang membelah, uang yang berbunga, zat radioaktif yang meluruh: apa kesamaan **cara** ketiganya berubah? Pikirkan: lajunya bergantung pada apa?
+
+</SocraticBlock>
+
+<!--
+Kumpulkan kertasnya. Soal 1: (5^x)' = 5^x ln 5, di x = 0 nilainya ln 5 ≈ 1,609. Faktor ln 5 datang dari 5^x = e^{x ln 5} dan aturan rantai.
+Catat di retro.md (tanpa nama): berapa yang menulis x·5^{x−1} (aturan pangkat, miskonsepsi slide applet), dan berapa yang menjawab e dengan "≈ 2,718" saja tanpa ln e = 1.
+Pilih dua jawaban anonim untuk pembuka pertemuan 28.
+Jawaban PKH: (1) 3^{x²}·2x·ln 3. (2) f(2) = 4, f'(2) = 4(ln 2 + 1) ≈ 6,77, jadi y = 4 + 6,77(x − 2). (3) 3^{x²}/(2 ln 3) + C.
+Pertanyaan terakhir tidak dijawab; ia menjadi pembuka 6.5 (pertumbuhan dan peluruhan eksponensial, y' = ky). Jangan memberi rumus bakteri di sini: deck 37 slide 2 meminta kelas menyusunnya sendiri.
 -->

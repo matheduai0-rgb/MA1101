@@ -1,0 +1,157 @@
+# Agenda pertemuan 27 · Senin 23 Nov 2026 · 6.3 Fungsi Eksponen Natural + 6.4 Eksponen dan Logaritma Umum
+# Sesuai silabus. Arc A (6.3) = deck 36, arc B (6.4) = deck 38.
+# Agenda ini disimpan di folder deck 36; 'slides' memakai awalan nomor deck ("38:2").
+# Menggantikan rencana lama (pertemuan 27 = 6.2 + 6.3, pertemuan 28 = 6.4 + 6.5), tersimpan di riwayat git (84b39c0).
+# Periksa: python3 .claude/skills/planning-calculus-lecture/scripts/validate_agenda.py <file ini>
+
+meeting = 27
+date = "2026-11-23"
+slot_minutes = 100
+buffer_minutes = 5
+template = "two-subchapter"
+deck = "2026/slides/36_fungsi_eksponen_natural + 2026/slides/38_fungsi_eksponen_dan_logaritma_umum"
+previous_exit = "ln x selalu naik, jadi punya invers. Fungsi apa itu? Dengan Teorema B, berapa turunannya? (pertemuan 26, deck 35)"
+applets = ["LnAreaBoard mode=area (36:3)", "PowerBaseBoard (38:2)"]
+
+[[subchapter]]
+code = "6.3"
+title = "Fungsi Eksponen Natural"
+purcell = "§6.3"
+goal = "Menjelaskan e^x sebagai invers ln, lalu menurunkan dan mengintegralkan e^u."
+big_question = "Adakah fungsi (selain fungsi nol) yang turunannya sama dengan dirinya sendiri?"
+prior = ["ln x sebagai luas di bawah 1/t (6.1)", "Teorema A dan B tentang invers (6.2, pertemuan 26)"]
+misconceptions = ["aturan pangkat dipakai pada e^(x^2)"]
+
+[[subchapter]]
+code = "6.4"
+title = "Fungsi Eksponen dan Logaritma Umum"
+purcell = "§6.4"
+goal = "Menuliskan a^x = e^(x ln a), lalu menurunkan dan mengintegralkan a^x, log_a x, dan x^x."
+big_question = "Apa arti 2 pangkat akar 2, dan seberapa curam grafik 2^x?"
+prior = ["e^x dan ln x saling invers (arc A hari ini)", "(e^u)' = e^u u' (arc A hari ini)", "aturan rantai (2.5)"]
+misconceptions = ["turunan a^x dikira x a^(x-1)", "x^x diturunkan dengan aturan pangkat atau aturan eksponen saja"]
+
+# ---- arc A: 6.3, penuh (sekitar 45 menit) ----
+[[segment]]
+name = "Pertanyaan besar 6.3 + 2 jawaban tiket keluar pertemuan 26"
+stage = 1
+slides = "36:1"
+minutes = 3
+mode = "Pikir 30 dtk"
+subchapter = "6.3"
+
+[[segment]]
+name = "Mulai dari soal: x berapa yang membuat ln x = 1?"
+stage = 2
+slides = "36:2"
+minutes = 5
+mode = "Kerjakan di kertas · 1 mnt"
+subchapter = "6.3"
+
+[[segment]]
+name = "Tebak lalu geser: luas di bawah 1/t tepat 1 (LnAreaBoard)"
+stage = 3
+slides = "36:3"
+minutes = 6
+mode = "Angkat jari: A / B / C"
+subchapter = "6.3"
+
+[[segment]]
+name = "Temukan bersama: exp = invers ln, e^x, turunan lewat Teorema B"
+stage = 4
+slides = "36:4"
+minutes = 8
+mode = "Diskusi berpasangan · 1 mnt"
+subchapter = "6.3"
+
+[[segment]]
+name = "Beri nama + Apakah ini benar? (Rina: turunan e^(x^2))"
+stage = 6
+slides = "36:5-6"
+minutes = 7
+mode = "Angkat jari: benar / salah"
+subchapter = "6.3"
+targets = ["aturan pangkat dipakai pada e^(x^2)"]
+
+[[segment]]
+name = "Contoh terpandu: maksimum x e^(-x)"
+stage = 7
+slides = "36:7-8"
+minutes = 8
+mode = "Pikir 30 dtk"
+subchapter = "6.3"
+
+[[segment]]
+name = "Latihan mandiri berpasangan: integral e^x/(1 + e^x) dari 0 sampai ln 2"
+stage = 9
+slides = "36:9-10"
+minutes = 7
+mode = "Kerjakan di kertas · 4 mnt"
+subchapter = "6.3"
+cut = true
+
+[[segment]]
+name = "PKH 6.3 + jembatan ke 6.4 (2 pangkat akar 2)"
+stage = 0
+slides = "36:11"
+minutes = 1
+mode = "Pikir 30 dtk"
+cut = true
+
+# ---- arc B: 6.4, dipadatkan (sekitar 46 menit) ----
+[[segment]]
+name = "Pertanyaan besar 6.4 + soal 2 pangkat akar 2 + tebak kemiringan a^x (PowerBaseBoard)"
+stage = 3
+slides = "38:1-2"
+minutes = 11
+mode = "Angkat jari: A / B / C"
+subchapter = "6.4"
+targets = ["turunan a^x dikira x a^(x-1)"]
+
+[[segment]]
+name = "Temukan bersama: a^x = e^(x ln a), turunan dan integralnya"
+stage = 4
+slides = "38:3"
+minutes = 7
+mode = "Diskusi berpasangan · 1 mnt"
+subchapter = "6.4"
+
+[[segment]]
+name = "Beri nama (log_a) + Apakah ini benar? (Dodi dan Fani: turunan x^x)"
+stage = 6
+slides = "38:4-5"
+minutes = 8
+mode = "Angkat jari: A / B / C"
+subchapter = "6.4"
+targets = ["x^x diturunkan dengan aturan pangkat atau aturan eksponen saja"]
+
+[[segment]]
+name = "Contoh terpandu: integral 2^x dari 0 sampai 1"
+stage = 7
+slides = "38:6-7"
+minutes = 8
+mode = "Pikir 30 dtk"
+subchapter = "6.4"
+
+[[segment]]
+name = "Latihan berpasangan + tangga petunjuk: kemiringan log_2(x^2 + 1) di x = 1"
+stage = 9
+slides = "38:8"
+minutes = 6
+mode = "Kerjakan di kertas · 3 mnt"
+subchapter = "6.4"
+cut = true
+
+[[segment]]
+name = "Tiket keluar + PKH 6.3/6.4 + pertanyaan jembatan (6.5)"
+stage = 10
+slides = "38:9"
+minutes = 6
+mode = "Tulis · 3 mnt"
+subchapter = "6.4"
+
+[exit_ticket]
+goal = "6.4"
+prompt = "Hitung turunan 5^x di x = 0, lalu jelaskan dari mana faktor ln 5 datang. (Jawaban ln 5 ≈ 1,609; dari 5^x = e^(x ln 5).)"
+bridge = "Bakteri yang membelah, uang yang berbunga, zat radioaktif yang meluruh: apa kesamaan cara ketiganya berubah? (6.5)"
+materials = ["kertas kecil untuk tiket keluar", "spidol 2 warna", "kalkulator (ln, e^x, pangkat)"]

@@ -2,53 +2,109 @@
 theme: default
 background: '#0c1018'
 title: 'MA1101 Kalkulus I - Fungsi Eksponen Natural'
-info: 'Subtopik 6.3 · Pertemuan 27 (bagian 2 dari 2, setelah deck 35)'
+info: 'Subtopik 6.3 · Pertemuan 27 (bagian 1 dari 2, lanjut ke deck 38)'
 class: text-white
 drawings:
   persist: false
 transition: slide-left
 mdc: true
 canvasWidth: 980
-layout: two-cols-header
 ---
 
-<h2 class="slide-title">
-  <span>Bagian Kedua: x Berapa yang Membuat ln x = 1?</span>
-  <span class="text-xs text-cyan-400 font-mono">Subtopik 6.3 · Tebak → Amati → Jelaskan</span>
-</h2>
+# MA1101 Kalkulus I
+<p class="text-xl text-amber-400 font-semibold mt-2">Bab 6: Fungsi Transenden</p>
+<p class="text-sm text-slate-300 mt-1">Subtopik 6.3: Fungsi Eksponen Natural · lalu 6.4: Eksponen dan Logaritma Umum</p>
 
-::left::
-
-<SocraticBlock type="question" title="Pertanyaan Kedua Hari Ini">
+<div class="mt-8 max-w-xl mx-auto text-left">
+<SocraticBlock type="question" title="Pertanyaan Pertama Hari Ini">
 
 Adakah fungsi (selain fungsi nol) yang turunannya **sama dengan dirinya sendiri**?
 
 </SocraticBlock>
+</div>
+
+<!--
+Jangan dijawab sekarang. Bacakan, beri jeda 10 detik, lalu katakan: "Di akhir bagian pertama, kalian sendiri yang akan menjawabnya."
+Buka dengan 2 jawaban anonim tiket keluar pertemuan 26 ("ln x selalu naik, jadi punya invers. Fungsi apa itu? Berapa turunannya?"): satu yang menyebut eˣ, satu yang macet di Teorema B.
+Jika ada yang menjawab "eˣ" dari SMA: "Bagus. Hari ini kita cari tahu apa sebenarnya e itu, dan mengapa turunannya sama dengan dirinya."
+Pertemuan ini dua bagian: 6.3 (deck ini, sekitar 50 menit), lalu 6.4 (deck 38).
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Mulai dari Soal: x Berapa yang Membuat ln x = 1?</span>
+  <span class="text-xs text-slate-400 font-mono">Pakai yang sudah kita tahu</span>
+</h2>
+
+<BeamerBlock type="block" title="Yang sudah kita tahu (6.1 dan 6.2)">
+
+$\ln x = \displaystyle\int_1^x \frac{1}{t}\,dt$ selalu naik dan kontinu, dengan $\ln 1 = 0$ dan $\ln x \to \infty$ untuk $x \to \infty$. Fungsi yang selalu naik punya invers (Teorema A).
+
+</BeamerBlock>
+
+<SocraticBlock type="question" mode="Kerjakan di kertas · 1 mnt">
+
+Pasti ada tepat satu $x$ dengan $\ln x = 1$. Mengapa **pasti ada**, dan mengapa **hanya satu**? Kira-kira berapa nilainya: lebih kecil atau lebih besar dari $2$? Dari $3$?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="answer" title="Yang biasanya muncul">
+
+Pasti ada karena $\ln$ kontinu dan naik dari $0$ ke nilai yang sangat besar. Hanya satu karena $\ln$ selalu naik. Nilainya sulit ditebak tanpa alat bantu.
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="question" title="Pertanyaan Lanjutan" mode="Pikir 30 dtk">
+
+$\ln x$ adalah luas di bawah $y = \tfrac1t$ dari $1$ sampai $x$. Bagaimana kita bisa mencari $x$ itu dengan gambar luas?
+
+</SocraticBlock>
+
+<!--
+Tanya: beri 1 menit di kertas.
+"Pasti ada": Teorema Nilai Antara (ln kontinu, ln 1 = 0 < 1 dan ln x besar untuk x besar). "Hanya satu": monoton murni (Teorema A di 6.2).
+Untuk perkiraan: luas dari 1 sampai 2 lebih kecil dari 1 (persegi panjang 1 × 1 di atasnya), jadi x > 2.
+Pertanyaan lanjutan dijawab di slide berikutnya dengan applet.
+-->
+
+---
+layout: two-cols-header
+---
+
+<h2 class="slide-title">
+  <span>Coba Geser: Luas Tepat Satu</span>
+  <span class="text-xs text-cyan-400 font-mono">Tebak → Amati → Jelaskan</span>
+</h2>
+
+::left::
 
 <SocraticBlock type="predict" mode="Angkat jari: A / B / C">
 
-$\ln x$ adalah luas di bawah $y = \tfrac1t$ dari $1$ sampai $x$. Luas itu tepat $1$ ketika $x$:
+Luas di bawah $y = \tfrac1t$ dari $t = 1$ sampai $t = x$ tepat $1$ ketika $x$:
 
-**A.** antara $2$ dan $2{,}5$ &nbsp; **B.** antara $2{,}5$ dan $3$ &nbsp; **C.** lebih dari $3$
+**A.** antara $2$ dan $2{,}5$  
+**B.** antara $2{,}5$ dan $3$  
+**C.** lebih dari $3$
 
 </SocraticBlock>
 
 <SocraticBlock v-click type="question" title="Sambil Mengamati" mode="Pikir 30 dtk">
 
-Geser $x$ sampai luasnya sedekat mungkin dengan $1$. Di antara dua nilai $x$ mana luas itu melewati $1$? Bilangan itu kita beri nama $e$.
+1. Geser $x$ sampai luasnya sedekat mungkin dengan $1$. Di antara dua nilai $x$ mana luas itu melewati $1$?
+2. Bilangan itu kita beri nama $e$. Berapa $\ln e$?
 
 </SocraticBlock>
 
 ::right::
 
-<LnAreaBoard mode="area" height="370px" />
+<LnAreaBoard mode="area" height="350px" />
 
 <!--
-Bagian kedua pertemuan (sekitar 43 menit). Pertanyaan besar tidak dijawab sekarang; dijawab di slide Temukan Bersama.
-Hubungkan dengan jembatan di akhir deck 35: "ln punya invers. Untuk mengenalnya, kita perlu tahu dulu: ln x = 1 di mana?"
-Urutan: (1) semua mengangkat jari SEBELUM applet disentuh. (2) Geser x ke 2,5 (luas ≈ 0,916), lalu 2,7 (≈ 0,993) dan 2,75 (≈ 1,012).
-Jawaban diharapkan: B. Luas melewati 1 antara x = 2,70 dan 2,75. Nilai tepatnya e ≈ 2,71828; tulis di papan, dan ln e = 1.
+Urutan: (1) minta semua mengangkat jari SEBELUM menyentuh applet. (2) Geser x ke 2,5 (luas ≈ 0,916), lalu 2,7 (≈ 0,993) dan 2,75 (≈ 1,012).
+Jawaban diharapkan: B. Luas melewati 1 antara x = 2,70 dan 2,75. Nilai tepatnya e ≈ 2,71828.
 Jika banyak memilih A: "Geser ke 2,5. Luasnya sudah 1?"
+Pengamatan 2: ln e = 1, itulah definisi e. Tulis di papan: e ≈ 2,718.
 -->
 
 ---
@@ -58,7 +114,7 @@ class: slide-compact
 
 <h2 class="slide-title">
   <span>Temukan Bersama: Invers ln dan Turunannya</span>
-  <span class="text-xs text-slate-400 font-mono">Pakai Teorema B dari bagian pertama</span>
+  <span class="text-xs text-slate-400 font-mono">Pakai Teorema B dari 6.2</span>
 </h2>
 
 ::left::
@@ -97,14 +153,14 @@ Jadi fungsi apa yang turunannya sama dengan dirinya sendiri? Apakah $5e^x$ juga?
 
 <SocraticBlock v-click="5" type="answer">
 
-$e^x$, dan semua $Ce^x$. Tetapi $\bigl(e^{2x}\bigr)' = 2e^{2x}$ (aturan rantai), jadi tidak. Pertanyaan kedua hari ini terjawab.
+$e^x$, dan semua $Ce^x$. Tetapi $\bigl(e^{2x}\bigr)' = 2e^{2x}$ (aturan rantai), jadi tidak. Pertanyaan besar hari ini terjawab.
 
 </SocraticBlock>
 
 <!--
 Tiap pertanyaan dibuka dengan klik, beri waktu sebelum klik berikutnya.
 P1: kesalahan umum ln(e²) = e. Tanya: "ln a^r = r ln a. Di sini a = e, r = 2."
-P2: Teorema B baru saja dipakai di bagian pertama; biarkan pasangan mengerjakannya sendiri. Kesalahan umum: dy/dx = 1/x. Tanya: "Variabel bebas di x = ln y itu y. Jadi 1/y, lalu y diganti apa?"
+P2: Teorema B dari pertemuan lalu (6.2); biarkan pasangan mengerjakannya sendiri. Kesalahan umum: dy/dx = 1/x. Tanya: "Variabel bebas di x = ln y itu y. Jadi 1/y, lalu y diganti apa?"
 P3: e^{2x} menjembatani ke 6.5 (y' = ky). Grafik eˣ (cerminan ln terhadap y = x, asimtot y = 0) cukup digambar cepat di papan; applet ExpBoard ada di draf lengkap (slides.v1-full.md) bila waktu longgar.
 -->
 
@@ -371,11 +427,11 @@ Kesalahan umum: lupa mengganti batas, atau menulis e^{ln 2} = ln 2. Tanyakan: "e
 ---
 
 <h2 class="slide-title">
-  <span>Latihan di Rumah (PKH 6.3)</span>
-  <span class="text-xs text-slate-400 font-mono">Kerjakan di rumah</span>
+  <span>Latihan di Rumah, lalu Lanjut ke Bagian Kedua</span>
+  <span class="text-xs text-slate-400 font-mono">PKH 6.3 · jembatan ke 6.4</span>
 </h2>
 
-<BeamerBlock type="example" title="Latihan di rumah">
+<BeamerBlock type="example" title="Latihan di rumah (PKH 6.3)">
 
 1. Hitung $\displaystyle\int x\,e^{-x^2}\,dx$. Pilih $u$ yang turunannya (hampir) muncul di depan, lalu periksa dengan menurunkan hasilnya.
 2. Tunjukkan $e^a e^b = e^{a + b}$ dan $e^a / e^b = e^{a - b}$ dengan mengambil $\ln$ kedua ruas.
@@ -383,35 +439,14 @@ Kesalahan umum: lupa mengganti batas, atau menulis e^{ln 2} = ln 2. Tanyakan: "e
 
 </BeamerBlock>
 
-<!--
-Soal 1 adalah contoh setengah jadi dari draf lengkap deck ini (slides.v1-full.md); jawabannya −½e^{−x²} + C.
-Soal 3 mengulang slide Rina dan pertanyaan Dani yang dilewati di kelas.
-Slide ini cukup ditunjukkan 30 detik; tidak dibahas di kelas.
--->
-
----
-
-<h2 class="slide-title">
-  <span>Tulis Sebelum Pulang</span>
-  <span class="text-xs text-slate-400 font-mono">Tulis di kertas · 3 mnt</span>
-</h2>
-
-<SocraticBlock type="reflect" title="Tiket Keluar" mode="Tulis · 3 mnt">
-
-1. $f(x) = x + e^x$. Tunjukkan $f$ punya invers, lalu hitung $\bigl(f^{-1}\bigr)'(1)$.
-2. Dengan kata-katamu sendiri: apa sebenarnya bilangan $e$?
-
-</SocraticBlock>
-
-<SocraticBlock type="question" title="Untuk Pertemuan Berikutnya">
+<SocraticBlock type="question" title="Sekarang, Bagian Kedua" mode="Pikir 30 dtk">
 
 Kita sudah punya $e^x$ untuk semua $x$ real. Bagaimana mendefinisikan $2^x$, misalnya $2^{\sqrt 2}$? Petunjuk: $2 = e^{\ln 2}$.
 
 </SocraticBlock>
 
 <!--
-Kumpulkan kertasnya. Soal 1 menguji kedua bagian sekaligus: f'(x) = 1 + eˣ > 0 jadi f punya invers (6.2); f(0) = 1, f'(0) = 2, jadi (f⁻¹)'(1) = 1/2 (memakai eˣ dari 6.3).
-Catat di retro.md (tanpa nama): berapa yang memakai x = 1 alih-alih x = 0 (kesalahan Bima), dan berapa yang salah menurunkan eˣ.
-Pilih dua jawaban anonim untuk pembuka pertemuan berikutnya.
-Pertanyaan terakhir tidak dijawab; ia menjadi pembuka 6.4 (fungsi eksponen dan logaritma umum: aˣ = e^{x ln a}).
+Tunjukkan PKH 30 detik saja; tidak dibahas di kelas. Soal 1: −½e^{−x²} + C. Soal 3 mengulang slide Rina (x^e memakai aturan pangkat).
+Bacakan pertanyaan jembatan, beri 30 detik, lalu langsung buka deck 38 (6.4). Jangan dijawab di sini: slide pertama deck 38 mulai dari pertanyaan ini.
+Jika telat (lewat menit 50), lewati slide ini dan langsung buka deck 38.
 -->
