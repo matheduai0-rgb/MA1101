@@ -208,6 +208,48 @@ Pengamatan, jawaban diharapkan: luas b→ab = luas 1→a, yaitu L(ab) − L(b) =
 
 ---
 layout: two-cols-header
+class: slide-compact
+---
+
+<h2 class="slide-title">
+  <span>Mengapa Sama? Regangkan Daerahnya</span>
+  <span class="text-xs text-cyan-400 font-mono">Tebak → Amati → Jelaskan</span>
+</h2>
+
+::left::
+
+<SocraticBlock type="question" title="Pertanyaan" mode="Pikir 30 dtk">
+
+Daerah $2 \to 4$ dua kali lebih lebar, tetapi tingginya setengah. Regangkan daerah $1 \to x$: lebar $\times a$, tinggi $\div a$. Tekan "regangkan". Daerah hasilnya ada di bawah $\tfrac1t$ dari mana sampai mana?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="answer">
+
+Titik $(t, y)$ dengan $0 \le y \le \tfrac1t$ pindah ke $(at, \tfrac{y}{a})$, dan $\tfrac{y}{a} \le \tfrac{1}{at}$. Jadi daerah $1 \to x$ menjadi tepat daerah $a \to ax$. Tiap pita: lebar $\times a$, tinggi $\div a$, luasnya tetap:
+
+$$\int_1^x \frac{dt}{t} = \int_a^{ax} \frac{dt}{t}, \quad\text{yaitu}\quad L(ax) - L(a) = L(x)$$
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="question" title="Pertanyaan Lanjutan" mode="Pikir 30 dtk">
+
+Ini penjelasan dengan gambar. Bisakah kita membuktikannya dengan turunan saja?
+
+</SocraticBlock>
+
+::right::
+
+<LnStretchBoard height="390px" />
+
+<!--
+Jembatan dari "Dua Luas yang Mirip" (pengamatan) ke bukti dengan turunan di slide berikutnya.
+Urutan: (1) bacakan pertanyaan, (2) tekan "regangkan sampai k = a" dengan x = 2, a = 2: daerah 1→2 menjadi 2→4, persis seperti di slide sebelumnya. (3) Ubah x dan a, ulangi. (4) Baru centang "tampilkan luas".
+Jika ada yang bertanya mengapa luas pita tetap: lebar × a dan tinggi ÷ a, hasil kalinya sama. Pita tipis hampir persegi panjang, jadi jumlah luasnya (jumlah Riemann) juga tetap.
+Pertanyaan lanjutan tidak dijawab di sini; jawabannya slide berikutnya (aturan rantai pada L(ax)).
+-->
+---
+layout: two-cols-header
 ---
 
 <h2 class="slide-title">

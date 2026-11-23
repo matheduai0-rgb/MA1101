@@ -5,7 +5,7 @@ component. Reuse one of these before writing a new applet; the deck column shows
 
 | component | props | used in decks |
 |---|---|---|
-| `BeamerBlock` | `type`: 'block' / 'example' / 'alert', `title` | 34_fungsi_logaritma_natural, 35_fungsi_invers_dan_turunannya, 36_fungsi_eksponen_natural (+9 more) |
+| `BeamerBlock` | `type`: 'block' / 'example' / 'alert', `title` | 36_fungsi_eksponen_natural, 37_pertumbuhan_dan_peluruhan_eksponensial, 38_fungsi_eksponen_dan_logaritma_umum (+11 more) |
 | `CableSpringBoard` | `height` | 33_kerja |
 | `CalcRiemannSum` | `initialN`, `height`, `a`, `b` | 26_slidev_jsxgraph_pilot |
 | `CrossSectionBoard` | `height`, `radius` | 24_volume_cakram_cincin_dan_irisan_sejajar |
@@ -14,18 +14,21 @@ component. Reuse one of these before writing a new applet; the deck column shows
 | `DiscMethodY3Board` | `height`, `initialMode`: 'single' / 'multi' | 30_volume_metode_cincin_y3 |
 | `DiscMethodYAxis3DBoard` | `height`, `initialMode`: 'single' / 'multi' | 28_volume_metode_cakram_sumbu_y |
 | `DiskWasherBoard` | `height` | 24_volume_cakram_cincin_dan_irisan_sejajar |
-| `ExpBoard` | `mode`: 'reflect' / 'slope', `height` | 36_fungsi_eksponen_natural |
+| `ExpBoard` | `mode`: 'reflect' / 'slope', `height` | — |
+| `GrowthBoard` | `mode`: 'race' / 'compound', `height` | 37_pertumbuhan_dan_peluruhan_eksponensial |
 | `InverseBoard` | `mode`: 'test' / 'reflect', `height` | 35_fungsi_invers_dan_turunannya |
 | `JSXGraphBoard` | `boundingbox`, `axis`, `showNavigation`, `showCopyright`, `height`, `width`, `init` | 26_slidev_jsxgraph_pilot |
 | `LnAreaBoard` | `mode`: 'area' / 'scale' / 'graph', `height` | 34_fungsi_logaritma_natural, 36_fungsi_eksponen_natural |
+| `LnStretchBoard` | `height`, `initialX`, `initialA`, `xName`, `aName` | 34_fungsi_logaritma_natural, 36_fungsi_eksponen_natural |
 | `PartitionStep` | `n`, `compact` | 33_kerja |
-| `PolyaStepper` | `step`, `support`: 'full' / 'partial' / 'independent', `phases` | 34_fungsi_logaritma_natural, 35_fungsi_invers_dan_turunannya, 36_fungsi_eksponen_natural (+2 more) |
+| `PolyaStepper` | `step`, `support`: 'full' / 'partial' / 'independent', `phases` | 36_fungsi_eksponen_natural, 37_pertumbuhan_dan_peluruhan_eksponensial, 38_fungsi_eksponen_dan_logaritma_umum (+4 more) |
+| `PowerBaseBoard` | `height`, `initialA` | 38_fungsi_eksponen_dan_logaritma_umum |
 | `PyramidSquareSlicing3DBoard` | `height`, `initialMode`: 'single' / 'multi' | 31_volume_piramida_irisan_bujursangkar |
 | `RopeLiftBoard` | `height` | 33_kerja |
 | `ShellAxisFigure` | `axis`, `reveal`, `height` | 32_volume_metode_kulit_tabung |
 | `ShellBoard` | `height` | — |
 | `ShellBoard3D` | `height` | 32_volume_metode_kulit_tabung |
-| `SocraticBlock` | `type`: 'question' / 'predict' / 'hint' / 'answer' / 'pitfall' / 'reflect', `title`, `level`, `mode` | 34_fungsi_logaritma_natural, 35_fungsi_invers_dan_turunannya, 36_fungsi_eksponen_natural (+2 more) |
+| `SocraticBlock` | `type`: 'question' / 'predict' / 'hint' / 'answer' / 'pitfall' / 'reflect', `title`, `level`, `mode` | 36_fungsi_eksponen_natural, 37_pertumbuhan_dan_peluruhan_eksponensial, 38_fungsi_eksponen_dan_logaritma_umum (+4 more) |
 | `SpringStretchBoard` | `height`, `k`, `xmax` | 33_kerja |
 | `TankBoard` | `height` | 33_kerja |
 | `WorkFigure` | `kind`: 'spring' / 'spring-force' / 'spring-ex' / 'cable' / 'tank', `height`, `reveal` | 33_kerja |

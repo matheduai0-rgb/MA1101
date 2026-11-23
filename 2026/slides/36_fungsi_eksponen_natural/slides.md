@@ -208,9 +208,46 @@ Baris mana di kotak ini yang tadi kita temukan dengan applet luas? Baris mana de
 
 <!--
 Definisi ditampilkan SETELAH kelas menemukannya sendiri. Katakan: "Ini hanya nama dan rumus untuk yang tadi kalian temukan."
-Jawaban: ln e = 1 dari applet luas; (eˣ)' = eˣ dari Teorema B. Sifat e^a e^b = e^{a+b} dibuktikan dengan mengambil ln kedua ruas; jadikan PKH (lihat slide PKH).
+Jawaban: ln e = 1 dari applet luas; (eˣ)' = eˣ dari Teorema B. Sifat e^a e^b = e^{a+b} dijelaskan di slide berikutnya dengan applet regangan; bukti dengan mengambil ln kedua ruas tetap jadi PKH.
 -->
 
+---
+layout: two-cols-header
+class: slide-compact
+---
+
+<h2 class="slide-title">
+  <span>Mengapa eᵃ · eᵇ = eᵃ⁺ᵇ? Lihat Luasnya</span>
+  <span class="text-xs text-cyan-400 font-mono">Regangan dari 6.1</span>
+</h2>
+
+::left::
+
+<SocraticBlock type="question" title="Pertanyaan" mode="Diskusi berpasangan · 1 mnt">
+
+$a = \ln(e^a)$ adalah luas di bawah $\tfrac1t$ dari $1$ sampai $e^a$. Regangkan daerah $1 \to e^b$ dengan faktor $k = e^a$. Daerah hasilnya dari mana sampai mana, dan berapa luasnya?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="answer">
+
+Dari $e^a$ sampai $e^a e^b$, dan luasnya tetap $b$. Jadi luas dari $1$ sampai $e^a e^b$ adalah $a + b$:
+
+$$\ln\bigl(e^a e^b\bigr) = a + b \quad\Rightarrow\quad e^a e^b = e^{a + b}$$
+
+</SocraticBlock>
+
+::right::
+
+<LnStretchBoard height="390px" x-name="eᵇ" a-name="eᵃ" :initial-x="2" :initial-a="1.5" />
+
+<!--
+Pakai lagi gambar regangan dari 6.1 (deck 34): ∫_1^x dt/t = ∫_k^{kx} dt/t.
+Di applet, slider eᵇ adalah batas kanan daerah awal dan eᵃ adalah faktor regangan. Contoh: eᵇ = 2 (b = ln 2 ≈ 0,693), eᵃ = 1,5 (a = ln 1,5 ≈ 0,405).
+Urutan: (1) pasangan berdiskusi 1 menit, (2) tekan "regangkan": daerah 1→2 menjadi 1,5→3, (3) centang "tampilkan luas": keduanya ≈ 0,693 = b. Luas 1→1,5 adalah a ≈ 0,405, jadi luas 1→3 = a + b ≈ 1,099 = ln 3 ✓.
+Kesimpulan diharapkan dari mahasiswa: ln(eᵃeᵇ) = a + b, lalu ambil exp kedua ruas.
+Bila waktu sempit, cukup jawaban lisan dan lewati applet.
+-->
 ---
 
 <h2 class="slide-title">

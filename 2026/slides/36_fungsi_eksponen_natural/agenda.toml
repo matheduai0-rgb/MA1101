@@ -11,7 +11,7 @@ buffer_minutes = 5
 template = "two-subchapter"
 deck = "2026/slides/36_fungsi_eksponen_natural + 2026/slides/38_fungsi_eksponen_dan_logaritma_umum"
 previous_exit = "ln x selalu naik, jadi punya invers. Fungsi apa itu? Dengan Teorema B, berapa turunannya? (pertemuan 26, deck 35)"
-applets = ["LnAreaBoard mode=area (36:3)", "PowerBaseBoard (38:2)"]
+applets = ["LnAreaBoard mode=area (36:3, 36:4)", "LnStretchBoard (36:6)", "PowerBaseBoard (38:2)"]
 
 [[subchapter]]
 code = "6.3"
@@ -65,10 +65,10 @@ mode = "Diskusi berpasangan · 1 mnt"
 subchapter = "6.3"
 
 [[segment]]
-name = "Beri nama + Apakah ini benar? (Rina: turunan e^(x^2))"
+name = "Beri nama + eᵃeᵇ = eᵃ⁺ᵇ lewat regangan (LnStretchBoard) + Apakah ini benar? (Rina)"
 stage = 6
-slides = "36:5-6"
-minutes = 7
+slides = "36:5-7"
+minutes = 10
 mode = "Angkat jari: benar / salah"
 subchapter = "6.3"
 targets = ["aturan pangkat dipakai pada e^(x^2)"]
@@ -76,7 +76,7 @@ targets = ["aturan pangkat dipakai pada e^(x^2)"]
 [[segment]]
 name = "Contoh terpandu: maksimum x e^(-x)"
 stage = 7
-slides = "36:7-8"
+slides = "36:8-9"
 minutes = 8
 mode = "Pikir 30 dtk"
 subchapter = "6.3"
@@ -84,7 +84,7 @@ subchapter = "6.3"
 [[segment]]
 name = "Latihan mandiri berpasangan: integral e^x/(1 + e^x) dari 0 sampai ln 2"
 stage = 9
-slides = "36:9-10"
+slides = "36:10-11"
 minutes = 7
 mode = "Kerjakan di kertas · 4 mnt"
 subchapter = "6.3"
@@ -93,7 +93,7 @@ cut = true
 [[segment]]
 name = "PKH 6.3 + jembatan ke 6.4 (2 pangkat akar 2)"
 stage = 0
-slides = "36:11"
+slides = "36:12"
 minutes = 1
 mode = "Pikir 30 dtk"
 cut = true
