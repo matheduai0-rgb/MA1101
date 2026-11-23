@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'index.html'
+      - '404.html'
       - '2026/slides/**'
       - 'components/**'
       - 'styles/**'
@@ -49,7 +50,7 @@ jobs:
       - name: Prepare Artifact Directory
         run: |
           mkdir -p _site/2026/slides
-          cp index.html _site/
+          cp index.html 404.html _site/
 
           # Copy slide directories containing HTML slides and their media/assets
           if [ -d "2026/slides/23_luas_daerah_pada_bidang" ]; then
@@ -74,6 +75,9 @@ jobs:
           for deck in 32_volume_metode_kulit_tabung 33_kerja 34_fungsi_logaritma_natural \
                       35_fungsi_invers_dan_turunannya 36_fungsi_eksponen_natural \
                       38_fungsi_eksponen_dan_logaritma_umum 37_pertumbuhan_dan_peluruhan_eksponensial; do
+            # Pages has no SPA fallback: build with hash routing so …/<deck>/#/<n> works.
+            # Local dev keeps history routing (the checker opens /<n>); 404.html redirects old links.
+            sed -i '1a routerMode: hash' "2026/slides/${deck}/slides.md"
             npx slidev build "2026/slides/${deck}/slides.md" \
               --base "${BASE}/2026/slides/${deck}/" \
               --out "$GITHUB_WORKSPACE/_site/2026/slides/${deck}"
