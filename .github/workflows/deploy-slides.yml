@@ -68,10 +68,12 @@ jobs:
             cp -r docs/* _site/docs/
           fi
 
-      - name: Build Slidev decks (Socratic Subtopik 5.3 and 5.5)
+      - name: Build Slidev decks (Socratic Subtopik 5.3, 5.5 and 6.1-6.5)
         run: |
           BASE="/${GITHUB_REPOSITORY#*/}"
-          for deck in 32_volume_metode_kulit_tabung 33_kerja; do
+          for deck in 32_volume_metode_kulit_tabung 33_kerja 34_fungsi_logaritma_natural \
+                      35_fungsi_invers_dan_turunannya 36_fungsi_eksponen_natural \
+                      38_fungsi_eksponen_dan_logaritma_umum 37_pertumbuhan_dan_peluruhan_eksponensial; do
             npx slidev build "2026/slides/${deck}/slides.md" \
               --base "${BASE}/2026/slides/${deck}/" \
               --out "$GITHUB_WORKSPACE/_site/2026/slides/${deck}"
