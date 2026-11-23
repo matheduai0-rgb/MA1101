@@ -1,0 +1,417 @@
+---
+theme: default
+background: '#0c1018'
+title: 'MA1101 Kalkulus I - Fungsi Eksponen Natural'
+info: 'Subtopik 6.3 · Pertemuan 27 (bagian 2 dari 2, setelah deck 35)'
+class: text-white
+drawings:
+  persist: false
+transition: slide-left
+mdc: true
+canvasWidth: 980
+layout: two-cols-header
+---
+
+<h2 class="slide-title">
+  <span>Bagian Kedua: x Berapa yang Membuat ln x = 1?</span>
+  <span class="text-xs text-cyan-400 font-mono">Subtopik 6.3 · Tebak → Amati → Jelaskan</span>
+</h2>
+
+::left::
+
+<SocraticBlock type="question" title="Pertanyaan Kedua Hari Ini">
+
+Adakah fungsi (selain fungsi nol) yang turunannya **sama dengan dirinya sendiri**?
+
+</SocraticBlock>
+
+<SocraticBlock type="predict" mode="Angkat jari: A / B / C">
+
+$\ln x$ adalah luas di bawah $y = \tfrac1t$ dari $1$ sampai $x$. Luas itu tepat $1$ ketika $x$:
+
+**A.** antara $2$ dan $2{,}5$ &nbsp; **B.** antara $2{,}5$ dan $3$ &nbsp; **C.** lebih dari $3$
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="question" title="Sambil Mengamati" mode="Pikir 30 dtk">
+
+Geser $x$ sampai luasnya sedekat mungkin dengan $1$. Di antara dua nilai $x$ mana luas itu melewati $1$? Bilangan itu kita beri nama $e$.
+
+</SocraticBlock>
+
+::right::
+
+<LnAreaBoard mode="area" height="370px" />
+
+<!--
+Bagian kedua pertemuan (sekitar 43 menit). Pertanyaan besar tidak dijawab sekarang; dijawab di slide Temukan Bersama.
+Hubungkan dengan jembatan di akhir deck 35: "ln punya invers. Untuk mengenalnya, kita perlu tahu dulu: ln x = 1 di mana?"
+Urutan: (1) semua mengangkat jari SEBELUM applet disentuh. (2) Geser x ke 2,5 (luas ≈ 0,916), lalu 2,7 (≈ 0,993) dan 2,75 (≈ 1,012).
+Jawaban diharapkan: B. Luas melewati 1 antara x = 2,70 dan 2,75. Nilai tepatnya e ≈ 2,71828; tulis di papan, dan ln e = 1.
+Jika banyak memilih A: "Geser ke 2,5. Luasnya sudah 1?"
+-->
+
+---
+layout: two-cols-header
+class: slide-compact
+---
+
+<h2 class="slide-title">
+  <span>Temukan Bersama: Invers ln dan Turunannya</span>
+  <span class="text-xs text-slate-400 font-mono">Pakai Teorema B dari bagian pertama</span>
+</h2>
+
+::left::
+
+<SocraticBlock type="question" title="Pertanyaan 1" mode="Pikir 30 dtk">
+
+Invers $\ln$ kita beri nama $\exp$. Pakai $\ln a^r = r\ln a$ dan $\ln e = 1$: berapa $\ln(e^r)$ untuk $r$ rasional? Jadi $\exp r = \;?$
+
+</SocraticBlock>
+
+<SocraticBlock v-click="1" type="answer">
+
+$\ln(e^r) = r\ln e = r$, jadi $\exp r = e^r$. Untuk **semua** $x$ real kita definisikan $e^x = \exp x$, termasuk $e^{\sqrt 2}$ dan $e^{\pi}$.
+
+</SocraticBlock>
+
+<SocraticBlock v-click="2" type="question" title="Pertanyaan 2" mode="Diskusi berpasangan · 1 mnt">
+
+Tulis $y = e^x$ sebagai $x = \ln y$. Berapa $\dfrac{dx}{dy}$? Dengan Teorema B, berapa $\dfrac{dy}{dx}$?
+
+</SocraticBlock>
+
+::right::
+
+<SocraticBlock v-click="3" type="answer" title="Kesimpulan Kita">
+
+$$\frac{dx}{dy} = \frac{1}{y} \quad\Rightarrow\quad \frac{dy}{dx} = \frac{1}{dx/dy} = y = e^x$$
+
+</SocraticBlock>
+
+<SocraticBlock v-click="4" type="question" title="Pertanyaan 3" mode="Pikir 30 dtk">
+
+Jadi fungsi apa yang turunannya sama dengan dirinya sendiri? Apakah $5e^x$ juga? Bagaimana dengan $e^{2x}$?
+
+</SocraticBlock>
+
+<SocraticBlock v-click="5" type="answer">
+
+$e^x$, dan semua $Ce^x$. Tetapi $\bigl(e^{2x}\bigr)' = 2e^{2x}$ (aturan rantai), jadi tidak. Pertanyaan kedua hari ini terjawab.
+
+</SocraticBlock>
+
+<!--
+Tiap pertanyaan dibuka dengan klik, beri waktu sebelum klik berikutnya.
+P1: kesalahan umum ln(e²) = e. Tanya: "ln a^r = r ln a. Di sini a = e, r = 2."
+P2: Teorema B baru saja dipakai di bagian pertama; biarkan pasangan mengerjakannya sendiri. Kesalahan umum: dy/dx = 1/x. Tanya: "Variabel bebas di x = ln y itu y. Jadi 1/y, lalu y diganti apa?"
+P3: e^{2x} menjembatani ke 6.5 (y' = ky). Grafik eˣ (cerminan ln terhadap y = x, asimtot y = 0) cukup digambar cepat di papan; applet ExpBoard ada di draf lengkap (slides.v1-full.md) bila waktu longgar.
+-->
+
+---
+layout: two-cols-header
+class: slide-compact
+---
+
+<h2 class="slide-title">
+  <span>Sekarang Kita Beri Nama</span>
+  <span class="text-xs text-slate-400 font-mono">Purcell §6.3</span>
+</h2>
+
+::left::
+
+<BeamerBlock type="block" title="Definisi: Bilangan e dan Fungsi Eksponen Natural">
+
+$e$ adalah bilangan dengan $\ln e = 1$, yaitu $e \approx 2{,}71828$. Fungsi $\exp = \ln^{-1}$, ditulis $e^x = \exp x$ untuk semua $x$ real:
+
+$$e^{\ln x} = x \ (x \gt 0), \qquad \ln(e^y) = y \ (\text{semua } y)$$
+
+</BeamerBlock>
+
+::right::
+
+<BeamerBlock type="example" title="Sifat dan Kalkulus">
+
+- $e^a e^b = e^{a + b}$ dan $e^a / e^b = e^{a - b}$
+- $(e^x)' = e^x$ dan $(e^{u})' = e^{u}\,u'$
+- $\int e^x\,dx = e^x + C$
+
+</BeamerBlock>
+
+<SocraticBlock v-click type="reflect" title="Cocokkan dengan yang Kita Temukan" mode="Pikir 30 dtk">
+
+Baris mana di kotak ini yang tadi kita temukan dengan applet luas? Baris mana dengan Teorema B?
+
+</SocraticBlock>
+
+<!--
+Definisi ditampilkan SETELAH kelas menemukannya sendiri. Katakan: "Ini hanya nama dan rumus untuk yang tadi kalian temukan."
+Jawaban: ln e = 1 dari applet luas; (eˣ)' = eˣ dari Teorema B. Sifat e^a e^b = e^{a+b} dibuktikan dengan mengambil ln kedua ruas; jadikan PKH (lihat slide PKH).
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Apakah Ini Benar? Turunan e Pangkat Sesuatu</span>
+  <span class="text-xs text-rose-400 font-mono">Cari kesalahannya</span>
+</h2>
+
+<SocraticBlock type="pitfall" title="Benarkah Cara Rina?" mode="Angkat jari: benar / salah">
+
+Rina menulis
+
+$$\frac{d}{dx}e^{x^2} = x^2\,e^{x^2 - 1}$$
+
+karena "turunkan pangkatnya ke depan, lalu pangkatnya dikurangi satu". Apa yang keliru?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="answer">
+
+Aturan pangkat $\dfrac{d}{dx}x^n = nx^{n - 1}$ hanya untuk **alas** yang berubah dan pangkat tetap. Di $e^{x^2}$, alasnya tetap ($e$) dan **pangkatnya** yang berubah. Pakai $\dfrac{d}{dx}e^{u} = e^{u}u'$:
+
+$$\frac{d}{dx}e^{x^2} = e^{x^2}\cdot 2x$$
+
+</SocraticBlock>
+
+<!--
+Nama tokoh pada slide kesalahan selalu fiktif agar tidak ada mahasiswa yang merasa dituding.
+Jawaban diharapkan: salah aturan. Jika hening: "Periksa di x = 1 dengan applet kemiringan. Kemiringan e^{x²} di x = 1 kira-kira berapa? Rumus Rina memberi berapa?" (2e ≈ 5,4 lawan 1).
+Bila waktu longgar, tanya lisan: "Dani menulis (x^e)' = x^e. Benarkah?" x^e adalah pangkat dengan pangkat tetap e, jadi turunannya e·x^{e−1}. Kebalikan dari kesalahan Rina.
+-->
+
+---
+layout: two-cols-header
+---
+
+<h2 class="slide-title">
+  <span>Contoh 1: Nilai Maksimum x e⁻ˣ</span>
+  <span class="text-xs text-slate-400 font-mono">Purcell §6.3</span>
+</h2>
+
+<PolyaStepper step="1-2" support="full" />
+
+::left::
+
+<BeamerBlock type="example" title="Soal">
+
+Tentukan nilai maksimum $f(x) = x\,e^{-x}$ untuk $x \ge 0$.
+
+</BeamerBlock>
+
+<SocraticBlock type="question" title="1 · Pahami Soal">
+
+Apa yang ditanya: titik maksimum atau nilai maksimum? Berapa $f(0)$? Apa yang terjadi pada $f(x)$ untuk $x$ sangat besar?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="answer">
+
+Ditanya nilai terbesar $f$. $f(0) = 0$, dan untuk $x$ besar $e^{-x}$ mengecil jauh lebih cepat daripada $x$ membesar, jadi $f(x) \to 0$. Maksimumnya ada di tengah.
+
+</SocraticBlock>
+
+::right::
+
+<div v-click="2" class="flex flex-col">
+
+<SocraticBlock type="question" title="2 · Buat Rencana">
+
+Alat apa dari Bab 3 untuk mencari maksimum? Aturan turunan mana yang dipakai untuk $x\,e^{-x}$?
+
+</SocraticBlock>
+
+</div>
+
+<div v-click="3" class="flex flex-col">
+
+<SocraticBlock type="answer" title="Rencana">
+
+1. Turunkan dengan aturan hasil kali dan $\dfrac{d}{dx}e^{u} = e^{u}u'$.
+2. Cari titik kritis dari $f'(x) = 0$.
+3. Periksa tanda $f'$ di kiri dan kanan titik itu.
+
+</SocraticBlock>
+
+</div>
+
+<!--
+Contoh dikerjakan bersama: dosen mencontohkan keempat langkah, tetapi tiap langkah dibuka dengan pertanyaan.
+Pahami: kesalahan umum mencampur titik dan nilai. Tanyakan: "Jawabannya berupa x atau f(x)?"
+Untuk x besar: hitung f(10) ≈ 0,00045 di kalkulator.
+Rencana, jawaban diharapkan: turunan = 0, uji tanda (Bab 3).
+-->
+
+---
+layout: two-cols-header
+---
+
+<h2 class="slide-title">
+  <span>Contoh 1: Nilai Maksimum x e⁻ˣ (lanjutan)</span>
+  <span class="text-xs text-slate-400 font-mono">Purcell §6.3</span>
+</h2>
+
+<PolyaStepper step="3-4" support="full" />
+
+::left::
+
+<BeamerBlock type="example" title="3 · Kerjakan">
+
+$$
+\begin{aligned}
+f'(x) &= 1\cdot e^{-x} + x\cdot e^{-x}\cdot(-1) \\
+&= e^{-x}\,(1 - x)
+\end{aligned}
+$$
+
+$e^{-x} \gt 0$, jadi $f'(x) = 0$ hanya di $x = 1$. Nilai maksimum:
+
+$$f(1) = 1\cdot e^{-1} = \frac{1}{e} \approx 0{,}368$$
+
+</BeamerBlock>
+
+::right::
+
+<SocraticBlock v-click type="question" title="4 · Periksa Lagi" mode="Pikir 1 mnt">
+
+Benarkah $x = 1$ memberi maksimum, bukan minimum? Periksa tanda $f'$ di $x = 0{,}5$ dan $x = 2$. Cocokkah dengan $f(0) = 0$ dan $f \to 0$?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="answer">
+
+$f'(0{,}5) = e^{-0{,}5}(0{,}5) \gt 0$ dan $f'(2) = e^{-2}(-1) \lt 0$: naik lalu turun, jadi maksimum ✓. Nilai $0{,}368$ lebih besar dari $f(0) = 0$ dan dari nilai untuk $x$ besar ✓
+
+</SocraticBlock>
+
+<!--
+Kerjakan: tulis di papan baris demi baris, slide hanya ringkasan.
+Tekankan mengapa e^{-x} boleh "dibuang" saat mencari f' = 0: eˣ tidak pernah nol (lihat daerah hasil).
+Periksa Lagi: langkah ini bukan hiasan. Jika ada waktu, hitung f(0,9) ≈ 0,366 dan f(1,1) ≈ 0,366, keduanya sedikit di bawah 0,368.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Coba Sendiri: Integral Tentu dengan eˣ</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 6 mnt</span>
+</h2>
+
+<PolyaStepper step="1-4" support="independent" />
+
+<BeamerBlock type="example" title="Soal">
+
+Hitung $\displaystyle\int_0^{\ln 2} \frac{e^x}{1 + e^x}\,dx$.
+
+</BeamerBlock>
+
+<SocraticBlock type="question" title="Sebelum Mulai" mode="Pikir 30 dtk">
+
+Sebelum menghitung, perkirakan dulu: berapa nilai integran di $x = 0$ dan di $x = \ln 2$? Kira-kira berapa hasil integralnya?
+
+</SocraticBlock>
+
+<!--
+Mandiri: tidak ada kerangka langkah. Beri waktu 1 menit sebelum membuka slide petunjuk.
+Perkiraan: integran 1/2 di x = 0 dan 2/3 di x = ln 2; panjang selang ln 2 ≈ 0,69; hasil kira-kira 0,4.
+Soal ini menyambung ke 6.1: ∫ du/u = ln|u| + C, serta e^{ln 2} = 2.
+Lanjutkan ke slide berikutnya untuk petunjuk bertingkat.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Coba Sendiri: Integral Tentu dengan eˣ (lanjutan)</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 6 mnt</span>
+</h2>
+
+<PolyaStepper step="1-4" support="independent" />
+
+<BeamerBlock type="example" title="Soal (ringkas)">
+
+Hitung $\displaystyle\int_0^{\ln 2} \frac{e^x}{1 + e^x}\,dx$.
+
+</BeamerBlock>
+
+<div class="grid grid-cols-3 gap-3">
+
+<SocraticBlock v-click type="hint" level="1">
+
+Bentuk pecahannya: apakah pembilang adalah turunan dari penyebut? Integral apa yang punya bentuk $\dfrac{u'}{u}$?
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="2">
+
+Substitusi $u = 1 + e^x$. Jangan lupa mengubah batas integral ke $u$.
+
+</SocraticBlock>
+
+<SocraticBlock v-click type="hint" level="3">
+
+$du = e^x\,dx$. Batas: $x = 0 \Rightarrow u = 2$, dan $x = \ln 2 \Rightarrow u = 1 + e^{\ln 2} = 3$.
+
+</SocraticBlock>
+
+</div>
+
+<SocraticBlock v-click type="answer" title="Jawaban Akhir & Periksa Lagi">
+
+$\ln 3 - \ln 2 = \ln\tfrac32 \approx 0{,}405$. Cocokkah dengan perkiraan kalian di slide sebelumnya?
+
+</SocraticBlock>
+
+<!--
+Mandiri: petunjuk dibuka satu per satu HANYA bila kelas macet, beri jeda minimal 1 menit.
+Petunjuk 1 mengarahkan ulang, petunjuk 2 menyebut strategi, petunjuk 3 memberi langkah pertama. Tidak ada yang memberi jawaban.
+Penyelesaian: ∫ dari 2 sampai 3 du/u = ln 3 − ln 2 = ln(3/2).
+Kesalahan umum: lupa mengganti batas, atau menulis e^{ln 2} = ln 2. Tanyakan: "exp dan ln saling invers. e^{ln 2} = ?"
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Latihan di Rumah (PKH 6.3)</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan di rumah</span>
+</h2>
+
+<BeamerBlock type="example" title="Latihan di rumah">
+
+1. Hitung $\displaystyle\int x\,e^{-x^2}\,dx$. Pilih $u$ yang turunannya (hampir) muncul di depan, lalu periksa dengan menurunkan hasilnya.
+2. Tunjukkan $e^a e^b = e^{a + b}$ dan $e^a / e^b = e^{a - b}$ dengan mengambil $\ln$ kedua ruas.
+3. Turunkan $e^{x^2}$, $x^e$, dan $e^{\sin x}$. Tandai mana yang memakai aturan pangkat dan mana yang memakai $(e^{u})' = e^{u}u'$.
+
+</BeamerBlock>
+
+<!--
+Soal 1 adalah contoh setengah jadi dari draf lengkap deck ini (slides.v1-full.md); jawabannya −½e^{−x²} + C.
+Soal 3 mengulang slide Rina dan pertanyaan Dani yang dilewati di kelas.
+Slide ini cukup ditunjukkan 30 detik; tidak dibahas di kelas.
+-->
+
+---
+
+<h2 class="slide-title">
+  <span>Tulis Sebelum Pulang</span>
+  <span class="text-xs text-slate-400 font-mono">Tulis di kertas · 3 mnt</span>
+</h2>
+
+<SocraticBlock type="reflect" title="Tiket Keluar" mode="Tulis · 3 mnt">
+
+1. $f(x) = x + e^x$. Tunjukkan $f$ punya invers, lalu hitung $\bigl(f^{-1}\bigr)'(1)$.
+2. Dengan kata-katamu sendiri: apa sebenarnya bilangan $e$?
+
+</SocraticBlock>
+
+<SocraticBlock type="question" title="Untuk Pertemuan Berikutnya">
+
+Kita sudah punya $e^x$ untuk semua $x$ real. Bagaimana mendefinisikan $2^x$, misalnya $2^{\sqrt 2}$? Petunjuk: $2 = e^{\ln 2}$.
+
+</SocraticBlock>
+
+<!--
+Kumpulkan kertasnya. Soal 1 menguji kedua bagian sekaligus: f'(x) = 1 + eˣ > 0 jadi f punya invers (6.2); f(0) = 1, f'(0) = 2, jadi (f⁻¹)'(1) = 1/2 (memakai eˣ dari 6.3).
+Catat di retro.md (tanpa nama): berapa yang memakai x = 1 alih-alih x = 0 (kesalahan Bima), dan berapa yang salah menurunkan eˣ.
+Pilih dua jawaban anonim untuk pembuka pertemuan berikutnya.
+Pertanyaan terakhir tidak dijawab; ia menjadi pembuka 6.4 (fungsi eksponen dan logaritma umum: aˣ = e^{x ln a}).
+-->

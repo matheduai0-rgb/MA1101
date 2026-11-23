@@ -267,7 +267,10 @@ Add `--scope segment` when the deliverable is a few slides and not a full lectur
 `--timing` (default `--slot 100`) to print the estimated minutes per slide and warn when the deck
 leaves less than 5 minutes of buffer, and `--agenda <deck>/agenda.toml` to check that the deck
 carries the agenda's big question and targets each of its misconceptions. Both report warnings,
-not errors.
+not errors. When one meeting is split over two decks (arc A and arc B), keep a single agenda in
+the first deck's folder, put the subchapter code in each deck's `info:` line, and check deck A
+with `--arc first` (stages 1–7 only) and deck B with `--arc compressed` (half-finished example
+optional).
 
 The script runs two passes. The **structure** pass reads the Markdown and checks the pedagogy:
 hook present, a question attached to every applet, notes on every question slide, all four Pólya

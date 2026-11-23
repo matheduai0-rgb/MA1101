@@ -9,6 +9,9 @@ with the segment budgets of an agenda.toml.
 Usage:
   python3 estimate_timing.py <slides.md> [--slot 100] [--agenda agenda.toml] [--json]
 
+A meeting split over two decks keeps one agenda; its segments write slides as
+"35:2-4" (deck number prefix), and only the segments of the deck being timed are compared.
+
 Slide boundaries come from split_slides() in the socratic skill's verifier, imported
 by path, so both tools always agree on slide numbers.
 
@@ -133,10 +136,17 @@ def main():
         ag = tomllib.loads(Path(a.agenda).read_text(encoding="utf-8"))
         by = {r["slide"]: r["minutes"] for r in rows}
         print("\nAgenda segments (budget vs estimate):")
+        deck_no = re.match(r"(\d+)", Path(a.slides).resolve().parent.name)
         for seg in ag.get("segment", []):
             if "slides" not in seg:
                 continue
-            est = round(sum(by.get(k, 0) for k in parse_range(seg["slides"])), 1)
+            rng = str(seg["slides"])
+            pref = re.match(r"\s*(\d+)\s*:(.*)", rng)
+            if pref:  # "36:2-4" = slides 2-4 of deck 36; skip segments of the other deck
+                if not deck_no or int(pref.group(1)) != int(deck_no.group(1)):
+                    continue
+                rng = pref.group(2)
+            est = round(sum(by.get(k, 0) for k in parse_range(rng)), 1)
             flag = "  <- over" if est > seg.get("minutes", 0) + 2 else ""
             print(f"  {seg.get('name', '?'):<34} {seg.get('minutes', 0):>4} min budget  {est:>5.1f} est  (slides {seg['slides']}){flag}")
     print()

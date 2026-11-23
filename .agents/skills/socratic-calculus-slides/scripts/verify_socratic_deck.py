@@ -20,11 +20,16 @@ Usage:
   python3 verify_socratic_deck.py <slides.md> [--scope deck|segment]
                                   [--png <dir>] [--port N] [--no-render]
                                   [--timing [--slot 100]] [--agenda agenda.toml]
+                                  [--arc full|first|compressed]
 
   --timing         estimated class minutes per slide (planning-calculus-lecture's
                    estimate_timing.py); warns when the buffer is under 5 minutes.
   --agenda FILE    check the deck against an agenda.toml: big question on the
                    first slides, each misconception targeted, exit reflection.
+                   When the deck's info line names subchapter codes, only those
+                   subchapters are checked (a meeting split over two decks).
+  --arc            first = arc A of a two-subchapter meeting (stages 1-7);
+                   compressed = arc B (half-finished example optional).
 
   --scope deck     (default) a full lecture deck: every structure rule applies.
   --scope segment  a few slides (one worked example, one applet): only the
@@ -114,7 +119,7 @@ def has_applet(slide: str) -> bool:
     return bool(re.search(r"<(JSXGraphBoard|Calc\w+|\w+Board)\b", slide))
 
 
-def structure_pass(text: str, scope: str):
+def structure_pass(text: str, scope: str, arc: str = "full"):
     errors, warnings = [], []
     slides = split_slides(text)
     n = len(slides)
@@ -172,8 +177,9 @@ def structure_pass(text: str, scope: str):
             seen.setdefault(sup, dict(first=i, steps=set()))["steps"] |= steps
     n_phases = min([ph for d in info for _, _, ph in d["steppers"]] or [4])
     required = set(range(1, n_phases + 1))
+    needed = {"full": ("full", "partial", "independent"), "first": ("full",), "compressed": ("full", "independent")}[arc]
     for sup, label in (("full", "worked example"), ("partial", "half-finished example"), ("independent", "independent problem")):
-        if sup not in seen:
+        if sup not in seen and sup in needed:
             errors.append(f'no {label}: missing <PolyaStepper support="{sup}">. Support should fade full -> partial -> independent.')
     if "full" in seen and not required <= seen["full"]["steps"]:
         missing = sorted(required - seen["full"]["steps"])
@@ -188,7 +194,7 @@ def structure_pass(text: str, scope: str):
             errors.append(f"independent problem (slide {indep[0] + 1}) has {hints} hint(s); give a ladder of at least two, ideally three.")
     if not any(t == "pitfall" for d in info for t, _ in d["blocks"]):
         warnings.append("no pitfall block: one 'Benarkah?' slide diagnosing a common misconception is usually worth its time.")
-    if not any(t == "reflect" for d in info[-2:] for t, _ in d["blocks"]):
+    if arc != "first" and not any(t == "reflect" for d in info[-2:] for t, _ in d["blocks"]):
         errors.append("no exit reflection: one of the last two slides should carry a reflect block (tiket keluar).")
     return errors, warnings, n
 
@@ -222,10 +228,16 @@ def _words(s: str):
     return {w for w in re.findall(r"[a-z0-9^()]+", s.lower()) if len(w) > 3}
 
 
-def agenda_pass(text: str, agenda_file: Path):
+def agenda_pass(text: str, agenda_file: Path, arc: str = "full"):
     import tomllib
     warns = []
     ag = tomllib.loads(agenda_file.read_text(encoding="utf-8"))
+    head = re.search(r"^info:\s*(.+)$", text, re.M)
+    info_line = head.group(1) if head else ""
+    subs = ag.get("subchapter", [])
+    mine = [x for x in subs if x.get("code") and x["code"] in info_line]
+    if mine:  # a meeting split over two decks: check only this deck's subchapters
+        ag = dict(ag, subchapter=mine)
     slides = split_slides(text)
     low = [s.lower() for s in slides]
     pitfall_text = " ".join(s for s in low if 'type="pitfall"' in s or 'type="predict"' in s)
@@ -243,7 +255,7 @@ def agenda_pass(text: str, agenda_file: Path):
             if hit < 0.5:
                 warns.append(f"agenda: misconception '{m}' ({sub.get('code')}) not found in any pitfall/predict slide "
                              f"(word overlap {hit:.0%}).")
-    if not any('type="reflect"' in s for s in low[-2:]):
+    if arc != "first" and not any('type="reflect"' in s for s in low[-2:]):
         warns.append("agenda: no reflect block in the last two slides for the exit ticket.")
     return warns
 
@@ -397,21 +409,24 @@ def main():
     ap.add_argument("--timing", action="store_true", help="estimate class minutes (warnings only)")
     ap.add_argument("--slot", type=float, default=100, help="meeting length in minutes for --timing (default 100)")
     ap.add_argument("--agenda", default="", help="agenda.toml to check the deck against (warnings only)")
+    ap.add_argument("--arc", choices=("full", "first", "compressed"), default="full",
+                    help="full (default) = whole arc; first = arc A of a two-subchapter meeting (stages 1-7, no "
+                         "half-finished/independent/exit needed); compressed = arc B (no half-finished needed)")
     a = ap.parse_args()
 
     f = Path(a.slides).resolve()
     if not f.exists():
         sys.exit(f"not found: {f}")
-    s_err, s_warn, n = structure_pass(f.read_text(encoding="utf-8"), a.scope)
+    s_err, s_warn, n = structure_pass(f.read_text(encoding="utf-8"), a.scope, a.arc)
     info_lines = []
     if a.timing:
         t_warn, info_lines = timing_pass(f, a.slot)
         s_warn += t_warn
     if a.agenda:
-        s_warn += agenda_pass(f.read_text(encoding="utf-8"), Path(a.agenda))
+        s_warn += agenda_pass(f.read_text(encoding="utf-8"), Path(a.agenda), a.arc)
     r_err, r_warn, rendered = ([], [], 0) if a.no_render else render_pass(f, a.port, a.png, a.chrome)
 
-    print(f"\n== Socratic deck check: {f.name} ({n} slides, scope={a.scope}) ==")
+    print(f"\n== Socratic deck check: {f.name} ({n} slides, scope={a.scope}, arc={a.arc}) ==")
     for title, errs, warns in (("STRUCTURE", s_err, s_warn), ("RENDER" + ("" if not a.no_render else " (skipped)"), r_err, r_warn)):
         print(f"\n[{title}] {len(errs)} error(s), {len(warns)} warning(s)")
         for e in errs:

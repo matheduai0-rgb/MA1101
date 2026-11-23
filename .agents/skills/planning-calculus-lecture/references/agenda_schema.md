@@ -42,7 +42,7 @@ edit; do not write one from memory.
 | `subchapter` | which subchapter code it serves |
 | `targets` | misconception phrases this segment confronts (copy them exactly) |
 | `cut` | `true` if it can be dropped when late. At least two; never stage 1, 7 or 10 |
-| `slides` | optional, filled after the deck exists: `"9-10"`. Lets `estimate_timing.py --agenda` compare |
+| `slides` | optional, filled after the deck exists: `"9-10"`. Lets `estimate_timing.py --agenda` compare. When the meeting is split over two decks, prefix the deck number: `"36:2-3"` |
 
 ## `[exit_ticket]`
 

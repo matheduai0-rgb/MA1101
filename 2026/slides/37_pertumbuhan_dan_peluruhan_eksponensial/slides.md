@@ -2,81 +2,28 @@
 theme: default
 background: '#0c1018'
 title: 'MA1101 Kalkulus I - Pertumbuhan dan Peluruhan Eksponensial'
-info: 'Subtopik 6.5 · Pertemuan 28'
-class: text-white
+info: 'Subtopik 6.5 · Pertemuan 28 (bagian 2 dari 2, setelah deck 38)'
+class: text-white slide-compact
 drawings:
   persist: false
 transition: slide-left
 mdc: true
 canvasWidth: 980
----
-
-# MA1101 Kalkulus I
-<p class="text-xl text-amber-400 font-semibold mt-2">Bab 6: Fungsi Transenden</p>
-<p class="text-sm text-slate-300 mt-1">Subtopik 6.5: Pertumbuhan dan Peluruhan Eksponensial</p>
-
-<div class="mt-8 max-w-xl mx-auto text-left">
-<SocraticBlock type="question" title="Pertanyaan Kita Hari Ini" mode="Pikir 30 dtk">
-
-Kapan sesuatu bertambah dengan laju yang **sebanding dengan banyaknya sendiri**, dan rumus apa yang selalu muncul?
-
-</SocraticBlock>
-</div>
-
-<!--
-Jangan dijawab sekarang. Bacakan, beri jeda 30 detik, minta satu-dua contoh dari kelas (bakteri, uang di bank, virus, berita viral).
-Lalu buka dua jawaban anonim dari tiket keluar pertemuan 27 (turunan 5ˣ di x = 0): satu yang benar (ln 5), satu yang lupa faktor ln 5. Tanya: "Mana yang benar, dan dari mana ln 5 datang?"
-Katakan: "Di akhir kuliah, kalian sendiri yang akan menjawab pertanyaan hari ini."
--->
-
----
-
-<h2 class="slide-title">
-  <span>Mulai dari Soal: Bakteri yang Membelah</span>
-  <span class="text-xs text-slate-400 font-mono">Pakai yang sudah kita tahu</span>
-</h2>
-
-<BeamerBlock type="block" title="Soal">
-
-Sebuah koloni dimulai dengan $1000$ bakteri, dan banyaknya menjadi **dua kali lipat setiap jam**.
-
-</BeamerBlock>
-
-<SocraticBlock type="question" mode="Kerjakan di kertas · 2 mnt">
-
-Buat tabel: berapa bakteri setelah $1, 2, 3$ jam? Setelah $10$ jam? Tulis rumusnya untuk $t$ jam.
-
-</SocraticBlock>
-
-<SocraticBlock v-click type="answer" title="Yang biasanya muncul">
-
-$2000,\ 4000,\ 8000,\ \dots$ Setelah $10$ jam: $1000\cdot 2^{10} = 1.024.000$. Rumusnya $y(t) = 1000\cdot 2^{t}$.
-
-</SocraticBlock>
-
-<SocraticBlock v-click type="question" title="Pertanyaan Lanjutan" mode="Pikir 30 dtk">
-
-Pada jam pertama koloni bertambah $1000$ bakteri. Pada jam ketiga bertambah berapa? Mengapa pertambahannya makin besar?
-
-</SocraticBlock>
-
-<!--
-Tanya: 2 menit di kertas, berkeliling melihat tabel.
-Jawaban diharapkan: tabel benar; rumus 1000·2^t (dari 6.4, a^x = e^{x ln a}).
-Jika ada yang menulis 1000 + 1000t: "Coba periksa jam ke-2 dengan rumusmu. Dua kali lipat dari 2000 itu berapa?"
-Pertanyaan lanjutan: jam ketiga bertambah 4000 (dari 4000 ke 8000). Makin banyak bakteri, makin banyak yang membelah. Ini benih "laju sebanding banyaknya", dibuka di applet berikutnya.
--->
-
----
 layout: two-cols-header
 ---
 
 <h2 class="slide-title">
-  <span>Coba Geser: Siapa yang Menang?</span>
-  <span class="text-xs text-cyan-400 font-mono">Tebak → Amati → Jelaskan</span>
+  <span>Bagian Kedua: Siapa yang Menang?</span>
+  <span class="text-xs text-cyan-400 font-mono">Subtopik 6.5 · Tebak → Amati → Jelaskan</span>
 </h2>
 
 ::left::
+
+<SocraticBlock type="question" title="Pertanyaan Kedua Hari Ini">
+
+Kapan sesuatu bertambah dengan laju yang **sebanding dengan banyaknya sendiri**, dan rumus apa yang selalu muncul?
+
+</SocraticBlock>
 
 <SocraticBlock type="predict" mode="Angkat jari: A / B / C">
 
@@ -97,9 +44,11 @@ Koloni **A** mulai dari $1000$ dan bertambah $500$ tiap jam. Koloni **B** mulai 
 
 ::right::
 
-<GrowthBoard mode="race" height="360px" />
+<GrowthBoard mode="race" height="390px" />
 
 <!--
+Bagian kedua pertemuan (sekitar 45 menit). Pertanyaan besar tidak dijawab sekarang; dijawab di slide Beri Nama.
+Hubungkan dengan jembatan di akhir deck 38: laju 1000·2^t adalah (ln 2) × banyaknya.
 Miskonsepsi yang diuji: pertumbuhan eksponensial dikira linear (B mulai kecil, jadi "pasti kalah").
 Urutan: (1) semua mengangkat jari SEBELUM applet disentuh. (2) Geser pelan: berhenti di t = 4 (A = 3000, B = 160: B tampak kalah telak), lalu t = 9 (A = 5500, B = 5120), lalu t = 12.
 Jawaban diharapkan: B. Setelah 12 jam A = 7000, B = 40.960. B menyusul sekitar jam ke-9,1.
@@ -158,7 +107,7 @@ Untuk koloni yang dua kali lipat tiap jam, $y(1) = 2y_0$. Berapa $k$? Pernahkah 
 
 <SocraticBlock v-click="5" type="answer" title="Kesimpulan Kita">
 
-$e^{k} = 2$, jadi $k = \ln 2 \approx 0{,}693$, sama dengan angka laju B di applet. Dan $y_0e^{t\ln 2} = y_0\,2^{t}$, rumus dari tabel kita.
+$e^{k} = 2$, jadi $k = \ln 2 \approx 0{,}693$, sama dengan angka laju B di applet. Dan $y_0e^{t\ln 2} = y_0\,2^{t}$, rumus bakteri di jembatan tadi.
 
 </SocraticBlock>
 
@@ -244,16 +193,10 @@ Model Sari memberi $e^{0{,}1} \approx 1{,}105$, yaitu naik $10{,}5\%$ per tahun.
 
 </SocraticBlock>
 
-<SocraticBlock v-click type="question" title="Pertanyaan Lanjutan" mode="Pikir 30 dtk">
-
-Bagaimana kalau bakteri naik $100\%$ per jam? Cara Sari memberi $k = 1$. Berapa $k$ yang benar, dan seberapa jauh selisihnya setelah $10$ jam?
-
-</SocraticBlock>
-
 <!--
 Nama tokoh pada slide kesalahan selalu fiktif agar tidak ada mahasiswa yang merasa dituding.
 Voting dulu. Banyak yang memilih A; jangan langsung dikoreksi. Tanya: "Kalau model Sari benar, berapa penduduk setelah 1 tahun? Hitung e^{0,1}."
-Pertanyaan lanjutan: naik 100% berarti dua kali lipat, k = ln 2 ≈ 0,693, bukan 1. Setelah 10 jam: e^{10} ≈ 22.026 kali lawan 2^{10} = 1024 kali. Untuk persen kecil ln(1 + r) ≈ r, makanya kesalahan ini sering tidak ketahuan.
+Bila waktu longgar, tanya lisan: "Bakteri naik 100% per jam; cara Sari memberi k = 1. Berapa k yang benar?" Naik 100% berarti dua kali lipat, k = ln 2 ≈ 0,693, bukan 1. Setelah 10 jam: e^{10} ≈ 22.026 kali lawan 2^{10} = 1024 kali. Untuk persen kecil ln(1 + r) ≈ r, makanya kesalahan ini sering tidak ketahuan.
 -->
 
 ---
@@ -364,125 +307,6 @@ Periksa Lagi: langkah ini bukan hiasan. Tanya juga: "Setelah 2 × 5730 tahun, be
 -->
 
 ---
-layout: two-cols-header
----
-
-<h2 class="slide-title">
-  <span>Coba Geser: Bunga yang Dihitung Makin Sering</span>
-  <span class="text-xs text-cyan-400 font-mono">Tebak → Amati → Jelaskan</span>
-</h2>
-
-::left::
-
-<SocraticBlock type="predict" mode="Angkat jari: A / B / C">
-
-Uang $1$ juta, bunga $100\%$ per tahun. Bila bunga ditambahkan $n$ kali setahun, setelah satu tahun uangnya $\left(1 + \tfrac1n\right)^{n}$ juta. Kalau bunga ditambahkan makin sering:
-
-**A.** uangnya membesar tanpa batas  
-**B.** uangnya mendekati suatu bilangan  
-**C.** uangnya tetap $2$ juta
-
-</SocraticBlock>
-
-<SocraticBlock v-click type="question" title="Sambil Mengamati" mode="Pikir 30 dtk">
-
-Geser dari tahunan sampai tiap menit. Bilangan apa yang didekati? Centang "tampilkan garis e" untuk memeriksa.
-
-</SocraticBlock>
-
-::right::
-
-<GrowthBoard mode="compound" height="360px" />
-
-<!--
-Slide ini boleh dilewati bila waktu habis (lihat run-sheet). Bisa diberikan sebagai bacaan.
-Urutan: voting dulu, lalu geser satu per satu: 2; 2,25; 2,4414; 2,6130; 2,6926; 2,7146; 2,7181; 2,7183.
-Jawaban diharapkan: B, mendekati e ≈ 2,71828. Jika banyak memilih A: "Dari harian ke tiap jam, uangnya bertambah berapa?" (kurang dari 0,004 juta).
-Kaitkan: bunga yang ditambahkan terus-menerus (kontinu) adalah y' = ry, sehingga y = y₀e^{rt}. Ini juga cara Purcell menulis e sebagai limit (1 + h)^{1/h}.
--->
-
----
-layout: two-cols-header
----
-
-<h2 class="slide-title">
-  <span>Contoh 2: Lengkapi yang Kosong</span>
-  <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 4 mnt</span>
-</h2>
-
-<PolyaStepper step="1-2" support="partial" />
-
-::left::
-
-<BeamerBlock type="example" title="Soal">
-
-Kadar sebuah obat dalam darah meluruh secara eksponensial dengan waktu paruh $4$ jam. Pasien menerima $200$ mg. Kapan obat yang tersisa tinggal $25$ mg?
-
-</BeamerBlock>
-
-<SocraticBlock type="question" title="1–2 · Pahami Soal & Buat Rencana" mode="Diskusi berpasangan · 1 mnt">
-
-Rencananya sama dengan soal fosil. Apa dua hal yang harus kalian peroleh, dan dalam urutan apa?
-
-</SocraticBlock>
-
-::right::
-
-<BeamerBlock type="example" title="Yang sudah kita punya">
-
-Model: $y(t) = 200\,e^{kt}$ mg, $t$ dalam jam. Rencana: (1) $k$ dari waktu paruh, (2) selesaikan $y(t) = 25$.
-
-</BeamerBlock>
-
-<!--
-Dukungan dikurangi: rencana sudah diberikan, mahasiswa mengisi langkahnya. Beri 1 menit berpasangan untuk Pahami dan Rencana.
-Jawaban diharapkan: k dulu, lalu t.
-Jika ada pasangan yang langsung menjawab "12 jam" dengan membagi dua tiga kali: bagus, minta mereka tetap mengisi rumusnya. Itulah pemeriksaan di slide berikutnya.
--->
-
----
-layout: two-cols-header
----
-
-<h2 class="slide-title">
-  <span>Contoh 2: Lengkapi yang Kosong (lanjutan)</span>
-  <span class="text-xs text-slate-400 font-mono">Kerjakan berpasangan · 4 mnt</span>
-</h2>
-
-<PolyaStepper step="3-4" support="partial" />
-
-::left::
-
-<BeamerBlock type="example" title="3 · Kerjakan: lengkapi yang kosong">
-
-$$
-\begin{aligned}
-k &= -\frac{\ln 2}{\boxed{\phantom{00}}} \\
-200\,e^{kt} &= 25 \;\Rightarrow\; e^{kt} = \boxed{\phantom{000}} \\
-t &= \frac{\ln\boxed{\phantom{000}}}{k} = \boxed{\phantom{00}} \text{ jam}
-\end{aligned}
-$$
-
-</BeamerBlock>
-
-::right::
-
-<SocraticBlock v-click type="answer" title="Isian dan Pemeriksaan">
-
-$4$ &nbsp;·&nbsp; $\tfrac18$ &nbsp;·&nbsp; $\tfrac18$ &nbsp;·&nbsp; $12$, karena $t = \dfrac{\ln \tfrac18}{-\tfrac14\ln 2} = \dfrac{-3\ln 2}{-\tfrac14\ln 2} = 12$.
-
-**Periksa:** $200 \to 100 \to 50 \to 25$ mg, tiga kali waktu paruh $= 3 \times 4 = 12$ jam ✓
-
-</SocraticBlock>
-
-<!--
-Beri 4 menit berpasangan, berkeliling.
-Kesalahan umum: e^{kt} = 25 (lupa membagi dengan 200), atau k positif. Tanya: "Obatnya bertambah atau berkurang? Jadi tanda k?"
-Kesalahan kedua: ln(1/8) dihitung sebagai 1/ln 8. Minta pasangan itu menulis ln(1/8) = −ln 8 = −3 ln 2.
-Klik untuk isian hanya setelah sebagian besar pasangan selesai.
--->
-
----
 
 <h2 class="slide-title">
   <span>Coba Sendiri: Penduduk Sebuah Kota</span>
@@ -564,31 +388,24 @@ class: slide-compact
 ---
 
 <h2 class="slide-title">
-  <span>Latihan Berpasangan: Tiga Soal Campuran</span>
-  <span class="text-xs text-slate-400 font-mono">Berpasangan · 12 mnt dengan pembahasan</span>
+  <span>Latihan di Rumah (PKH 6.5)</span>
+  <span class="text-xs text-slate-400 font-mono">Kerjakan di rumah</span>
 </h2>
 
-<SocraticBlock type="question" title="Pilih dua dari tiga" mode="Kerjakan di kertas · 10 mnt">
+<BeamerBlock type="example" title="Latihan di rumah">
 
-1. Bakteri bertambah dari $500$ menjadi $4000$ dalam $6$ jam. Berapa waktu dua kali lipatnya?
-2. Uang $10$ juta dengan bunga $6\%$ per tahun yang ditambahkan **kontinu**. Berapa setelah $5$ tahun? Bandingkan dengan bunga yang ditambahkan **tahunan**.
-3. Sebuah zat radioaktif berkurang $20\%$ dalam $3$ hari. Berapa waktu paruhnya?
+1. Kadar obat dalam darah meluruh dengan waktu paruh $4$ jam. Pasien menerima $200$ mg. Kapan obatnya tinggal $25$ mg? Periksa dengan menghitung berapa kali waktu paruh.
+2. Bakteri bertambah dari $500$ menjadi $4000$ dalam $6$ jam. Berapa waktu dua kali lipatnya?
+3. Uang $10$ juta, bunga $6\%$ per tahun ditambahkan **kontinu**. Berapa setelah $5$ tahun? Bandingkan dengan bunga yang ditambahkan **tahunan**.
+4. Zat radioaktif berkurang $20\%$ dalam $3$ hari. Berapa waktu paruhnya?
+5. Uang $1$ juta, bunga $100\%$ per tahun ditambahkan $n$ kali setahun menjadi $\left(1 + \tfrac1n\right)^n$ juta. Hitung untuk $n = 12$ dan $n = 365$. Bilangan apa yang didekati?
 
-</SocraticBlock>
-
-<SocraticBlock v-click type="answer" title="Jawaban Akhir">
-
-1. $4000/500 = 8 = 2^3$: tiga kali berlipat dua dalam $6$ jam, jadi waktu dua kali lipatnya $2$ jam.
-2. Kontinu: $10e^{0{,}3} \approx 13{,}50$ juta. Tahunan: $10\cdot 1{,}06^5 \approx 13{,}38$ juta.
-3. $e^{3k} = 0{,}8$, $k = \tfrac13\ln 0{,}8 \approx -0{,}0744$, jadi $T = \dfrac{\ln 2}{0{,}0744} \approx 9{,}3$ hari.
-
-</SocraticBlock>
+</BeamerBlock>
 
 <!--
-Slide ini boleh dilewati bila waktu habis; jadikan PKH (lihat run-sheet).
-Berkeliling, kumpulkan satu kesalahan yang paling sering untuk dibahas 2 menit sebelum membuka jawaban.
-Soal 1 bisa dijawab tanpa logaritma (pemeriksaan bagus). Soal 2: k = 0,06 tepat untuk bunga kontinu, berbeda dengan soal Sari (persen per tahun). Tanya: "Mengapa di sini k boleh 0,06?"
-Soal 3: kesalahan umum memakai e^{3k} = 0,2. Tanya: "Berkurang 20% berarti yang tersisa berapa persen?"
+Jawaban: (1) 12 jam (200 → 100 → 50 → 25). (2) 2 jam (8 = 2³). (3) 10e^{0,3} ≈ 13,50 juta; tahunan 10·1,06⁵ ≈ 13,38 juta. (4) k = (ln 0,8)/3 ≈ −0,0744, waktu paruh ≈ 9,3 hari. (5) 2,6130 dan 2,7146, mendekati e.
+Soal 1 dan 5 berasal dari draf satu-subbab deck ini (contoh setengah jadi dan applet bunga, GrowthBoard mode="compound"); versi itu ada di riwayat git (commit dc26109).
+Slide ini cukup ditunjukkan 30 detik.
 -->
 
 ---
