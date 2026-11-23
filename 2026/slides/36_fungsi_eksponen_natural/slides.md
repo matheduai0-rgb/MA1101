@@ -125,26 +125,32 @@ Invers $\ln$ kita beri nama $\exp$. Pakai $\ln a^r = r\ln a$ dan $\ln e = 1$: be
 
 </SocraticBlock>
 
-<SocraticBlock v-click="1" type="answer">
+<LnAreaBoard mode="area" height="325px" />
 
-$\ln(e^r) = r\ln e = r$, jadi $\exp r = e^r$. Untuk **semua** $x$ real kita definisikan $e^x = \exp x$, termasuk $e^{\sqrt 2}$ dan $e^{\pi}$.
 
-</SocraticBlock>
 
-<SocraticBlock v-click="2" type="question" title="Pertanyaan 2" mode="Diskusi berpasangan · 1 mnt">
 
-Tulis $y = e^x$ sebagai $x = \ln y$. Berapa $\dfrac{dx}{dy}$? Dengan Teorema B, berapa $\dfrac{dy}{dx}$?
+  
 
-</SocraticBlock>
 
 ::right::
+<SocraticBlock v-click="1" type="answer">
+
+$\ln(e^r) = r\ln e = r$, jadi $\exp r = e^r$. Misal $\exp 3 = e^3=e \times e \times e.$ Untuk **semua** $x$ real kita definisikan $e^x = \exp x$, termasuk $e^{\sqrt 2}$ dan $e^{\pi}$.
+
+</SocraticBlock>
+<SocraticBlock v-click="2" type="question" title="Pertanyaan 2" mode="Diskusi berpasangan · 1 mnt">
+
+Tulis $y = f(x)=\ln x$ sehingga $x = f^{-1}(y)=\exp(y)=e^y$. Berapa $\dfrac{dy}{dx}$? Dengan Teorema $(f^{-1})'(y)=\frac{1}{f'(x)}$, berapa $\dfrac{dx}{dy}$?
+
+</SocraticBlock>
 
 <SocraticBlock v-click="3" type="answer" title="Kesimpulan Kita">
 
-$$\frac{dx}{dy} = \frac{1}{y} \quad\Rightarrow\quad \frac{dy}{dx} = \frac{1}{dx/dy} = y = e^x$$
+$$\frac{dy}{dx} = \frac{1}{x} \quad\Rightarrow\quad \frac{dx}{dy} =  (f^{-1})'(y)=\frac{1}{f'(x)} = \frac{1}{dy/dx} = x = e^y$$
 
 </SocraticBlock>
-
+<!--
 <SocraticBlock v-click="4" type="question" title="Pertanyaan 3" mode="Pikir 30 dtk">
 
 Jadi fungsi apa yang turunannya sama dengan dirinya sendiri? Apakah $5e^x$ juga? Bagaimana dengan $e^{2x}$?
@@ -157,7 +163,7 @@ $e^x$, dan semua $Ce^x$. Tetapi $\bigl(e^{2x}\bigr)' = 2e^{2x}$ (aturan rantai),
 
 </SocraticBlock>
 
-<!--
+
 Tiap pertanyaan dibuka dengan klik, beri waktu sebelum klik berikutnya.
 P1: kesalahan umum ln(e²) = e. Tanya: "ln a^r = r ln a. Di sini a = e, r = 2."
 P2: Teorema B dari pertemuan lalu (6.2); biarkan pasangan mengerjakannya sendiri. Kesalahan umum: dy/dx = 1/x. Tanya: "Variabel bebas di x = ln y itu y. Jadi 1/y, lalu y diganti apa?"
@@ -189,8 +195,8 @@ $$e^{\ln x} = x \ (x \gt 0), \qquad \ln(e^y) = y \ (\text{semua } y)$$
 <BeamerBlock type="example" title="Sifat dan Kalkulus">
 
 - $e^a e^b = e^{a + b}$ dan $e^a / e^b = e^{a - b}$
-- $(e^x)' = e^x$ dan $(e^{u})' = e^{u}\,u'$
-- $\int e^x\,dx = e^x + C$
+- $\frac{d}{d x}(e^x) = e^x$ dan $\frac{d}{d x}(e^{u(x)}) = e^{u(x)}\,\frac{d u}{d x}$
+- $\displaystyle\int e^x\,dx = e^x + C$
 
 </BeamerBlock>
 
@@ -263,7 +269,7 @@ Apa yang ditanya: titik maksimum atau nilai maksimum? Berapa $f(0)$? Apa yang te
 
 <SocraticBlock v-click type="answer">
 
-Ditanya nilai terbesar $f$. $f(0) = 0$, dan untuk $x$ besar $e^{-x}$ mengecil jauh lebih cepat daripada $x$ membesar, jadi $f(x) \to 0$. Maksimumnya ada di tengah.
+Ditanya nilai terbesar $f$. $f(0) = 0$, dan untuk $x$ besar $f'(x) = (1-x)e^{-x} \lt 0$ maka $f$ turun setelah nilai tertentu. Maksimumnya ada di tengah.
 
 </SocraticBlock>
 
@@ -330,13 +336,13 @@ $$f(1) = 1\cdot e^{-1} = \frac{1}{e} \approx 0{,}368$$
 
 <SocraticBlock v-click type="question" title="4 · Periksa Lagi" mode="Pikir 1 mnt">
 
-Benarkah $x = 1$ memberi maksimum, bukan minimum? Periksa tanda $f'$ di $x = 0{,}5$ dan $x = 2$. Cocokkah dengan $f(0) = 0$ dan $f \to 0$?
+Benarkah $x = 1$ memberi maksimum, bukan minimum? Periksa tanda $f'$.
 
 </SocraticBlock>
 
 <SocraticBlock v-click type="answer">
 
-$f'(0{,}5) = e^{-0{,}5}(0{,}5) \gt 0$ dan $f'(2) = e^{-2}(-1) \lt 0$: naik lalu turun, jadi maksimum ✓. Nilai $0{,}368$ lebih besar dari $f(0) = 0$ dan dari nilai untuk $x$ besar ✓
+$e^{-x}\gt 0$ sehingga tanda dari $f'(x)$ ditentukan oleh $(1-x)$ saja. Untuk $0\leq x \lt 1$, $f'(x)\gt 0$, dan untuk $1 \lt x$, $f'(x)\lt 0$. Jadi $x=1$ menghasilkan maksimum global.
 
 </SocraticBlock>
 
